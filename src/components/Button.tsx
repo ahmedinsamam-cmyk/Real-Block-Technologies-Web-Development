@@ -32,12 +32,15 @@ type ButtonAsExternal = BaseProps &
 type ButtonProps = ButtonAsButton | ButtonAsLink | ButtonAsExternal
 
 const variantClasses: Record<Variant, string> = {
-  primary:
-    'bg-royal text-white hover:bg-royal-dark shadow-sm shadow-royal/25 border border-transparent',
-  secondary: 'bg-navy text-white hover:bg-navy-light border border-transparent',
-  outline: 'bg-transparent text-white border border-white/30 hover:bg-white/10 hover:border-white/50',
-  ghost: 'bg-transparent text-navy border border-border hover:border-royal/40 hover:text-royal',
-  gold: 'bg-gold text-navy hover:bg-gold-light border border-transparent font-semibold',
+  /* Institutional black CTA */
+  primary: 'bg-navy text-white hover:bg-navy-light border border-transparent',
+  /* Light surface CTA */
+  secondary: 'bg-white text-navy hover:bg-surface border border-transparent',
+  /* For dark heroes — white outline */
+  outline: 'bg-transparent text-white border border-white/35 hover:bg-white/10 hover:border-white/60',
+  ghost: 'bg-transparent text-navy border border-border hover:border-navy/40 hover:bg-surface',
+  /* On dark sections: white filled CTA (Securitize-style) */
+  gold: 'bg-white text-navy hover:bg-surface border border-transparent font-semibold',
 }
 
 const sizeClasses: Record<Size, string> = {
@@ -47,7 +50,7 @@ const sizeClasses: Record<Size, string> = {
 }
 
 const baseClasses =
-  'inline-flex items-center justify-center gap-2 rounded-md font-display font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal focus-visible:ring-offset-2 disabled:opacity-60 disabled:pointer-events-none'
+  'inline-flex items-center justify-center gap-2 rounded-sm font-body font-semibold tracking-wide transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy/30 focus-visible:ring-offset-2 disabled:opacity-60 disabled:pointer-events-none'
 
 export function Button(props: ButtonProps) {
   const { variant = 'primary', size = 'md', children, className = '' } = props

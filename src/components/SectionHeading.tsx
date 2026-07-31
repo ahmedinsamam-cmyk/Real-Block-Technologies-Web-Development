@@ -17,7 +17,7 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <motion.div
-      className={`mb-12 max-w-3xl ${align === 'center' ? 'mx-auto text-center' : 'text-left'}`}
+      className={`mb-14 max-w-3xl ${align === 'center' ? 'mx-auto text-center' : 'text-left'}`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
@@ -25,18 +25,26 @@ export function SectionHeading({
     >
       {eyebrow && (
         <p
-          className={`mb-3 text-xs font-semibold tracking-[0.18em] uppercase ${
-            light ? 'text-gold' : 'text-royal'
+          className={`mb-4 font-body text-[0.7rem] font-semibold tracking-[0.22em] uppercase ${
+            light ? 'text-gold-light' : 'text-royal'
           }`}
         >
           {eyebrow}
         </p>
       )}
-      <h2 className={`text-3xl font-bold md:text-4xl lg:text-[2.75rem] ${light ? 'text-white' : 'text-navy'}`}>
+      <h2
+        className={`font-display text-4xl font-semibold leading-tight md:text-5xl ${
+          light ? 'text-white' : 'text-navy'
+        }`}
+      >
         {title}
       </h2>
       {description && (
-        <p className={`mt-4 text-base leading-relaxed md:text-lg ${light ? 'text-white/70' : 'text-ink-muted'}`}>
+        <p
+          className={`mt-5 text-base leading-relaxed md:text-lg ${
+            light ? 'text-white/65' : 'text-ink-muted'
+          }`}
+        >
           {description}
         </p>
       )}

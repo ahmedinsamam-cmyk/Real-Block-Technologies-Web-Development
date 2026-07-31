@@ -37,7 +37,7 @@ export function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled || !isHome
-          ? 'border-b border-border/80 bg-white/95 shadow-sm backdrop-blur-md'
+          ? 'border-b border-border/80 bg-white/90 shadow-sm backdrop-blur-md'
           : 'bg-transparent'
       }`}
     >
@@ -50,13 +50,13 @@ export function Navbar() {
               key={link.href}
               to={link.href}
               className={({ isActive }) =>
-                `rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                `rounded-sm px-3 py-2 text-sm font-medium tracking-wide transition-colors ${
                   isActive
                     ? darkHero
-                      ? 'text-gold'
-                      : 'text-royal'
+                      ? 'text-white'
+                      : 'text-navy'
                     : darkHero
-                      ? 'text-white/80 hover:text-white'
+                      ? 'text-white/70 hover:text-white'
                       : 'text-ink-muted hover:text-navy'
                 }`
               }
@@ -72,10 +72,10 @@ export function Navbar() {
             target="_blank"
             rel="noreferrer"
             aria-label="Follow Real Block Technologies on LinkedIn"
-            className={`flex h-9 w-9 items-center justify-center rounded-md border transition ${
+            className={`flex h-9 w-9 items-center justify-center rounded-sm border transition ${
               darkHero
-                ? 'border-white/20 text-white hover:border-gold hover:text-gold'
-                : 'border-border text-navy hover:border-royal hover:text-royal'
+                ? 'border-white/20 text-white hover:border-white hover:bg-white/10'
+                : 'border-border text-navy hover:border-navy'
             }`}
             onClick={() => trackEvent({ event: 'linkedin_follow', label: 'navbar' })}
           >
@@ -94,7 +94,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className={`inline-flex items-center justify-center rounded-md p-2 lg:hidden ${
+          className={`inline-flex items-center justify-center rounded-sm p-2 lg:hidden ${
             darkHero ? 'text-white' : 'text-navy'
           }`}
           aria-label={open ? 'Close menu' : 'Open menu'}
@@ -124,7 +124,7 @@ export function Navbar() {
                   >
                     <Link
                       to={link.href}
-                      className="block border-b border-white/10 py-4 font-display text-lg font-semibold text-white"
+                      className="block border-b border-white/10 py-4 font-display text-2xl font-semibold text-white"
                     >
                       {link.label}
                     </Link>
@@ -136,7 +136,7 @@ export function Navbar() {
                   href={SOCIAL_LINKS.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-md border border-white/20 py-3 text-sm font-semibold text-white"
+                  className="flex items-center justify-center gap-2 rounded-sm border border-white/20 py-3 text-sm font-semibold text-white"
                   onClick={() => trackEvent({ event: 'linkedin_follow', label: 'mobile_nav' })}
                 >
                   <LinkedInIcon className="h-4 w-4" />

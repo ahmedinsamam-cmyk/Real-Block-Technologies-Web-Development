@@ -27,7 +27,7 @@ export function Footer() {
             <p className="mt-5 text-sm leading-relaxed text-white/65">{COMPANY.tagline}</p>
 
             <div className="mt-8">
-              <h3 className="font-display text-sm font-bold tracking-wide text-gold uppercase">
+              <h3 className="font-body text-[0.7rem] font-semibold tracking-[0.2em] text-white/50 uppercase">
                 Follow Real Block Technologies
               </h3>
               <ul className="mt-4 space-y-3">
@@ -57,7 +57,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <h3 className="font-display text-sm font-bold tracking-wide text-gold uppercase">Services</h3>
+            <h3 className="font-body text-[0.7rem] font-semibold tracking-[0.2em] text-white/45 uppercase">Services</h3>
             <ul className="mt-4 space-y-2.5">
               {FOOTER_SERVICES.map((item) => (
                 <li key={item.label}>
@@ -70,7 +70,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-3">
-            <h3 className="font-display text-sm font-bold tracking-wide text-gold uppercase">Company</h3>
+            <h3 className="font-body text-[0.7rem] font-semibold tracking-[0.2em] text-white/45 uppercase">Company</h3>
             <ul className="mt-4 space-y-2.5">
               {FOOTER_COMPANY.map((item) => (
                 <li key={item.label}>
@@ -83,7 +83,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-3">
-            <h3 className="font-display text-sm font-bold tracking-wide text-gold uppercase">Contact</h3>
+            <h3 className="font-body text-[0.7rem] font-semibold tracking-[0.2em] text-white/45 uppercase">Contact</h3>
             <ul className="mt-4 space-y-3 text-sm text-white/70">
               <li>
                 <a href={`mailto:${COMPANY.email}`} className="transition hover:text-white">
@@ -97,7 +97,7 @@ export function Footer() {
               </li>
               <li>{COMPANY.address}</li>
               <li>
-                <Link to="/resources/rwa-tokenization-guide" className="font-semibold text-gold hover:text-gold-light">
+                <Link to="/resources/rwa-tokenization-guide" className="font-semibold text-white hover:text-gold-light">
                   Download the RWA Guide →
                 </Link>
               </li>

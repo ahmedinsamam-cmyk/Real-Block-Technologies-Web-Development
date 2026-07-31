@@ -1,22 +1,25 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-navy: #071a33;
-  --color-navy-light: #0c2749;
-  --color-navy-muted: #132f54;
-  --color-royal: #155eef;
-  --color-royal-dark: #1248c4;
-  --color-royal-light: #3b7af5;
-  --color-gold: #d4af37;
-  --color-gold-light: #e4c76a;
-  --color-gold-dark: #b8942a;
-  --color-ink: #1f2937;
-  --color-ink-muted: #4b5563;
-  --color-surface: #f7f9fc;
-  --color-surface-alt: #eef2f8;
-  --color-border: #e2e8f0;
-  --font-display: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-body: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  /* Institutional black — BlackRock / Blackstone inspired */
+  --color-navy: #0b0b0b;
+  --color-navy-light: #161616;
+  --color-navy-muted: #222222;
+  /* Warm stone accent (replaces blue) */
+  --color-royal: #6b5e4f;
+  --color-royal-dark: #53483c;
+  --color-royal-light: #8a7b6a;
+  /* Muted champagne bronze (subtle, not flashy gold) */
+  --color-gold: #b89a6d;
+  --color-gold-light: #d0b68a;
+  --color-gold-dark: #967a52;
+  --color-ink: #121212;
+  --color-ink-muted: #5c5c5c;
+  --color-surface: #f6f5f3;
+  --color-surface-alt: #efede9;
+  --color-border: #e4e1db;
+  --font-display: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -38,7 +41,7 @@
   }
 
   ::selection {
-    @apply bg-royal/20 text-navy;
+    @apply bg-navy/10 text-navy;
   }
 }
 
@@ -48,21 +51,32 @@
   }
 
   .gradient-navy {
-    background: linear-gradient(145deg, #071a33 0%, #0c2749 45%, #132f54 100%);
+    background: linear-gradient(160deg, #0b0b0b 0%, #161616 55%, #1c1a18 100%);
   }
 
+  /* Securitize-like atmospheric dusk — warm stone, no blue */
   .gradient-hero-mesh {
     background:
-      radial-gradient(ellipse 80% 60% at 20% 20%, rgba(21, 94, 239, 0.28), transparent 55%),
-      radial-gradient(ellipse 70% 50% at 80% 10%, rgba(212, 175, 55, 0.16), transparent 50%),
-      radial-gradient(ellipse 60% 40% at 70% 80%, rgba(21, 94, 239, 0.18), transparent 55%),
-      linear-gradient(160deg, #071a33 0%, #0a2242 50%, #071a33 100%);
+      linear-gradient(180deg, rgba(11, 11, 11, 0.55) 0%, rgba(11, 11, 11, 0.72) 45%, rgba(11, 11, 11, 0.92) 100%),
+      linear-gradient(120deg, rgba(184, 154, 109, 0.22) 0%, transparent 45%),
+      linear-gradient(300deg, rgba(107, 94, 79, 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 60% at 70% 20%, rgba(232, 168, 124, 0.18), transparent 55%),
+      #0b0b0b;
+  }
+
+  .hero-photo {
+    background-image:
+      linear-gradient(180deg, rgba(11, 11, 11, 0.45) 0%, rgba(11, 11, 11, 0.7) 50%, rgba(11, 11, 11, 0.94) 100%),
+      linear-gradient(115deg, rgba(184, 154, 109, 0.15), transparent 40%),
+      url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2400&q=80');
+    background-size: cover;
+    background-position: center 40%;
   }
 
   .grid-tech {
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 48px 48px;
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
   }
 }

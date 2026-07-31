@@ -20,12 +20,13 @@ export function CTASection({
   secondaryTo = '/services',
 }: CTASectionProps) {
   return (
-    <section className="relative overflow-hidden py-20 md:py-24">
-      <div className="absolute inset-0 gradient-hero-mesh" />
-      <div className="absolute inset-0 grid-tech opacity-40" />
-      <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden py-24 md:py-28">
+      <div className="absolute inset-0 gradient-navy" />
+      <div className="absolute inset-0 hero-photo opacity-30" />
+      <div className="absolute inset-0 bg-navy/75" />
+      <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
         <motion.h2
-          className="font-display text-3xl font-bold text-white md:text-4xl"
+          className="font-display text-4xl font-semibold text-white md:text-5xl"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -33,7 +34,7 @@ export function CTASection({
           {title}
         </motion.h2>
         <motion.p
-          className="mx-auto mt-4 max-w-2xl text-base text-white/70 md:text-lg"
+          className="mx-auto mt-5 max-w-2xl text-base text-white/65 md:text-lg"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -42,7 +43,7 @@ export function CTASection({
           {description}
         </motion.p>
         <motion.div
-          className="mt-8 flex flex-wrap items-center justify-center gap-4"
+          className="mt-9 flex flex-wrap items-center justify-center gap-4"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

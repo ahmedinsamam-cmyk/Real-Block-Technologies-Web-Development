@@ -18,10 +18,10 @@ export function LinkedInCTA() {
           <div className="absolute inset-0 grid-tech opacity-30" />
           <div className="absolute -right-10 -bottom-10 h-48 w-48 rounded-full bg-royal/20 blur-3xl" />
           <div className="relative mx-auto max-w-2xl text-center">
-            <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 text-[#0A66C2]">
+            <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center border border-white/15 bg-white/5 text-white">
               <LinkedInIcon className="h-6 w-6" />
             </div>
-            <h2 className="font-display text-3xl font-bold text-white md:text-4xl">
+            <h2 className="font-display text-4xl font-semibold text-white md:text-5xl">
               Follow Our Technology Insights
             </h2>
             <p className="mt-4 text-base text-white/70 md:text-lg">

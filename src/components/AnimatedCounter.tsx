@@ -42,9 +42,9 @@ export function AnimatedCounter({ value, suffix = '', label, duration = 1.6 }: A
       viewport={{ once: true }}
       transition={{ duration: 0.45 }}
     >
-      <div className="font-display text-4xl font-extrabold text-navy md:text-5xl">
+      <div className="font-display text-5xl font-semibold text-navy md:text-6xl">
         {display}
-        <span className="text-gold">{suffix}</span>
+        <span className="text-royal">{suffix}</span>
       </div>
       <p className="mt-2 text-sm font-medium text-ink-muted md:text-base">{label}</p>
     </motion.div>
