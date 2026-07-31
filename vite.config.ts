@@ -22,4 +22,24 @@ export default defineConfig({
     port: 4173,
     allowedHosts: true,
   },
+  build: {
+    target: 'es2022',
+    cssCodeSplit: true,
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/framer-motion')) return 'motion'
+          if (id.includes('node_modules/lucide-react')) return 'icons'
+          if (
+            id.includes('node_modules/react-dom') ||
+            id.includes('node_modules/react-router') ||
+            id.includes('node_modules/react/')
+          ) {
+            return 'react'
+          }
+        },
+      },
+    },
+  },
 })

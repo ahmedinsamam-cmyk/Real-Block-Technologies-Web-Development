@@ -12,6 +12,10 @@ import { Hero } from '@/sections/home/Hero'
 import { Stats } from '@/sections/home/Stats'
 import { ServiceHighlights } from '@/sections/home/ServiceHighlights'
 import { CapabilityPillars } from '@/sections/home/CapabilityPillars'
+import { TrustSignals } from '@/sections/home/TrustSignals'
+import { ProcessTimeline } from '@/sections/home/ProcessTimeline'
+import { TechnologyShowcase } from '@/sections/home/TechnologyShowcase'
+import { BusinessOutcomes } from '@/sections/home/BusinessOutcomes'
 import { trackCtaClick } from '@/utils/analytics'
 
 export function HomePage() {
@@ -19,23 +23,27 @@ export function HomePage() {
     <PageTransition>
       <SEO
         title="Real Block Technologies | AI, Blockchain & RWA Consulting"
-        description="Enterprise consulting for AI, blockchain, and real-world asset transformation. Unlock value from physical assets and digital operations."
+        description="Institutional consulting for AI, blockchain, and real-world asset transformation. Strategy, architecture, and delivery for enterprise executives."
         path="/"
       />
       <Hero />
       <TrustedPartners />
+      <TrustSignals />
       <CapabilityPillars />
       <Stats />
+      <ProcessTimeline />
       <ServiceHighlights />
+      <TechnologyShowcase />
+      <BusinessOutcomes />
       <Testimonials />
 
-      <section className="relative overflow-hidden py-24 md:py-32">
-        <div className="absolute inset-0 section-photo-a" />
-        <div className="absolute inset-0 bg-navy/70" />
+      <section className="relative overflow-hidden py-20 md:py-28">
+        <div className="absolute inset-0 section-photo-a" aria-hidden />
+        <div className="absolute inset-0 bg-navy/70" aria-hidden />
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <p className="eyebrow text-gold-light">Enterprise Resource</p>
-          <h2 className="mt-4 font-display text-4xl font-medium text-white md:text-5xl lg:text-[3.4rem]">
-            The Enterprise Guide to Real World Asset Tokenization
+          <p className="eyebrow text-gold-light">Enterprise resource</p>
+          <h2 className="mt-4 font-display text-3xl font-medium text-white md:text-5xl lg:text-[3.25rem]">
+            The enterprise guide to real-world asset tokenization
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base text-white/70 md:text-lg">
             A practical leadership briefing covering architecture, infrastructure, use cases, and an
@@ -48,22 +56,25 @@ export function HomePage() {
               size="lg"
               onClick={() => trackCtaClick('home_rwa_guide')}
             >
-              Download Free Guide
+              Download free guide
             </Button>
             <Button to="/resources" variant="outline" size="lg">
-              Browse Resources
+              Browse resources
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-24 md:py-28">
+      <section className="bg-white py-20 md:py-24">
         <div className="mx-auto max-w-xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <p className="eyebrow text-royal">Insights</p>
-            <h2 className="mt-4 font-display text-4xl font-medium text-navy">
-              Stay ahead of digital transformation
+            <h2 className="mt-4 font-display text-3xl font-medium text-navy md:text-4xl">
+              Briefings for digital transformation leaders
             </h2>
+            <p className="mt-3 text-sm text-ink-muted md:text-base">
+              Occasional perspectives on AI, blockchain, and asset digitization—no noise.
+            </p>
           </div>
           <div className="mt-10">
             <NewsletterSignup />
@@ -72,16 +83,17 @@ export function HomePage() {
       </section>
 
       <ConsultationBooking
-        title="Ready to transform your asset strategy?"
-        description="Book a discovery consultation covering AI transformation, RWA tokenization, blockchain strategy, and enterprise automation."
-        ctaLabel="Book a Free Consultation"
+        title="Start with a structured discovery conversation"
+        description="Clarify priorities across AI transformation, RWA tokenization, blockchain strategy, and enterprise automation—then define the right engagement path."
+        ctaLabel="Book a consultation"
       />
       <FAQ />
       <LinkedInCTA />
       <CTASection
-        title="Build the next chapter of digital value."
-        description="Partner with Real Block Technologies to design and deliver institutional-grade AI, blockchain, and real-world asset solutions."
-        primaryLabel="Schedule Consultation"
+        title="Partner with an advisory team built for institutional outcomes."
+        description="Real Block Technologies designs and delivers AI, blockchain, and real-world asset solutions with the governance executives require."
+        primaryLabel="Schedule consultation"
+        primaryTo="/contact#consultation"
       />
     </PageTransition>
   )

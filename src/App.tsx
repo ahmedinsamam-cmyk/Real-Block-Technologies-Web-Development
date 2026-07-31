@@ -1,22 +1,70 @@
+import { Suspense, lazy } from 'react'
 import { useRoutes } from 'react-router-dom'
 import { MainLayout } from '@/layouts/MainLayout'
 import { HomePage } from '@/pages/Home'
-import { AboutPage } from '@/pages/About'
-import { ServicesPage } from '@/pages/Services'
-import { ServiceDetailPage } from '@/pages/ServiceDetail'
-import { RealEstateTokenizationPage } from '@/pages/RealEstateTokenization'
-import { AISolutionsPage } from '@/pages/AISolutions'
-import { IndustriesPage } from '@/pages/Industries'
-import { IndustryDetailPage } from '@/pages/IndustryDetail'
-import { CaseStudiesPage } from '@/pages/CaseStudies'
-import { InsightsPage } from '@/pages/Insights'
-import { CareersPage } from '@/pages/Careers'
-import { ContactPage } from '@/pages/Contact'
-import { PrivacyPage } from '@/pages/Privacy'
-import { TermsPage } from '@/pages/Terms'
-import { RWAGuidePage } from '@/pages/RWAGuide'
-import { ResourcesPage } from '@/pages/Resources'
-import { HelpCenterPage } from '@/pages/HelpCenter'
+
+const AboutPage = lazy(() =>
+  import('@/pages/About').then((m) => ({ default: m.AboutPage })),
+)
+const ServicesPage = lazy(() =>
+  import('@/pages/Services').then((m) => ({ default: m.ServicesPage })),
+)
+const ServiceDetailPage = lazy(() =>
+  import('@/pages/ServiceDetail').then((m) => ({ default: m.ServiceDetailPage })),
+)
+const RealEstateTokenizationPage = lazy(() =>
+  import('@/pages/RealEstateTokenization').then((m) => ({
+    default: m.RealEstateTokenizationPage,
+  })),
+)
+const AISolutionsPage = lazy(() =>
+  import('@/pages/AISolutions').then((m) => ({ default: m.AISolutionsPage })),
+)
+const IndustriesPage = lazy(() =>
+  import('@/pages/Industries').then((m) => ({ default: m.IndustriesPage })),
+)
+const IndustryDetailPage = lazy(() =>
+  import('@/pages/IndustryDetail').then((m) => ({ default: m.IndustryDetailPage })),
+)
+const CaseStudiesPage = lazy(() =>
+  import('@/pages/CaseStudies').then((m) => ({ default: m.CaseStudiesPage })),
+)
+const InsightsPage = lazy(() =>
+  import('@/pages/Insights').then((m) => ({ default: m.InsightsPage })),
+)
+const CareersPage = lazy(() =>
+  import('@/pages/Careers').then((m) => ({ default: m.CareersPage })),
+)
+const ContactPage = lazy(() =>
+  import('@/pages/Contact').then((m) => ({ default: m.ContactPage })),
+)
+const PrivacyPage = lazy(() =>
+  import('@/pages/Privacy').then((m) => ({ default: m.PrivacyPage })),
+)
+const TermsPage = lazy(() =>
+  import('@/pages/Terms').then((m) => ({ default: m.TermsPage })),
+)
+const RWAGuidePage = lazy(() =>
+  import('@/pages/RWAGuide').then((m) => ({ default: m.RWAGuidePage })),
+)
+const ResourcesPage = lazy(() =>
+  import('@/pages/Resources').then((m) => ({ default: m.ResourcesPage })),
+)
+const HelpCenterPage = lazy(() =>
+  import('@/pages/HelpCenter').then((m) => ({ default: m.HelpCenterPage })),
+)
+const NotFoundPage = lazy(() =>
+  import('@/pages/NotFound').then((m) => ({ default: m.NotFoundPage })),
+)
+
+function RouteFallback() {
+  return (
+    <div className="flex min-h-[40vh] items-center justify-center" role="status" aria-live="polite">
+      <div className="h-8 w-8 animate-pulse border border-navy/20 border-t-navy" aria-hidden />
+      <span className="sr-only">Loading page</span>
+    </div>
+  )
+}
 
 export default function App() {
   const element = useRoutes([
@@ -40,10 +88,10 @@ export default function App() {
         { path: 'help', element: <HelpCenterPage /> },
         { path: 'privacy', element: <PrivacyPage /> },
         { path: 'terms', element: <TermsPage /> },
-        { path: '*', element: <HomePage /> },
+        { path: '*', element: <NotFoundPage /> },
       ],
     },
   ])
 
-  return element
+  return <Suspense fallback={<RouteFallback />}>{element}</Suspense>
 }

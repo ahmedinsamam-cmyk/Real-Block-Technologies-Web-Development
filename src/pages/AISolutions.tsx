@@ -7,12 +7,19 @@ import {
   LineChart,
   FileSearch,
   ArrowRight,
+  CheckCircle2,
 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { SEO } from '@/components/SEO'
 import { PageTransition } from '@/components/PageTransition'
 import { PageHero } from '@/components/PageHero'
 import { SectionHeading } from '@/components/SectionHeading'
 import { CTASection } from '@/components/CTASection'
+import { FAQ } from '@/components/FAQ'
+import { serviceDetailsById } from '@/data/serviceDetails'
+import { faqSchema } from '@/utils/schema'
+
+const detail = serviceDetailsById.ai
 
 const aiCapabilities = [
   {
@@ -62,12 +69,36 @@ export function AISolutionsPage() {
         title="AI Solutions"
         description="AI strategy, automation, agents, business intelligence, predictive analytics, and document intelligence for enterprise transformation."
         path="/services/ai-solutions"
+        jsonLd={faqSchema(detail.faqs)}
       />
       <PageHero
         eyebrow="AI Solutions"
         title="Enterprise AI that moves from ambition to operating impact"
         description="We help organizations design and deploy AI capabilities that improve decision quality, automate work, and create durable competitive advantage."
       />
+
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+          <div>
+            <p className="eyebrow text-royal">The problem</p>
+            <h2 className="mt-4 font-display text-3xl font-medium text-navy">Where AI programs stall</h2>
+            <p className="mt-4 text-base leading-relaxed text-ink-muted">{detail.problem}</p>
+          </div>
+          <div>
+            <p className="eyebrow text-royal">Our solution</p>
+            <h2 className="mt-4 font-display text-3xl font-medium text-navy">How we engage</h2>
+            <p className="mt-4 text-base leading-relaxed text-ink-muted">{detail.solution}</p>
+            <ul className="mt-6 space-y-2">
+              {detail.expectedOutcomes.map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-ink-muted">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-royal" aria-hidden />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
 
       <section className="bg-surface py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -131,9 +162,30 @@ export function AISolutionsPage() {
         </div>
       </section>
 
+      <section className="bg-surface py-14 md:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="font-display text-2xl font-medium text-navy">Related resources</h2>
+          <ul className="mt-6 flex flex-wrap gap-3">
+            {detail.relatedResources.map((resource) => (
+              <li key={resource.href}>
+                <Link
+                  to={resource.href}
+                  className="inline-flex border border-border bg-white px-4 py-2.5 text-sm font-semibold text-navy transition hover:border-navy"
+                >
+                  {resource.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <FAQ items={detail.faqs} />
+
       <CTASection
         title="Start your AI transformation with a clear roadmap"
         description="Book a consultation to identify high-value use cases and a practical path from pilot to enterprise scale."
+        primaryTo="/contact#consultation"
         secondaryLabel="Explore Tokenization"
         secondaryTo="/services/real-estate-tokenization"
       />

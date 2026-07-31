@@ -32,11 +32,13 @@ type ButtonAsExternal = BaseProps &
 type ButtonProps = ButtonAsButton | ButtonAsLink | ButtonAsExternal
 
 const variantClasses: Record<Variant, string> = {
-  primary: 'bg-navy text-white hover:bg-navy-light border border-transparent',
+  primary:
+    'bg-navy text-white hover:bg-navy-light border border-transparent shadow-sm hover:shadow-md',
   secondary: 'bg-white text-navy hover:bg-white/90 border border-transparent',
-  outline: 'bg-transparent text-white border border-white/40 hover:bg-white/10 hover:border-white',
+  outline:
+    'bg-transparent text-white border border-white/45 hover:bg-white/10 hover:border-white',
   ghost: 'bg-transparent text-navy border border-navy/15 hover:border-navy/40 hover:bg-surface',
-  gold: 'bg-white text-navy hover:bg-[#f3f1ec] border border-transparent',
+  gold: 'bg-[#f4efe6] text-navy hover:bg-[#ebe3d6] border border-transparent shadow-sm',
 }
 
 const sizeClasses: Record<Size, string> = {

@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { CheckCircle2, Mail, Phone, MapPin, Globe2 } from 'lucide-react'
+import { CheckCircle2, Mail, MapPin, Globe2 } from 'lucide-react'
 import { SEO } from '@/components/SEO'
 import { PageTransition } from '@/components/PageTransition'
 import { PageHero } from '@/components/PageHero'
@@ -120,19 +120,13 @@ export function ContactPage() {
             </p>
             <ul className="mt-8 space-y-4">
               <li className="flex items-start gap-3 text-sm text-ink-muted">
-                <Mail className="mt-0.5 h-4 w-4 text-royal" />
+                <Mail className="mt-0.5 h-4 w-4 text-royal" aria-hidden />
                 <a href={`mailto:${COMPANY.email}`} className="hover:text-royal">
                   {COMPANY.email}
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-ink-muted">
-                <Phone className="mt-0.5 h-4 w-4 text-royal" />
-                <a href={`tel:${COMPANY.phone.replace(/\D/g, '')}`} className="hover:text-royal">
-                  {COMPANY.phone}
-                </a>
-              </li>
-              <li className="flex items-start gap-3 text-sm text-ink-muted">
-                <MapPin className="mt-0.5 h-4 w-4 text-royal" />
+                <MapPin className="mt-0.5 h-4 w-4 text-royal" aria-hidden />
                 {COMPANY.address}
               </li>
               <li className="flex items-start gap-3 text-sm text-ink-muted">

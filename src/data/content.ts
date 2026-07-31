@@ -471,27 +471,27 @@ export const jobs: JobOpening[] = [
 export const testimonials = [
   {
     quote:
-      'Real Block Technologies helped us identify opportunities to automate critical business processes.',
+      'Real Block brought structure to a complex automation agenda. We left with prioritized use cases, clear governance, and a delivery plan our executives could fund with confidence.',
     name: 'Chief Operating Officer',
-    company: 'Growth Enterprise',
+    company: 'Multi-entity Operating Group',
   },
   {
     quote:
-      'Real Block Technologies brought clarity to a complex digital asset initiative and helped our leadership team move from concept to an actionable enterprise roadmap.',
+      'They translated digital asset ambition into an actionable enterprise roadmap—architecture, controls, and investor experience—without overselling the technology.',
     name: 'Director of Innovation',
-    company: 'Global Property Group',
+    company: 'Global Property Platform',
   },
   {
     quote:
-      'Their AI and process redesign work materially improved our finance operations. The engagement was structured, pragmatic, and outcomes-focused.',
+      'Their AI and process redesign work materially improved our finance operations. The engagement was structured, pragmatic, and outcomes-focused from week one.',
     name: 'VP of Finance Operations',
-    company: 'Multi-entity Enterprise',
+    company: 'International Finance Organization',
   },
   {
     quote:
       'We valued their ability to connect blockchain strategy with real business constraints—compliance, investor experience, and long-term asset management.',
     name: 'Head of Digital Strategy',
-    company: 'Investment Platform',
+    company: 'Capital Markets Platform',
   },
 ]
 

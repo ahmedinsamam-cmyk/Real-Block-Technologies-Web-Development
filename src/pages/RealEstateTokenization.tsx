@@ -1,11 +1,17 @@
 import { motion } from 'framer-motion'
 import { Building2, FileDigit, Coins, Users, Settings2, CheckCircle2 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { SEO } from '@/components/SEO'
 import { PageTransition } from '@/components/PageTransition'
 import { PageHero } from '@/components/PageHero'
 import { SectionHeading } from '@/components/SectionHeading'
 import { CTASection } from '@/components/CTASection'
+import { FAQ } from '@/components/FAQ'
 import { Button } from '@/components/Button'
+import { serviceDetailsById } from '@/data/serviceDetails'
+import { faqSchema } from '@/utils/schema'
+
+const detail = serviceDetailsById.rwa
 
 const workflow = [
   { icon: Building2, title: 'Physical Asset', text: 'Identify and prepare real-world assets for digitization.' },
@@ -37,12 +43,28 @@ export function RealEstateTokenizationPage() {
         title="Real Estate Tokenization"
         description="Learn how Real Block Technologies helps enterprises tokenize real-world assets—from digital representation to investor access and asset management."
         path="/services/real-estate-tokenization"
+        jsonLd={faqSchema(detail.faqs)}
       />
       <PageHero
         eyebrow="RWA Tokenization"
         title="Real estate tokenization for enterprise-grade asset programs"
         description="Digitize and manage physical assets using blockchain infrastructure designed for compliance, investor access, and long-term operations."
       />
+
+      <section className="bg-surface py-16 md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+          <div>
+            <p className="eyebrow text-royal">The problem</p>
+            <h2 className="mt-4 font-display text-3xl font-medium text-navy">Where value is trapped</h2>
+            <p className="mt-4 text-base leading-relaxed text-ink-muted">{detail.problem}</p>
+          </div>
+          <div>
+            <p className="eyebrow text-royal">Our solution</p>
+            <h2 className="mt-4 font-display text-3xl font-medium text-navy">How we engage</h2>
+            <p className="mt-4 text-base leading-relaxed text-ink-muted">{detail.solution}</p>
+          </div>
+        </div>
+      </section>
 
       <section className="bg-white py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -143,9 +165,30 @@ export function RealEstateTokenizationPage() {
         </div>
       </section>
 
+      <section className="bg-white py-14 md:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="font-display text-2xl font-medium text-navy">Related resources</h2>
+          <ul className="mt-6 flex flex-wrap gap-3">
+            {detail.relatedResources.map((resource) => (
+              <li key={resource.href}>
+                <Link
+                  to={resource.href}
+                  className="inline-flex border border-border px-4 py-2.5 text-sm font-semibold text-navy transition hover:border-navy hover:bg-surface"
+                >
+                  {resource.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <FAQ items={detail.faqs} />
+
       <CTASection
         title="Ready to evaluate asset tokenization for your portfolio?"
         description="Schedule a consultation to explore readiness, architecture options, and a practical implementation path."
+        primaryTo="/contact#consultation"
         secondaryLabel="View AI Solutions"
         secondaryTo="/services/ai-solutions"
       />

@@ -32,14 +32,14 @@ export function CapabilityPillars() {
           <div>
             <p className="eyebrow text-royal">About Real Block</p>
             <h2 className="mt-4 font-display text-4xl font-medium leading-[1.1] text-navy md:text-5xl lg:text-[3.4rem]">
-              From physical assets to digital markets.
+              From physical assets to governed digital markets.
             </h2>
           </div>
           <div>
             <p className="max-w-xl text-base leading-relaxed text-ink-muted md:text-lg">
-              Real Block Technologies helps enterprises unlock value across tokenization, AI, and
-              blockchain—with the rigor of institutional consulting and the speed of modern
-              technology delivery.
+              We help enterprises convert tokenization, AI, and blockchain initiatives into
+              operating capability—with institutional rigor, security-aware architecture, and
+              delivery discipline executives can trust.
             </p>
             <Button to="/about" variant="ghost" className="mt-8">
               About Real Block

@@ -1,14 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
-import { useInView, motion } from 'framer-motion'
+import { useInView } from 'framer-motion'
 
 interface AnimatedCounterProps {
   value: number
   suffix?: string
   label: string
   duration?: number
+  light?: boolean
 }
 
-export function AnimatedCounter({ value, suffix = '', label, duration = 1.6 }: AnimatedCounterProps) {
+export function AnimatedCounter({
+  value,
+  suffix = '',
+  label,
+  duration = 1.6,
+  light = false,
+}: AnimatedCounterProps) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-40px' })
   const [display, setDisplay] = useState(0)
@@ -34,19 +41,21 @@ export function AnimatedCounter({ value, suffix = '', label, duration = 1.6 }: A
   }, [isInView, value, duration])
 
   return (
-    <motion.div
-      ref={ref}
-      className="text-center"
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.45 }}
-    >
-      <div className="font-display text-5xl font-semibold text-navy md:text-6xl">
+    <div ref={ref} className={light ? 'text-center sm:text-left' : 'text-center'}>
+      <div
+        className={`font-display text-5xl font-medium md:text-6xl ${light ? 'text-white' : 'text-navy'}`}
+        aria-hidden
+      >
         {display}
-        <span className="text-royal">{suffix}</span>
+        <span className={light ? 'text-gold-light' : 'text-royal'}>{suffix}</span>
       </div>
-      <p className="mt-2 text-sm font-medium text-ink-muted md:text-base">{label}</p>
-    </motion.div>
+      <span className="sr-only">
+        {value}
+        {suffix} {label}
+      </span>
+      <p className={`mt-3 text-sm md:text-base ${light ? 'text-white/55' : 'text-ink-muted'}`}>
+        {label}
+      </p>
+    </div>
   )
 }

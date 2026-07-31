@@ -38,7 +38,7 @@ export function professionalServiceSchema() {
     '@type': 'ProfessionalService',
     name: COMPANY.name,
     url: COMPANY.url,
-    image: `${COMPANY.url}/og-image.png`,
+    image: `${COMPANY.url}/og-image.svg`,
     description:
       'Enterprise consulting for AI transformation, blockchain strategy, and real-world asset tokenization.',
     priceRange: '$$$',

@@ -1,10 +1,10 @@
 export const COMPANY = {
   name: 'Real Block Technologies',
   shortName: 'Real Block',
-  tagline: 'Unlocking the Future of Assets Through AI, Blockchain & Digital Innovation',
+  tagline: 'Institutional consulting for AI, blockchain, and real-world asset transformation',
   email: 'contact@realblocktechnologies.com',
-  phone: '+1 (555) 014-2800',
-  address: 'Enterprise Technology Hub, Global Operations',
+  phone: '',
+  address: 'Serving enterprises worldwide',
   url: 'https://realblocktechnologies.com',
 } as const
 
@@ -73,12 +73,27 @@ export const FOOTER_SERVICES = [
 export const FOOTER_COMPANY = [
   { label: 'About Us', href: '/about' },
   { label: 'Case Studies', href: '/case-studies' },
+  { label: 'Careers', href: '/careers' },
+  { label: 'Contact', href: '/contact' },
+] as const
+
+export const FOOTER_RESOURCES = [
   { label: 'Resource Library', href: '/resources' },
   { label: 'RWA Guide', href: '/resources/rwa-tokenization-guide' },
-  { label: 'Help Center', href: '/help' },
-  { label: 'Careers', href: '/careers' },
   { label: 'Insights', href: '/insights' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Help Center', href: '/help' },
+] as const
+
+export const FOOTER_INDUSTRIES = [
+  { label: 'Real Estate', href: '/industries/real-estate' },
+  { label: 'Financial Services', href: '/industries/financial-services' },
+  { label: 'Manufacturing', href: '/industries/manufacturing' },
+  { label: 'Healthcare', href: '/industries/healthcare' },
+  { label: 'Logistics', href: '/industries/logistics' },
+  { label: 'Professional Services', href: '/industries/professional-services' },
+] as const
+
+export const FOOTER_LEGAL = [
   { label: 'Privacy Policy', href: '/privacy' },
   { label: 'Terms of Use', href: '/terms' },
 ] as const
@@ -96,12 +111,12 @@ export const TRUST_INDICATORS = [
   'Outcome-focused engagements',
 ] as const
 
-/** Replace with real partner / client marks when approved */
+/** Sector marks — replace with client logos when approved */
 export const TRUSTED_PARTNERS = [
-  'Aether Capital',
-  'Northline Realty',
-  'Meridian Finance',
-  'Vertex Manufacturing',
-  'Horizon Logistics',
-  'Summit Advisory',
+  'Real Estate',
+  'Financial Services',
+  'Manufacturing',
+  'Healthcare',
+  'Logistics',
+  'Professional Services',
 ] as const

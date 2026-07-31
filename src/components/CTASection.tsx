@@ -15,7 +15,7 @@ export function CTASection({
   title = 'Ready to unlock the next chapter of digital transformation?',
   description = 'Partner with Real Block Technologies to design and deliver AI, blockchain, and real-world asset solutions built for enterprise outcomes.',
   primaryLabel = 'Schedule Consultation',
-  primaryTo = '/contact',
+  primaryTo = '/contact#consultation',
   secondaryLabel = 'Explore Services',
   secondaryTo = '/services',
 }: CTASectionProps) {
