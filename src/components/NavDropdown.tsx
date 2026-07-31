@@ -100,7 +100,7 @@ export function NavDropdown({ label, href, items, dark = false }: NavDropdownPro
         {open && (
           <motion.div
             role="menu"
-            className="absolute top-full left-0 z-50 mt-2 w-[22rem] border border-border bg-white py-2 shadow-xl shadow-navy/10"
+            className="absolute top-full left-0 z-50 mt-2 w-72 border border-border bg-white py-2 shadow-xl shadow-navy/10"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
@@ -120,15 +120,10 @@ export function NavDropdown({ label, href, items, dark = false }: NavDropdownPro
                 key={item.href}
                 to={item.href}
                 role="menuitem"
-                className="block px-4 py-2.5 transition hover:bg-surface"
+                className="block px-4 py-2.5 text-sm font-semibold text-navy transition hover:bg-surface"
                 onClick={() => setOpen(false)}
               >
-                <span className="block text-sm font-semibold text-navy">{item.label}</span>
-                {item.description && (
-                  <span className="mt-0.5 block text-xs leading-snug text-ink-muted">
-                    {item.description}
-                  </span>
-                )}
+                {item.label}
               </Link>
             ))}
           </motion.div>

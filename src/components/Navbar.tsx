@@ -13,13 +13,11 @@ import { trackCtaClick, trackEvent } from '@/utils/analytics'
 const serviceMenu = services.map((s) => ({
   label: s.title,
   href: s.href,
-  description: s.description,
 }))
 
 const industryMenu = industries.map((i) => ({
   label: i.title,
   href: i.href,
-  description: i.description,
 }))
 
 export function Navbar() {
