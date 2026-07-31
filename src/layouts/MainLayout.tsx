@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { ScrollToTop } from '@/components/ScrollToTop'
+import { AIChatWidget } from '@/components/AIChatWidget'
 
 export function MainLayout() {
   return (
@@ -15,6 +16,7 @@ export function MainLayout() {
         </AnimatePresence>
       </main>
       <Footer />
+      <AIChatWidget />
     </div>
   )
 }

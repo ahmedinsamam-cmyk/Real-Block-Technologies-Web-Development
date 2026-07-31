@@ -1,16 +1,15 @@
-import { useEffect, useRef } from 'react'
-import { CalendarDays, Clock3 } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { CalendarDays, Clock3, CheckCircle2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/Button'
 import { SectionHeading } from '@/components/SectionHeading'
-import { CALENDLY_URL, CONSULTATION_TOPICS } from '@/utils/constants'
+import { CALENDLY_URL, CONSULTATION_TOPICS, MEETING_TYPES } from '@/utils/constants'
 import { trackEvent, trackCtaClick } from '@/utils/analytics'
 
 interface ConsultationBookingProps {
   title?: string
   description?: string
   ctaLabel?: string
-  /** When true, embed the Calendly inline widget */
   embed?: boolean
   variant?: 'section' | 'compact'
 }
@@ -60,12 +59,17 @@ function loadCalendlyAssets(): Promise<void> {
 
 export function ConsultationBooking({
   title = 'Ready to Transform Your Business?',
-  description = 'Book a free 30-minute discovery consultation with our enterprise technology advisors.',
+  description = 'Book a consultation with our enterprise technology advisors. Calendar invites are sent automatically via Calendly.',
   ctaLabel = 'Book a Free Consultation',
   embed = false,
   variant = 'section',
 }: ConsultationBookingProps) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [selectedMeeting, setSelectedMeeting] = useState<string>(MEETING_TYPES[0].slug)
+  const [confirmed, setConfirmed] = useState(false)
+
+  const activeMeeting = MEETING_TYPES.find((m) => m.slug === selectedMeeting) ?? MEETING_TYPES[0]
+  const calendlyEventUrl = `${CALENDLY_URL}/${activeMeeting.slug}`
 
   useEffect(() => {
     if (!embed || !containerRef.current) return
@@ -76,16 +80,30 @@ export function ConsultationBooking({
       if (cancelled || !containerRef.current || !window.Calendly) return
       containerRef.current.innerHTML = ''
       window.Calendly.initInlineWidget({
-        url: `${CALENDLY_URL}?hide_gdpr_banner=1`,
+        url: `${calendlyEventUrl}?hide_gdpr_banner=1`,
         parentElement: containerRef.current,
       })
-      trackEvent({ event: 'consultation_booking', label: 'calendly_embed_view' })
+      trackEvent({
+        event: 'consultation_booking',
+        label: `calendly_embed_${activeMeeting.slug}`,
+      })
     })
+
+    const onMessage = (event: MessageEvent) => {
+      if (typeof event.data !== 'object' || !event.data) return
+      const data = event.data as { event?: string }
+      if (data.event === 'calendly.event_scheduled') {
+        setConfirmed(true)
+        trackEvent({ event: 'consultation_booking', label: 'calendly_scheduled' })
+      }
+    }
+    window.addEventListener('message', onMessage)
 
     return () => {
       cancelled = true
+      window.removeEventListener('message', onMessage)
     }
-  }, [embed])
+  }, [embed, calendlyEventUrl, activeMeeting.slug])
 
   if (variant === 'compact') {
     return (
@@ -120,11 +138,33 @@ export function ConsultationBooking({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading eyebrow="Book a Consultation" title={title} description={description} />
 
-        <div className="mx-auto mb-10 flex max-w-3xl flex-wrap items-center justify-center gap-3">
-          <span className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-navy">
-            <Clock3 className="h-3.5 w-3.5 text-royal" />
-            30-minute discovery consultation
-          </span>
+        <div className="mx-auto mb-8 grid max-w-4xl gap-3 md:grid-cols-3">
+          {MEETING_TYPES.map((meeting) => (
+            <button
+              key={meeting.slug}
+              type="button"
+              onClick={() => {
+                setSelectedMeeting(meeting.slug)
+                setConfirmed(false)
+                trackCtaClick(`meeting_type_${meeting.slug}`)
+              }}
+              className={`rounded-xl border p-4 text-left transition ${
+                selectedMeeting === meeting.slug
+                  ? 'border-royal bg-royal/5 shadow-sm'
+                  : 'border-border bg-surface hover:border-royal/40'
+              }`}
+            >
+              <p className="font-display text-sm font-bold text-navy">{meeting.title}</p>
+              <p className="mt-1 flex items-center gap-1 text-xs text-ink-muted">
+                <Clock3 className="h-3.5 w-3.5" />
+                {meeting.duration}
+              </p>
+              <p className="mt-2 text-xs leading-relaxed text-ink-muted">{meeting.description}</p>
+            </button>
+          ))}
+        </div>
+
+        <div className="mx-auto mb-8 flex max-w-3xl flex-wrap items-center justify-center gap-3">
           {CONSULTATION_TOPICS.map((topic) => (
             <span
               key={topic}
@@ -134,6 +174,18 @@ export function ConsultationBooking({
             </span>
           ))}
         </div>
+
+        {confirmed && (
+          <div className="mx-auto mb-6 flex max-w-3xl items-start gap-3 rounded-xl border border-royal/20 bg-royal/5 p-4">
+            <CheckCircle2 className="mt-0.5 h-5 w-5 text-royal" />
+            <div>
+              <p className="font-display text-sm font-bold text-navy">Consultation confirmed</p>
+              <p className="mt-1 text-sm text-ink-muted">
+                A calendar invitation has been sent via Calendly. Our team looks forward to speaking with you.
+              </p>
+            </div>
+          </div>
+        )}
 
         {embed ? (
           <motion.div
@@ -145,11 +197,11 @@ export function ConsultationBooking({
             <div
               ref={containerRef}
               className="calendly-inline-widget min-h-[700px] w-full"
-              data-url={CALENDLY_URL}
+              data-url={calendlyEventUrl}
             />
             <p className="border-t border-border px-4 py-3 text-center text-xs text-ink-muted">
-              Scheduler powered by Calendly. Replace{' '}
-              <span className="font-mono text-navy">{CALENDLY_URL}</span> with your live scheduling link.
+              Embedded Calendly scheduler for <span className="font-semibold text-navy">{activeMeeting.title}</span>.
+              Replace event slugs under your Calendly account when live.
             </p>
           </motion.div>
         ) : (
@@ -164,7 +216,7 @@ export function ConsultationBooking({
               {ctaLabel}
             </Button>
             <a
-              href={CALENDLY_URL}
+              href={calendlyEventUrl}
               target="_blank"
               rel="noreferrer"
               className="text-sm font-semibold text-royal hover:text-royal-dark"

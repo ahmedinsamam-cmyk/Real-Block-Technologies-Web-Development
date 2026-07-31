@@ -1,13 +1,13 @@
 import { trackEvent } from '@/utils/analytics'
+import { createContact, toCrmContact, trackEngagement, type CrmLeadSource } from '@/services/crmService'
+import { triggerResourceFollowUp, triggerWelcomeSeries } from '@/services/emailAutomation'
+import { checkRateLimit, getRecaptchaToken, sanitizeEmail, sanitizeLeadFields } from '@/utils/security'
+import { detectLocale, detectTimezone } from '@/utils/i18n'
+import { trackDownloadLocally } from '@/services/documentService'
 
 /**
- * CRM-ready lead management service.
- * Frontend submissions are persisted locally and prepared for HubSpot,
- * Salesforce, Monday.com, Mailchimp, ConvertKit, or a custom API.
- *
- * Configure:
- *   VITE_LEAD_API_URL — optional REST endpoint for lead ingestion
- *   VITE_CRM_PROVIDER — hubspot | salesforce | monday | custom
+ * Unified lead capture layer used by forms across the site.
+ * Orchestrates CRM (HubSpot), email automation, analytics, and security checks.
  */
 
 export type LeadSource =
@@ -16,14 +16,20 @@ export type LeadSource =
   | 'rwa_guide_download'
   | 'newsletter'
   | 'consultation'
+  | 'chat_widget'
+  | 'resource_library'
   | 'other'
 
 export interface LeadPayload {
   name?: string
+  firstName?: string
+  lastName?: string
   email: string
   company?: string
   jobTitle?: string
   industry?: string
+  country?: string
+  serviceInterest?: string
   phone?: string
   message?: string
   source: LeadSource
@@ -39,108 +45,54 @@ export interface LeadResponse {
   storedLocally: boolean
   forwardedToApi: boolean
   message: string
+  priority?: 'high' | 'medium' | 'low'
 }
 
-const STORAGE_KEY = 'rbt_leads_v1'
-
-function createLeadId(): string {
-  return `lead_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`
-}
-
-function readLocalLeads(): LeadPayload[] {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) return []
-    const parsed = JSON.parse(raw) as LeadPayload[]
-    return Array.isArray(parsed) ? parsed : []
-  } catch {
-    return []
+function mapSource(source: LeadSource): CrmLeadSource {
+  switch (source) {
+    case 'consultation':
+      return 'consultation_booking'
+    case 'newsletter':
+      return 'newsletter'
+    case 'case_study_download':
+    case 'rwa_guide_download':
+    case 'resource_library':
+      return 'resource_download'
+    case 'chat_widget':
+      return 'chat_widget'
+    case 'contact_form':
+      return 'contact_form'
+    default:
+      return 'other'
   }
 }
 
-function writeLocalLead(lead: LeadPayload & { id: string; createdAt: string }): void {
-  try {
-    const existing = readLocalLeads()
-    existing.push(lead)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(existing.slice(-200)))
-  } catch {
-    // Storage may be unavailable (private mode); ignore
-  }
-}
-
-async function forwardToApi(lead: LeadPayload & { id: string; createdAt: string }): Promise<boolean> {
-  const apiUrl = import.meta.env.VITE_LEAD_API_URL as string | undefined
-  if (!apiUrl) return false
-
-  const provider = (import.meta.env.VITE_CRM_PROVIDER as string | undefined) ?? 'custom'
-
-  try {
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CRM-Provider': provider,
-      },
-      body: JSON.stringify({
-        provider,
-        // HubSpot / Salesforce / Monday-compatible envelope
-        properties: {
-          email: lead.email,
-          firstname: lead.name,
-          company: lead.company,
-          jobtitle: lead.jobTitle,
-          industry: lead.industry,
-          phone: lead.phone,
-          message: lead.message,
-          lead_source: lead.source,
-          resource_id: lead.resourceId,
-          resource_title: lead.resourceTitle,
-        },
-        lead,
-      }),
-    })
-    return response.ok
-  } catch {
-    return false
-  }
-}
-
-async function persistLead(payload: LeadPayload, analyticsEvent: 'lead_capture' | 'newsletter_subscription' | 'resource_download'): Promise<LeadResponse> {
-  const id = createLeadId()
-  const createdAt = new Date().toISOString()
-  const record = {
-    ...payload,
-    id,
-    createdAt,
-    pagePath: payload.pagePath ?? (typeof window !== 'undefined' ? window.location.pathname : undefined),
+export async function captureLead(payload: LeadPayload): Promise<LeadResponse> {
+  const rate = checkRateLimit(`lead:${payload.source}`, 8, 60_000)
+  if (!rate.allowed) {
+    return {
+      success: false,
+      id: '',
+      storedLocally: false,
+      forwardedToApi: false,
+      message: 'Too many submissions. Please wait a moment and try again.',
+    }
   }
 
-  writeLocalLead(record)
-  const forwardedToApi = await forwardToApi(record)
-
-  trackEvent({
-    event: analyticsEvent,
-    label: payload.resourceTitle ?? payload.source,
-    metadata: {
-      source: payload.source,
-      forwardedToApi,
-    },
+  const clean = sanitizeLeadFields({
+    name: payload.name,
+    firstName: payload.firstName,
+    lastName: payload.lastName,
+    email: sanitizeEmail(payload.email),
+    company: payload.company,
+    jobTitle: payload.jobTitle,
+    industry: payload.industry,
+    country: payload.country,
+    phone: payload.phone,
+    message: payload.message,
   })
 
-  return {
-    success: true,
-    id,
-    storedLocally: true,
-    forwardedToApi,
-    message: forwardedToApi
-      ? 'Lead captured and forwarded to CRM endpoint.'
-      : 'Lead captured locally. Configure VITE_LEAD_API_URL to sync with HubSpot, Salesforce, or Monday.',
-  }
-}
-
-/** Generic lead capture for contact forms and gated content */
-export async function captureLead(payload: LeadPayload): Promise<LeadResponse> {
-  if (!payload.email?.trim()) {
+  if (!clean.email) {
     return {
       success: false,
       id: '',
@@ -150,35 +102,97 @@ export async function captureLead(payload: LeadPayload): Promise<LeadResponse> {
     }
   }
 
-  return persistLead(payload, 'lead_capture')
+  const recaptchaToken = await getRecaptchaToken(payload.source)
+
+  const contact = toCrmContact({
+    name: clean.name,
+    firstName: clean.firstName,
+    lastName: clean.lastName,
+    email: clean.email,
+    company: clean.company,
+    jobTitle: clean.jobTitle,
+    industry: clean.industry,
+    country: clean.country,
+    phone: clean.phone,
+    message: clean.message,
+    leadSource: mapSource(payload.source),
+    resourceId: payload.resourceId,
+    locale: detectLocale(),
+    timezone: detectTimezone(),
+  })
+
+  contact.metadata = {
+    ...payload.metadata,
+    ...(recaptchaToken ? { recaptchaToken } : {}),
+    pagePath: payload.pagePath ?? (typeof window !== 'undefined' ? window.location.pathname : ''),
+    serviceInterest: payload.serviceInterest ?? '',
+  }
+
+  const crm = await createContact(contact)
+
+  await trackEngagement({
+    contactEmail: clean.email,
+    event:
+      payload.source === 'consultation'
+        ? 'consultation_booked'
+        : payload.source === 'newsletter'
+          ? 'newsletter_subscribe'
+          : payload.resourceId
+            ? 'resource_download'
+            : 'cta_click',
+    label: payload.resourceTitle ?? payload.source,
+  })
+
+  if (payload.resourceId) {
+    trackDownloadLocally(payload.resourceId, clean.email)
+    void triggerResourceFollowUp(clean.email, payload.resourceTitle ?? payload.resourceId)
+  }
+
+  trackEvent({
+    event: 'lead_capture',
+    label: payload.source,
+    metadata: { priority: crm.priority },
+  })
+
+  return {
+    success: crm.success,
+    id: crm.contactId ?? '',
+    storedLocally: true,
+    forwardedToApi: crm.message.includes('HubSpot'),
+    message: crm.message,
+    priority: crm.priority,
+  }
 }
 
-/** Newsletter subscription — ready for Mailchimp / ConvertKit / HubSpot */
 export async function submitNewsletter(email: string, metadata?: Record<string, string>): Promise<LeadResponse> {
-  return persistLead(
-    {
-      email,
-      source: 'newsletter',
-      metadata,
-    },
-    'newsletter_subscription',
-  )
+  const result = await captureLead({
+    email,
+    source: 'newsletter',
+    metadata,
+  })
+  if (result.success) {
+    void triggerWelcomeSeries(sanitizeEmail(email))
+    trackEvent({ event: 'newsletter_subscription', label: 'newsletter' })
+  }
+  return result
 }
 
-/** Resource / PDF download lead capture */
 export async function downloadResource(
   payload: Omit<LeadPayload, 'source'> & { source?: LeadSource },
 ): Promise<LeadResponse> {
-  return persistLead(
-    {
-      ...payload,
-      source: payload.source ?? 'case_study_download',
-    },
-    'resource_download',
-  )
+  const result = await captureLead({
+    ...payload,
+    source: payload.source ?? 'case_study_download',
+  })
+  if (result.success) {
+    trackEvent({
+      event: 'resource_download',
+      label: payload.resourceTitle ?? payload.resourceId,
+    })
+  }
+  return result
 }
 
-/** Trigger browser download after successful lead capture */
 export function triggerFileDownload(filePath: string, fileName?: string): void {
   const anchor = document.createElement('a')
   anchor.href = filePath

@@ -3,6 +3,7 @@ import { BrowserRouter, useLocation } from 'react-router-dom'
 import App from '@/App'
 import { LoadingScreen } from '@/components/LoadingScreen'
 import { initAnalytics, trackPageView } from '@/utils/analytics'
+import { enforceHttpsInProduction, loadRecaptcha } from '@/utils/security'
 
 function AnalyticsListener() {
   const location = useLocation()
@@ -18,7 +19,9 @@ export function Root({ children }: { children?: ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    enforceHttpsInProduction()
     initAnalytics()
+    void loadRecaptcha()
     const timer = window.setTimeout(() => setLoading(false), 900)
     return () => window.clearTimeout(timer)
   }, [])

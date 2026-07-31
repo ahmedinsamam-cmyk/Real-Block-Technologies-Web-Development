@@ -7,6 +7,7 @@ import { SectionHeading } from '@/components/SectionHeading'
 import { NewsletterSignup } from '@/components/NewsletterSignup'
 import { LinkedInCTA } from '@/components/LinkedInCTA'
 import { CTASection } from '@/components/CTASection'
+import { SocialShare } from '@/components/SocialShare'
 import { insights } from '@/data/content'
 
 export function InsightsPage() {
@@ -52,7 +53,14 @@ export function InsightsPage() {
                   {article.title}
                 </h2>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-muted">{article.excerpt}</p>
-                <div className="mt-6 flex items-center justify-between border-t border-border pt-4">
+                <div className="mt-5">
+                  <SocialShare
+                    title={article.title}
+                    excerpt={article.excerpt}
+                    path={`/insights#${article.id}`}
+                  />
+                </div>
+                <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
                   <time className="text-xs text-ink-muted">{article.date}</time>
                   <span className="inline-flex items-center gap-1 text-sm font-semibold text-royal">
                     Read article

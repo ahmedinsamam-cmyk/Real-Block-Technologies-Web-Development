@@ -16,11 +16,40 @@ export const SOCIAL_LINKS = {
 
 export const CALENDLY_URL = 'https://calendly.com/realblocktechnologies'
 
+export const MEETING_TYPES = [
+  {
+    slug: 'discovery-call',
+    title: '30 Minute Discovery Call',
+    duration: '30 minutes',
+    description: 'Qualify priorities and identify the right engagement path.',
+  },
+  {
+    slug: 'strategy-session',
+    title: '60 Minute Strategy Session',
+    duration: '60 minutes',
+    description: 'Deep-dive on AI, RWA, or blockchain strategy with advisors.',
+  },
+  {
+    slug: 'enterprise-workshop',
+    title: 'Enterprise Transformation Workshop',
+    duration: '90–120 minutes',
+    description: 'Facilitated workshop for leadership alignment and roadmap design.',
+  },
+] as const
+
 export const CONSULTATION_TOPICS = [
   'AI Transformation',
   'RWA Tokenization',
   'Blockchain Strategy',
   'Enterprise Automation',
+] as const
+
+export const SEO_KEYWORDS = [
+  'AI Consulting Company',
+  'Blockchain Consulting',
+  'Real World Asset Tokenization',
+  'Enterprise AI Solutions',
+  'Digital Transformation Consulting',
 ] as const
 
 export const NAV_LINKS = [
@@ -44,7 +73,9 @@ export const FOOTER_SERVICES = [
 export const FOOTER_COMPANY = [
   { label: 'About Us', href: '/about' },
   { label: 'Case Studies', href: '/case-studies' },
+  { label: 'Resource Library', href: '/resources' },
   { label: 'RWA Guide', href: '/resources/rwa-tokenization-guide' },
+  { label: 'Help Center', href: '/help' },
   { label: 'Careers', href: '/careers' },
   { label: 'Insights', href: '/insights' },
   { label: 'Contact', href: '/contact' },

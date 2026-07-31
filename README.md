@@ -89,19 +89,23 @@ npx wrangler pages deploy dist --project-name=real-block-technologies
 - Legal review of Privacy Policy and Terms before go-live
 - Performance budgets, image CDN, and Core Web Vitals monitoring
 
-## Lead generation setup
+## Lead generation & business operations setup
 
-Configure optional environment variables (see `.env.example`):
+See `.env.example` for full configuration. Key integrations:
 
-- `VITE_GA4_MEASUREMENT_ID` — Google Analytics 4
-- `VITE_LINKEDIN_PARTNER_ID` — LinkedIn Insight Tag
-- `VITE_META_PIXEL_ID` — Meta Pixel
-- `VITE_LEAD_API_URL` — CRM / lead ingestion endpoint
-- `VITE_CRM_PROVIDER` — `hubspot` | `salesforce` | `monday` | `custom`
+| Capability | Service / module |
+|---|---|
+| CRM | HubSpot via `src/services/crmService.ts` |
+| Email automation | Mailchimp/ConvertKit via `src/services/emailAutomation.ts` |
+| Booking | Calendly meeting types in `ConsultationBooking` |
+| Chat | `AIChatWidget` (Intercom/Crisp/HubSpot ready) |
+| Analytics | GA4 + LinkedIn Insight + Meta in `src/utils/analytics.ts` |
+| CMS | Sanity-ready `src/services/cms.ts` |
+| Documents | Cloudflare R2-ready `src/services/documentService.ts` |
+| Security | reCAPTCHA, sanitization, rate limits in `src/utils/security.ts` |
+| i18n | Locale architecture in `src/utils/i18n.ts` |
+| Dashboard (future) | `src/services/dashboard.ts` |
 
-Replace placeholder URLs in `src/utils/constants.ts`:
+Routes added for GTM: `/resources`, `/help`, `/resources/rwa-tokenization-guide`.
 
-- LinkedIn: `https://www.linkedin.com/company/real-block-technologies/`
-- Calendly: `https://calendly.com/realblocktechnologies`
-
-Downloadable PDFs live in `public/resources/`.
+Replace placeholder URLs in `src/utils/constants.ts` (LinkedIn, Calendly event slugs).

@@ -1,13 +1,14 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { CheckCircle2, Mail, Phone, MapPin } from 'lucide-react'
+import { CheckCircle2, Mail, Phone, MapPin, Globe2 } from 'lucide-react'
 import { SEO } from '@/components/SEO'
 import { PageTransition } from '@/components/PageTransition'
 import { PageHero } from '@/components/PageHero'
 import { Button } from '@/components/Button'
 import { ConsultationBooking } from '@/components/ConsultationBooking'
 import { COMPANY } from '@/utils/constants'
+import { COUNTRY_OPTIONS, detectTimezone, COMMERCIAL_POSITIONING } from '@/utils/i18n'
 import {
   validateContactForm,
   type ContactFormData,
@@ -16,12 +17,37 @@ import {
 import { captureLead } from '@/services/leadService'
 
 const initialForm: ContactFormData = {
-  name: '',
-  company: '',
+  firstName: '',
+  lastName: '',
   email: '',
+  company: '',
+  jobTitle: '',
+  industry: '',
+  country: '',
   phone: '',
+  serviceInterest: '',
   message: '',
 }
+
+const industries = [
+  'Real Estate',
+  'Financial Services',
+  'Manufacturing',
+  'Healthcare',
+  'Logistics',
+  'Professional Services',
+  'Other',
+]
+
+const serviceInterests = [
+  { value: 'ai_transformation', label: 'AI Transformation' },
+  { value: 'rwa_tokenization', label: 'RWA Tokenization' },
+  { value: 'blockchain_strategy', label: 'Blockchain Strategy' },
+  { value: 'enterprise_automation', label: 'Enterprise Automation' },
+  { value: 'treasury_fintech', label: 'Treasury & FinTech' },
+  { value: 'software_development', label: 'Software Development' },
+  { value: 'general', label: 'General Inquiry' },
+]
 
 export function ContactPage() {
   const [form, setForm] = useState<ContactFormData>(initialForm)
@@ -29,19 +55,17 @@ export function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const location = useLocation()
+  const timezone = detectTimezone()
 
   useEffect(() => {
     if (location.hash === '#consultation') {
-      const el = document.getElementById('consultation')
-      el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      document.getElementById('consultation')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }, [location.hash])
 
   const updateField = (field: keyof ContactFormData, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }))
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: undefined }))
-    }
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }))
   }
 
   const handleSubmit = async (event: FormEvent) => {
@@ -52,12 +76,19 @@ export function ContactPage() {
 
     setSubmitting(true)
     const result = await captureLead({
-      name: form.name,
+      firstName: form.firstName,
+      lastName: form.lastName,
+      name: `${form.firstName} ${form.lastName}`,
       company: form.company,
       email: form.email,
+      jobTitle: form.jobTitle,
+      industry: form.industry,
+      country: form.country,
       phone: form.phone,
+      serviceInterest: form.serviceInterest,
       message: form.message,
       source: 'contact_form',
+      metadata: { timezone },
     })
     setSubmitting(false)
 
@@ -71,22 +102,21 @@ export function ContactPage() {
     <PageTransition>
       <SEO
         title="Contact"
-        description="Schedule a consultation with Real Block Technologies. Contact our team about AI, blockchain, and real-world asset initiatives."
+        description="Schedule a consultation with Real Block Technologies. Global enterprise contact form for AI, blockchain, and RWA initiatives."
         path="/contact"
       />
       <PageHero
         eyebrow="Contact"
         title="Let's discuss your transformation priorities"
-        description="Share a brief overview of your initiative or book a 30-minute discovery consultation directly on Calendly."
+        description="Submit an international inquiry or book a Calendly consultation. Timezone-aware scheduling and currency-neutral proposals."
       />
 
       <section className="bg-surface py-20 md:py-24">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.3fr] lg:px-8">
           <div>
-            <h2 className="font-display text-2xl font-bold text-navy md:text-3xl">Send a message</h2>
+            <h2 className="font-display text-2xl font-bold text-navy md:text-3xl">Global enterprise inquiry</h2>
             <p className="mt-4 text-sm leading-relaxed text-ink-muted md:text-base">
-              Whether you are evaluating tokenization readiness, designing an AI roadmap, or modernizing
-              financial operations, we are ready to help you move with clarity.
+              {COMMERCIAL_POSITIONING.pricingNote}
             </p>
             <ul className="mt-8 space-y-4">
               <li className="flex items-start gap-3 text-sm text-ink-muted">
@@ -105,6 +135,10 @@ export function ContactPage() {
                 <MapPin className="mt-0.5 h-4 w-4 text-royal" />
                 {COMPANY.address}
               </li>
+              <li className="flex items-start gap-3 text-sm text-ink-muted">
+                <Globe2 className="mt-0.5 h-4 w-4 text-royal" />
+                Detected timezone: {timezone}
+              </li>
             </ul>
           </div>
 
@@ -118,68 +152,67 @@ export function ContactPage() {
                 <CheckCircle2 className="h-12 w-12 text-royal" />
                 <h3 className="mt-4 font-display text-xl font-bold text-navy">Thank you for reaching out</h3>
                 <p className="mt-2 max-w-md text-sm text-ink-muted">
-                  Your message has been received. A member of our team will respond shortly—or book time
-                  below on Calendly.
+                  Your inquiry was captured for HubSpot-ready CRM follow-up. Book time below if you prefer an
+                  immediate calendar slot.
                 </p>
                 <Button className="mt-6" variant="ghost" onClick={() => setSubmitted(false)}>
                   Send another message
                 </Button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} noValidate className="space-y-5">
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <Field
-                    label="Name"
-                    id="name"
-                    value={form.name}
-                    error={errors.name}
-                    onChange={(v) => updateField('name', v)}
-                    autoComplete="name"
+              <form onSubmit={handleSubmit} noValidate className="space-y-4">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field label="First Name" id="firstName" value={form.firstName} error={errors.firstName} onChange={(v) => updateField('firstName', v)} autoComplete="given-name" />
+                  <Field label="Last Name" id="lastName" value={form.lastName} error={errors.lastName} onChange={(v) => updateField('lastName', v)} autoComplete="family-name" />
+                  <Field label="Business Email" id="email" type="email" value={form.email} error={errors.email} onChange={(v) => updateField('email', v)} autoComplete="email" />
+                  <Field label="Company Name" id="company" value={form.company} error={errors.company} onChange={(v) => updateField('company', v)} autoComplete="organization" />
+                  <Field label="Job Title" id="jobTitle" value={form.jobTitle} error={errors.jobTitle} onChange={(v) => updateField('jobTitle', v)} autoComplete="organization-title" />
+                  <Field label="Phone" id="phone" type="tel" value={form.phone} error={errors.phone} onChange={(v) => updateField('phone', v)} autoComplete="tel" />
+                  <SelectField
+                    label="Industry"
+                    id="industry"
+                    value={form.industry}
+                    error={errors.industry}
+                    onChange={(v) => updateField('industry', v)}
+                    options={industries.map((i) => ({ value: i, label: i }))}
                   />
-                  <Field
-                    label="Company"
-                    id="company"
-                    value={form.company}
-                    error={errors.company}
-                    onChange={(v) => updateField('company', v)}
-                    autoComplete="organization"
-                  />
-                  <Field
-                    label="Email"
-                    id="email"
-                    type="email"
-                    value={form.email}
-                    error={errors.email}
-                    onChange={(v) => updateField('email', v)}
-                    autoComplete="email"
-                  />
-                  <Field
-                    label="Phone"
-                    id="phone"
-                    type="tel"
-                    value={form.phone}
-                    error={errors.phone}
-                    onChange={(v) => updateField('phone', v)}
-                    autoComplete="tel"
+                  <SelectField
+                    label="Country"
+                    id="country"
+                    value={form.country}
+                    error={errors.country}
+                    onChange={(v) => updateField('country', v)}
+                    options={COUNTRY_OPTIONS.map((c) => ({ value: c, label: c }))}
                   />
                 </div>
+                <SelectField
+                  label="Service Interest"
+                  id="serviceInterest"
+                  value={form.serviceInterest}
+                  error={errors.serviceInterest}
+                  onChange={(v) => updateField('serviceInterest', v)}
+                  options={serviceInterests}
+                />
                 <div>
                   <label htmlFor="message" className="mb-1.5 block text-sm font-semibold text-navy">
                     Message
                   </label>
                   <textarea
                     id="message"
-                    rows={5}
+                    rows={4}
                     value={form.message}
                     onChange={(e) => updateField('message', e.target.value)}
-                    className={`w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm text-ink outline-none transition focus:ring-2 focus:ring-royal/30 ${
+                    className={`w-full rounded-lg border px-3.5 py-2.5 text-sm outline-none transition focus:ring-2 focus:ring-royal/30 ${
                       errors.message ? 'border-red-400' : 'border-border focus:border-royal'
                     }`}
-                    placeholder="Tell us about your initiative, timeline, and objectives."
+                    placeholder="Tell us about objectives, timeline, and stakeholders."
                   />
                   {errors.message && <p className="mt-1.5 text-xs text-red-600">{errors.message}</p>}
                 </div>
-                <Button type="submit" variant="primary" size="lg" className="w-full sm:w-auto" disabled={submitting}>
+                <p className="text-[0.7rem] text-ink-muted">
+                  Protected with validation, sanitization, rate limiting, and optional Google reCAPTCHA.
+                </p>
+                <Button type="submit" variant="primary" size="lg" disabled={submitting}>
                   {submitting ? 'Sending…' : 'Submit Inquiry'}
                 </Button>
               </form>
@@ -191,14 +224,21 @@ export function ContactPage() {
       <ConsultationBooking
         embed
         title="Book a Free Consultation"
-        description="Select a time for a 30-minute discovery consultation. Topics include AI Transformation, RWA Tokenization, Blockchain Strategy, and Enterprise Automation."
-        ctaLabel="Book a Free Consultation"
+        description="Choose a meeting type and schedule instantly. Confirmation and calendar invites are handled by Calendly."
       />
     </PageTransition>
   )
 }
 
-interface FieldProps {
+function Field({
+  label,
+  id,
+  value,
+  error,
+  onChange,
+  type = 'text',
+  autoComplete,
+}: {
   label: string
   id: string
   value: string
@@ -206,9 +246,7 @@ interface FieldProps {
   onChange: (value: string) => void
   type?: string
   autoComplete?: string
-}
-
-function Field({ label, id, value, error, onChange, type = 'text', autoComplete }: FieldProps) {
+}) {
   return (
     <div>
       <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-navy">
@@ -220,10 +258,50 @@ function Field({ label, id, value, error, onChange, type = 'text', autoComplete 
         value={value}
         autoComplete={autoComplete}
         onChange={(e) => onChange(e.target.value)}
-        className={`w-full rounded-lg border px-3.5 py-2.5 text-sm text-ink outline-none transition focus:ring-2 focus:ring-royal/30 ${
+        className={`w-full rounded-lg border px-3.5 py-2.5 text-sm outline-none transition focus:ring-2 focus:ring-royal/30 ${
           error ? 'border-red-400' : 'border-border focus:border-royal'
         }`}
       />
+      {error && <p className="mt-1.5 text-xs text-red-600">{error}</p>}
+    </div>
+  )
+}
+
+function SelectField({
+  label,
+  id,
+  value,
+  error,
+  onChange,
+  options,
+}: {
+  label: string
+  id: string
+  value: string
+  error?: string
+  onChange: (value: string) => void
+  options: Array<{ value: string; label: string }>
+}) {
+  return (
+    <div>
+      <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-navy">
+        {label}
+      </label>
+      <select
+        id={id}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className={`w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm outline-none transition focus:ring-2 focus:ring-royal/30 ${
+          error ? 'border-red-400' : 'border-border focus:border-royal'
+        }`}
+      >
+        <option value="">Select…</option>
+        {options.map((opt) => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
       {error && <p className="mt-1.5 text-xs text-red-600">{error}</p>}
     </div>
   )
