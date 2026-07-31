@@ -8,6 +8,21 @@ export const COMPANY = {
   url: 'https://realblocktechnologies.com',
 } as const
 
+export const SOCIAL_LINKS = {
+  linkedin: 'https://www.linkedin.com/company/real-block-technologies/',
+  twitter: 'https://twitter.com/realblocktech',
+  youtube: 'https://www.youtube.com/@realblocktechnologies',
+} as const
+
+export const CALENDLY_URL = 'https://calendly.com/realblocktechnologies'
+
+export const CONSULTATION_TOPICS = [
+  'AI Transformation',
+  'RWA Tokenization',
+  'Blockchain Strategy',
+  'Enterprise Automation',
+] as const
+
 export const NAV_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
@@ -29,6 +44,7 @@ export const FOOTER_SERVICES = [
 export const FOOTER_COMPANY = [
   { label: 'About Us', href: '/about' },
   { label: 'Case Studies', href: '/case-studies' },
+  { label: 'RWA Guide', href: '/resources/rwa-tokenization-guide' },
   { label: 'Careers', href: '/careers' },
   { label: 'Insights', href: '/insights' },
   { label: 'Contact', href: '/contact' },
@@ -47,4 +63,14 @@ export const TRUST_INDICATORS = [
   'Cross-industry delivery experience',
   'AI + blockchain specialists',
   'Outcome-focused engagements',
+] as const
+
+/** Replace with real partner / client marks when approved */
+export const TRUSTED_PARTNERS = [
+  'Aether Capital',
+  'Northline Realty',
+  'Meridian Finance',
+  'Vertex Manufacturing',
+  'Horizon Logistics',
+  'Summit Advisory',
 ] as const

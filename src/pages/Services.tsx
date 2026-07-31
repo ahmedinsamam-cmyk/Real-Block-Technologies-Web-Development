@@ -3,7 +3,7 @@ import { PageTransition } from '@/components/PageTransition'
 import { PageHero } from '@/components/PageHero'
 import { SectionHeading } from '@/components/SectionHeading'
 import { ServiceCard } from '@/components/ServiceCard'
-import { CTASection } from '@/components/CTASection'
+import { ConsultationBooking } from '@/components/ConsultationBooking'
 import { services } from '@/data/content'
 
 export function ServicesPage() {
@@ -33,9 +33,10 @@ export function ServicesPage() {
           </div>
         </div>
       </section>
-      <CTASection
-        title="Need a tailored service roadmap?"
-        description="Tell us about your priorities and we will recommend the right mix of advisory, architecture, and implementation support."
+      <ConsultationBooking
+        title="Discuss Your Digital Transformation Strategy"
+        description="Schedule a discovery call to prioritize AI, blockchain, and RWA initiatives against your operating goals."
+        ctaLabel="Book a Free Consultation"
       />
     </PageTransition>
   )

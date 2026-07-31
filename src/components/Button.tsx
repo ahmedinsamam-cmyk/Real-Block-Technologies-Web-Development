@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import type { ReactNode, ButtonHTMLAttributes } from 'react'
+import type { ReactNode, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react'
 
 type Variant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'gold'
 type Size = 'sm' | 'md' | 'lg'
@@ -14,14 +14,22 @@ interface BaseProps {
 type ButtonAsButton = BaseProps &
   ButtonHTMLAttributes<HTMLButtonElement> & {
     to?: undefined
+    href?: undefined
   }
 
 type ButtonAsLink = BaseProps & {
   to: string
+  href?: undefined
   onClick?: () => void
 }
 
-type ButtonProps = ButtonAsButton | ButtonAsLink
+type ButtonAsExternal = BaseProps &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & {
+    href: string
+    to?: undefined
+  }
+
+type ButtonProps = ButtonAsButton | ButtonAsLink | ButtonAsExternal
 
 const variantClasses: Record<Variant, string> = {
   primary:
@@ -42,13 +50,7 @@ const baseClasses =
   'inline-flex items-center justify-center gap-2 rounded-md font-display font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal focus-visible:ring-offset-2 disabled:opacity-60 disabled:pointer-events-none'
 
 export function Button(props: ButtonProps) {
-  const {
-    variant = 'primary',
-    size = 'md',
-    children,
-    className = '',
-  } = props
-
+  const { variant = 'primary', size = 'md', children, className = '' } = props
   const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`
 
   if ('to' in props && props.to) {
@@ -59,7 +61,17 @@ export function Button(props: ButtonProps) {
     )
   }
 
-  const { to: _to, variant: _v, size: _s, className: _c, children: _ch, ...rest } =
+  if ('href' in props && props.href) {
+    const { href, variant: _v, size: _s, className: _c, children: _ch, ...rest } =
+      props as ButtonAsExternal
+    return (
+      <a href={href} className={classes} {...rest}>
+        {children}
+      </a>
+    )
+  }
+
+  const { to: _to, href: _href, variant: _v, size: _s, className: _c, children: _ch, ...rest } =
     props as ButtonAsButton
 
   return (

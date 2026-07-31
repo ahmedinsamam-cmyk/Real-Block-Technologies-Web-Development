@@ -175,6 +175,9 @@ export interface CaseStudy {
   solution: string
   technology: string[]
   results: string[]
+  businessImpact: string
+  pdfPath?: string
+  pdfFileName?: string
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -192,6 +195,10 @@ export const caseStudies: CaseStudy[] = [
       'Faster month-end close cycles',
       'Improved audit readiness and reporting accuracy',
     ],
+    businessImpact:
+      'Finance leaders gained faster close cycles, stronger controls, and a scalable automation foundation for multi-entity operations.',
+    pdfPath: '/resources/AI_Enterprise_Automation_Case_Study.pdf',
+    pdfFileName: 'AI_Enterprise_Automation_Case_Study.pdf',
   },
   {
     id: 'property-tokenization',
@@ -207,6 +214,29 @@ export const caseStudies: CaseStudy[] = [
       'Investor-ready digital representation model',
       'Operational framework for ongoing asset management',
     ],
+    businessImpact:
+      'The organization established a practical path from physical assets to governed digital representation and investor access.',
+    pdfPath: '/resources/Real_Estate_Tokenization_Case_Study.pdf',
+    pdfFileName: 'Real_Estate_Tokenization_Case_Study.pdf',
+  },
+  {
+    id: 'digital-transformation',
+    title: 'Enterprise Digital Transformation Program',
+    industry: 'Cross-Industry',
+    challenge:
+      'Leadership needed a coordinated approach to modernize operations with AI automation and emerging digital infrastructure—without disrupting core business.',
+    solution:
+      'We built a phased transformation roadmap spanning opportunity discovery, architecture design, controlled pilots, and scaled operating model change.',
+    technology: ['AI Strategy', 'Process Automation', 'Enterprise Architecture'],
+    results: [
+      'Prioritized transformation portfolio',
+      'Reduced delivery risk through staged pilots',
+      'Clear governance for scale-up decisions',
+    ],
+    businessImpact:
+      'Executives aligned technology investment to measurable outcomes and accelerated decision-making across digital initiatives.',
+    pdfPath: '/resources/Digital_Transformation_Case_Study.pdf',
+    pdfFileName: 'Digital_Transformation_Case_Study.pdf',
   },
   {
     id: 'manufacturing-intelligence',
@@ -222,21 +252,8 @@ export const caseStudies: CaseStudy[] = [
       'Reduced unplanned downtime',
       'Stronger coordination between plants and supply partners',
     ],
-  },
-  {
-    id: 'treasury-modernization',
-    title: 'Modernizing Treasury Visibility for a Growth Enterprise',
-    industry: 'Professional Services',
-    challenge:
-      'Finance leaders needed better visibility into cash positions, working capital, and capital allocation decisions.',
-    solution:
-      'We built a treasury technology roadmap and implemented integrated dashboards, forecasting support, and process redesign for capital optimization.',
-    technology: ['FinTech Platforms', 'Analytics', 'Process Redesign'],
-    results: [
-      'Unified cash visibility',
-      'Improved forecasting confidence',
-      'Faster capital allocation decisions',
-    ],
+    businessImpact:
+      'Operations teams improved resilience and visibility across plants, enabling faster intervention before disruption escalated.',
   },
 ]
 
@@ -341,6 +358,12 @@ export const jobs: JobOpening[] = [
 export const testimonials = [
   {
     quote:
+      'Real Block Technologies helped us identify opportunities to automate critical business processes.',
+    name: 'Chief Operating Officer',
+    company: 'Growth Enterprise',
+  },
+  {
+    quote:
       'Real Block Technologies brought clarity to a complex digital asset initiative and helped our leadership team move from concept to an actionable enterprise roadmap.',
     name: 'Director of Innovation',
     company: 'Global Property Group',
@@ -361,23 +384,33 @@ export const testimonials = [
 
 export const faqs = [
   {
+    question: 'What is RWA tokenization?',
+    answer:
+      'Real World Asset (RWA) tokenization creates a digital representation of a physical or financial asset on blockchain infrastructure, enabling structured ownership, transferability, investor access, and lifecycle management while remaining linked to the underlying asset.',
+  },
+  {
+    question: 'How can AI improve business operations?',
+    answer:
+      'AI can automate repetitive workflows, improve forecasting, extract insight from documents, and support decision-making with agents and analytics—reducing cycle times and elevating operating quality across finance, operations, and customer processes.',
+  },
+  {
+    question: 'How long does implementation take?',
+    answer:
+      'Timelines vary by scope. Focused pilots often complete in weeks to a few months, while multi-workstream enterprise programs are phased across quarters. We define milestones, governance, and success metrics before delivery begins.',
+  },
+  {
+    question: 'Do you work with global clients?',
+    answer:
+      'Yes. We support enterprises and growth organizations worldwide, adapting our advisory and delivery approach to regional operating models, stakeholder needs, and technology landscapes.',
+  },
+  {
     question: 'What types of organizations do you work with?',
     answer:
-      'We partner with enterprises and growth organizations across real estate, financial services, manufacturing, healthcare, logistics, and professional services that are ready to adopt AI, blockchain, and digital asset capabilities.',
+      'We partner with enterprises across real estate, financial services, manufacturing, healthcare, logistics, and professional services that are ready to adopt AI, blockchain, and digital asset capabilities.',
   },
   {
     question: 'Do you only provide strategy, or also implementation?',
     answer:
       'Both. Our engagements range from strategic advisory and architecture design to hands-on implementation, integration, and operating model support.',
-  },
-  {
-    question: 'How do you approach real-world asset tokenization projects?',
-    answer:
-      'We begin with asset readiness, regulatory considerations, and business objectives, then design the digital representation, blockchain architecture, investor access model, and ongoing management processes.',
-  },
-  {
-    question: 'Can you integrate with existing enterprise systems?',
-    answer:
-      'Yes. We design solutions that connect with ERP, CRM, treasury, data, and cloud platforms so new capabilities enhance—not disrupt—your current technology landscape.',
   },
 ]

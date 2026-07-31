@@ -4,6 +4,8 @@ import { SEO } from '@/components/SEO'
 import { PageTransition } from '@/components/PageTransition'
 import { PageHero } from '@/components/PageHero'
 import { SectionHeading } from '@/components/SectionHeading'
+import { NewsletterSignup } from '@/components/NewsletterSignup'
+import { LinkedInCTA } from '@/components/LinkedInCTA'
 import { CTASection } from '@/components/CTASection'
 import { insights } from '@/data/content'
 
@@ -62,9 +64,19 @@ export function InsightsPage() {
           </div>
         </div>
       </section>
+
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <NewsletterSignup />
+        </div>
+      </section>
+
+      <LinkedInCTA />
+
       <CTASection
         title="Looking for tailored insight for your industry?"
         description="Connect with our team to discuss your priorities and receive a briefing aligned to your operating context."
+        primaryLabel="Book a Free Consultation"
       />
     </PageTransition>
   )

@@ -12,7 +12,7 @@ export function Testimonials() {
           title="Trusted by forward-looking enterprise teams"
           description="Leaders engage Real Block Technologies to navigate complex AI, blockchain, and digital asset initiatives with clarity and rigor."
         />
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {testimonials.map((item, index) => (
             <motion.blockquote
               key={item.name}

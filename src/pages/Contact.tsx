@@ -1,16 +1,19 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
+import { useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { CheckCircle2, Mail, Phone, MapPin } from 'lucide-react'
 import { SEO } from '@/components/SEO'
 import { PageTransition } from '@/components/PageTransition'
 import { PageHero } from '@/components/PageHero'
 import { Button } from '@/components/Button'
+import { ConsultationBooking } from '@/components/ConsultationBooking'
 import { COMPANY } from '@/utils/constants'
 import {
   validateContactForm,
   type ContactFormData,
   type ContactFormErrors,
 } from '@/utils/validation'
+import { captureLead } from '@/services/leadService'
 
 const initialForm: ContactFormData = {
   name: '',
@@ -25,6 +28,14 @@ export function ContactPage() {
   const [errors, setErrors] = useState<ContactFormErrors>({})
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.hash === '#consultation') {
+      const el = document.getElementById('consultation')
+      el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [location.hash])
 
   const updateField = (field: keyof ContactFormData, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }))
@@ -33,19 +44,27 @@ export function ContactPage() {
     }
   }
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     const nextErrors = validateContactForm(form)
     setErrors(nextErrors)
     if (Object.keys(nextErrors).length > 0) return
 
     setSubmitting(true)
-    // Frontend-only demo submission — wire to CRM/API in production.
-    window.setTimeout(() => {
-      setSubmitting(false)
+    const result = await captureLead({
+      name: form.name,
+      company: form.company,
+      email: form.email,
+      phone: form.phone,
+      message: form.message,
+      source: 'contact_form',
+    })
+    setSubmitting(false)
+
+    if (result.success) {
       setSubmitted(true)
       setForm(initialForm)
-    }, 700)
+    }
   }
 
   return (
@@ -58,13 +77,13 @@ export function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Let's discuss your transformation priorities"
-        description="Share a brief overview of your initiative and our team will follow up to schedule a consultation."
+        description="Share a brief overview of your initiative or book a 30-minute discovery consultation directly on Calendly."
       />
 
       <section className="bg-surface py-20 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:px-8">
           <div>
-            <h2 className="font-display text-2xl font-bold text-navy md:text-3xl">Book a consultation</h2>
+            <h2 className="font-display text-2xl font-bold text-navy md:text-3xl">Send a message</h2>
             <p className="mt-4 text-sm leading-relaxed text-ink-muted md:text-base">
               Whether you are evaluating tokenization readiness, designing an AI roadmap, or modernizing
               financial operations, we are ready to help you move with clarity.
@@ -99,8 +118,8 @@ export function ContactPage() {
                 <CheckCircle2 className="h-12 w-12 text-royal" />
                 <h3 className="mt-4 font-display text-xl font-bold text-navy">Thank you for reaching out</h3>
                 <p className="mt-2 max-w-md text-sm text-ink-muted">
-                  Your message has been received. A member of our team will respond shortly to schedule
-                  your consultation.
+                  Your message has been received. A member of our team will respond shortly—or book time
+                  below on Calendly.
                 </p>
                 <Button className="mt-6" variant="ghost" onClick={() => setSubmitted(false)}>
                   Send another message
@@ -161,13 +180,20 @@ export function ContactPage() {
                   {errors.message && <p className="mt-1.5 text-xs text-red-600">{errors.message}</p>}
                 </div>
                 <Button type="submit" variant="primary" size="lg" className="w-full sm:w-auto" disabled={submitting}>
-                  {submitting ? 'Sending…' : 'Book Consultation'}
+                  {submitting ? 'Sending…' : 'Submit Inquiry'}
                 </Button>
               </form>
             )}
           </motion.div>
         </div>
       </section>
+
+      <ConsultationBooking
+        embed
+        title="Book a Free Consultation"
+        description="Select a time for a 30-minute discovery consultation. Topics include AI Transformation, RWA Tokenization, Blockchain Strategy, and Enterprise Automation."
+        ctaLabel="Book a Free Consultation"
+      />
     </PageTransition>
   )
 }
@@ -194,7 +220,7 @@ function Field({ label, id, value, error, onChange, type = 'text', autoComplete 
         value={value}
         autoComplete={autoComplete}
         onChange={(e) => onChange(e.target.value)}
-        className={`w-full rounded-lg border bg-white px-3.5 py-2.5 text-sm text-ink outline-none transition focus:ring-2 focus:ring-royal/30 ${
+        className={`w-full rounded-lg border px-3.5 py-2.5 text-sm text-ink outline-none transition focus:ring-2 focus:ring-royal/30 ${
           error ? 'border-red-400' : 'border-border focus:border-royal'
         }`}
       />

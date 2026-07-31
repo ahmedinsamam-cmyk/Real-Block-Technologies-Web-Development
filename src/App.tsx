@@ -12,6 +12,7 @@ import { CareersPage } from '@/pages/Careers'
 import { ContactPage } from '@/pages/Contact'
 import { PrivacyPage } from '@/pages/Privacy'
 import { TermsPage } from '@/pages/Terms'
+import { RWAGuidePage } from '@/pages/RWAGuide'
 
 export default function App() {
   const element = useRoutes([
@@ -28,6 +29,7 @@ export default function App() {
         { path: 'insights', element: <InsightsPage /> },
         { path: 'careers', element: <CareersPage /> },
         { path: 'contact', element: <ContactPage /> },
+        { path: 'resources/rwa-tokenization-guide', element: <RWAGuidePage /> },
         { path: 'privacy', element: <PrivacyPage /> },
         { path: 'terms', element: <TermsPage /> },
         { path: '*', element: <HomePage /> },

@@ -11,9 +11,9 @@ export function FAQ({ items = faqs }: { items?: typeof faqs }) {
     <section className="bg-surface py-20 md:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="FAQ"
+          eyebrow="Enterprise FAQ"
           title="Frequently asked questions"
-          description="Clear answers to common questions about how we engage, deliver, and partner with enterprise teams."
+          description="Clear answers for executives evaluating AI, blockchain, and real-world asset initiatives."
         />
         <div className="space-y-3">
           {items.map((item, index) => {

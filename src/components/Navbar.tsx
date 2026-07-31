@@ -4,7 +4,9 @@ import { Menu, X, ArrowRight } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Logo } from '@/components/Logo'
 import { Button } from '@/components/Button'
-import { NAV_LINKS } from '@/utils/constants'
+import { LinkedInIcon } from '@/components/icons/SocialIcons'
+import { NAV_LINKS, SOCIAL_LINKS } from '@/utils/constants'
+import { trackCtaClick, trackEvent } from '@/utils/analytics'
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
@@ -65,7 +67,26 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <Button to="/contact" variant={darkHero ? 'gold' : 'primary'} size="sm">
+          <a
+            href={SOCIAL_LINKS.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Follow Real Block Technologies on LinkedIn"
+            className={`flex h-9 w-9 items-center justify-center rounded-md border transition ${
+              darkHero
+                ? 'border-white/20 text-white hover:border-gold hover:text-gold'
+                : 'border-border text-navy hover:border-royal hover:text-royal'
+            }`}
+            onClick={() => trackEvent({ event: 'linkedin_follow', label: 'navbar' })}
+          >
+            <LinkedInIcon className="h-4 w-4" />
+          </a>
+          <Button
+            to="/contact#consultation"
+            variant={darkHero ? 'gold' : 'primary'}
+            size="sm"
+            onClick={() => trackCtaClick('navbar_schedule_consultation')}
+          >
             Schedule Consultation
             <ArrowRight className="h-3.5 w-3.5" />
           </Button>
@@ -111,7 +132,17 @@ export function Navbar() {
                 ))}
               </div>
               <div className="mt-auto space-y-3 pb-8">
-                <Button to="/contact" variant="gold" size="lg" className="w-full">
+                <a
+                  href={SOCIAL_LINKS.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center gap-2 rounded-md border border-white/20 py-3 text-sm font-semibold text-white"
+                  onClick={() => trackEvent({ event: 'linkedin_follow', label: 'mobile_nav' })}
+                >
+                  <LinkedInIcon className="h-4 w-4" />
+                  Follow on LinkedIn
+                </a>
+                <Button to="/contact#consultation" variant="gold" size="lg" className="w-full">
                   Schedule Consultation
                 </Button>
                 <Button to="/services" variant="outline" size="lg" className="w-full">

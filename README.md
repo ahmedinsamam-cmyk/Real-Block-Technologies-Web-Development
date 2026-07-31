@@ -88,3 +88,20 @@ npx wrangler pages deploy dist --project-name=real-block-technologies
 - Add authenticated careers applications and ATS integration
 - Legal review of Privacy Policy and Terms before go-live
 - Performance budgets, image CDN, and Core Web Vitals monitoring
+
+## Lead generation setup
+
+Configure optional environment variables (see `.env.example`):
+
+- `VITE_GA4_MEASUREMENT_ID` — Google Analytics 4
+- `VITE_LINKEDIN_PARTNER_ID` — LinkedIn Insight Tag
+- `VITE_META_PIXEL_ID` — Meta Pixel
+- `VITE_LEAD_API_URL` — CRM / lead ingestion endpoint
+- `VITE_CRM_PROVIDER` — `hubspot` | `salesforce` | `monday` | `custom`
+
+Replace placeholder URLs in `src/utils/constants.ts`:
+
+- LinkedIn: `https://www.linkedin.com/company/real-block-technologies/`
+- Calendly: `https://calendly.com/realblocktechnologies`
+
+Downloadable PDFs live in `public/resources/`.
