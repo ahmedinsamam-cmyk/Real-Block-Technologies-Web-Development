@@ -7,28 +7,27 @@ import { trackEvent } from '@/utils/analytics'
 
 export function LinkedInCTA() {
   return (
-    <section className="bg-surface py-20 md:py-24">
+    <section className="bg-surface py-24 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="relative overflow-hidden rounded-2xl border border-border bg-navy px-6 py-12 md:px-12 md:py-14"
+          className="relative overflow-hidden bg-navy px-6 py-16 md:px-14 md:py-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className="absolute inset-0 grid-tech opacity-30" />
-          <div className="absolute -right-10 -bottom-10 h-48 w-48 rounded-full bg-royal/20 blur-3xl" />
+          <div className="absolute inset-0 section-photo-b opacity-30" />
+          <div className="absolute inset-0 bg-navy/75" />
           <div className="relative mx-auto max-w-2xl text-center">
-            <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center border border-white/15 bg-white/5 text-white">
-              <LinkedInIcon className="h-6 w-6" />
+            <div className="mx-auto mb-6 flex h-12 w-12 items-center justify-center border border-white/20 text-white">
+              <LinkedInIcon className="h-5 w-5" />
             </div>
-            <h2 className="font-display text-4xl font-semibold text-white md:text-5xl">
-              Follow Our Technology Insights
+            <h2 className="font-display text-4xl font-medium text-white md:text-5xl">
+              Follow our technology insights
             </h2>
-            <p className="mt-4 text-base text-white/70 md:text-lg">
-              Stay updated with our latest insights on AI, Blockchain, Real World Assets, and enterprise
-              transformation.
+            <p className="mt-5 text-base text-white/65 md:text-lg">
+              Stay updated on AI, blockchain, real-world assets, and enterprise transformation.
             </p>
-            <div className="mt-8 flex justify-center">
+            <div className="mt-9 flex justify-center">
               <Button
                 href={SOCIAL_LINKS.linkedin}
                 target="_blank"

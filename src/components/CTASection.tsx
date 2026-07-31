@@ -21,12 +21,11 @@ export function CTASection({
 }: CTASectionProps) {
   return (
     <section className="relative overflow-hidden py-24 md:py-28">
-      <div className="absolute inset-0 gradient-navy" />
-      <div className="absolute inset-0 hero-photo opacity-30" />
-      <div className="absolute inset-0 bg-navy/75" />
+      <div className="absolute inset-0 section-photo-c" />
+      <div className="absolute inset-0 bg-navy/80" />
       <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
         <motion.h2
-          className="font-display text-4xl font-semibold text-white md:text-5xl"
+          className="font-display text-4xl font-medium text-white md:text-5xl"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -43,7 +42,7 @@ export function CTASection({
           {description}
         </motion.p>
         <motion.div
-          className="mt-9 flex flex-wrap items-center justify-center gap-4"
+          className="mt-9 flex flex-wrap items-center justify-center gap-3"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

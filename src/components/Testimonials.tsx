@@ -1,33 +1,36 @@
 import { motion } from 'framer-motion'
-import { Quote } from 'lucide-react'
 import { testimonials } from '@/data/content'
-import { SectionHeading } from '@/components/SectionHeading'
 
 export function Testimonials() {
+  const featured = testimonials.slice(0, 3)
+
   return (
-    <section className="bg-white py-20 md:py-24">
+    <section className="bg-navy py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="Client Perspective"
-          title="Trusted by forward-looking enterprise teams"
-          description="Leaders engage Real Block Technologies to navigate complex AI, blockchain, and digital asset initiatives with clarity and rigor."
-        />
-        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-          {testimonials.map((item, index) => (
+        <div className="max-w-2xl">
+          <p className="eyebrow text-gold-light">Client Perspective</p>
+          <h2 className="mt-4 font-display text-4xl font-medium text-white md:text-5xl">
+            Built for institutions. Trusted by operators.
+          </h2>
+        </div>
+
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {featured.map((item, index) => (
             <motion.blockquote
               key={item.name}
-              className="relative rounded-xl border border-border bg-surface p-6 md:p-8"
-              initial={{ opacity: 0, y: 24 }}
+              className="border border-white/10 bg-white/[0.03] p-7 md:p-8"
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.45 }}
+              transition={{ delay: index * 0.08 }}
             >
-              <Quote className="mb-4 h-8 w-8 text-gold/80" aria-hidden />
-              <p className="text-sm leading-relaxed text-ink md:text-[0.95rem]">"{item.quote}"</p>
-              <footer className="mt-6 border-t border-border pt-4">
+              <p className="font-display text-xl leading-relaxed text-white/90 md:text-2xl">
+                “{item.quote}”
+              </p>
+              <footer className="mt-8 border-t border-white/10 pt-5">
                 <cite className="not-italic">
-                  <span className="block font-display text-sm font-semibold text-navy">{item.name}</span>
-                  <span className="text-xs text-ink-muted">{item.company}</span>
+                  <span className="block text-sm font-semibold text-white">{item.name}</span>
+                  <span className="text-xs text-white/45">{item.company}</span>
                 </cite>
               </footer>
             </motion.blockquote>
