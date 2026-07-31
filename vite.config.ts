@@ -10,4 +10,16 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+    // Allow Cursor cloud preview / ingress hostnames
+    allowedHosts: true,
+    strictPort: true,
+  },
+  preview: {
+    host: '0.0.0.0',
+    port: 4173,
+    allowedHosts: true,
+  },
 })
