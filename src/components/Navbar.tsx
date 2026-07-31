@@ -1,16 +1,32 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Menu, X, ArrowRight } from 'lucide-react'
+import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Logo } from '@/components/Logo'
 import { Button } from '@/components/Button'
+import { NavDropdown } from '@/components/NavDropdown'
 import { LinkedInIcon } from '@/components/icons/SocialIcons'
-import { NAV_LINKS, SOCIAL_LINKS } from '@/utils/constants'
+import { SOCIAL_LINKS } from '@/utils/constants'
+import { services, industries } from '@/data/content'
 import { trackCtaClick, trackEvent } from '@/utils/analytics'
+
+const serviceMenu = services.map((s) => ({
+  label: s.title,
+  href: s.href,
+  description: s.description,
+}))
+
+const industryMenu = industries.map((i) => ({
+  label: i.title,
+  href: i.href,
+  description: i.description,
+}))
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
+  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false)
   const location = useLocation()
   const isHome = location.pathname === '/'
   const darkHero = isHome && !scrolled
@@ -24,6 +40,8 @@ export function Navbar() {
 
   useEffect(() => {
     setOpen(false)
+    setMobileServicesOpen(false)
+    setMobileIndustriesOpen(false)
   }, [location.pathname])
 
   useEffect(() => {
@@ -44,26 +62,75 @@ export function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-[4.25rem] sm:px-6 lg:px-8">
         <Logo light={darkHero} />
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
-          {NAV_LINKS.map((link) => (
-            <NavLink
-              key={link.href}
-              to={link.href}
-              className={({ isActive }) =>
-                `rounded-sm px-3 py-2 text-sm font-medium tracking-wide transition-colors ${
-                  isActive
-                    ? darkHero
-                      ? 'text-white'
-                      : 'text-navy'
-                    : darkHero
-                      ? 'text-white/70 hover:text-white'
-                      : 'text-ink-muted hover:text-navy'
-                }`
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `rounded-sm px-3 py-2 text-sm font-medium tracking-wide transition-colors ${
+                isActive
+                  ? darkHero
+                    ? 'text-white'
+                    : 'text-navy'
+                  : darkHero
+                    ? 'text-white/70 hover:text-white'
+                    : 'text-ink-muted hover:text-navy'
+              }`
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              `rounded-sm px-3 py-2 text-sm font-medium tracking-wide transition-colors ${
+                isActive
+                  ? darkHero
+                    ? 'text-white'
+                    : 'text-navy'
+                  : darkHero
+                    ? 'text-white/70 hover:text-white'
+                    : 'text-ink-muted hover:text-navy'
+              }`
+            }
+          >
+            About
+          </NavLink>
+
+          <NavDropdown label="Services" href="/services" items={serviceMenu} dark={darkHero} />
+          <NavDropdown label="Industries" href="/industries" items={industryMenu} dark={darkHero} />
+
+          <NavLink
+            to="/insights"
+            className={({ isActive }) =>
+              `rounded-sm px-3 py-2 text-sm font-medium tracking-wide transition-colors ${
+                isActive
+                  ? darkHero
+                    ? 'text-white'
+                    : 'text-navy'
+                  : darkHero
+                    ? 'text-white/70 hover:text-white'
+                    : 'text-ink-muted hover:text-navy'
+              }`
+            }
+          >
+            Insights
+          </NavLink>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              `rounded-sm px-3 py-2 text-sm font-medium tracking-wide transition-colors ${
+                isActive
+                  ? darkHero
+                    ? 'text-white'
+                    : 'text-navy'
+                  : darkHero
+                    ? 'text-white/70 hover:text-white'
+                    : 'text-ink-muted hover:text-navy'
+              }`
+            }
+          >
+            Contact
+          </NavLink>
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
@@ -108,40 +175,93 @@ export function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 top-16 z-40 bg-navy lg:hidden"
+            className="fixed inset-0 top-16 z-40 overflow-y-auto bg-navy lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <nav className="flex h-full flex-col px-6 py-8" aria-label="Mobile">
-              <div className="flex flex-col gap-2">
-                {NAV_LINKS.map((link, index) => (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, x: -12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                  >
-                    <Link
-                      to={link.href}
-                      className="block border-b border-white/10 py-4 font-display text-2xl font-semibold text-white"
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-              <div className="mt-auto space-y-3 pb-8">
-                <a
-                  href={SOCIAL_LINKS.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-sm border border-white/20 py-3 text-sm font-semibold text-white"
-                  onClick={() => trackEvent({ event: 'linkedin_follow', label: 'mobile_nav' })}
+            <nav className="flex min-h-full flex-col px-6 py-8" aria-label="Mobile">
+              <div className="flex flex-col">
+                <Link to="/" className="border-b border-white/10 py-4 font-display text-2xl font-semibold text-white">
+                  Home
+                </Link>
+                <Link to="/about" className="border-b border-white/10 py-4 font-display text-2xl font-semibold text-white">
+                  About
+                </Link>
+
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between border-b border-white/10 py-4 font-display text-2xl font-semibold text-white"
+                  onClick={() => setMobileServicesOpen((v) => !v)}
                 >
-                  <LinkedInIcon className="h-4 w-4" />
-                  Follow on LinkedIn
-                </a>
+                  Services
+                  <ChevronDown className={`h-5 w-5 transition ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence initial={false}>
+                  {mobileServicesOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden border-b border-white/10"
+                    >
+                      <Link to="/services" className="block py-3 pl-2 text-sm font-semibold text-gold-light">
+                        View all services
+                      </Link>
+                      {serviceMenu.map((item) => (
+                        <Link
+                          key={item.href}
+                          to={item.href}
+                          className="block py-2.5 pl-2 text-sm text-white/75"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between border-b border-white/10 py-4 font-display text-2xl font-semibold text-white"
+                  onClick={() => setMobileIndustriesOpen((v) => !v)}
+                >
+                  Industries
+                  <ChevronDown className={`h-5 w-5 transition ${mobileIndustriesOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence initial={false}>
+                  {mobileIndustriesOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden border-b border-white/10"
+                    >
+                      <Link to="/industries" className="block py-3 pl-2 text-sm font-semibold text-gold-light">
+                        View all industries
+                      </Link>
+                      {industryMenu.map((item) => (
+                        <Link
+                          key={item.href}
+                          to={item.href}
+                          className="block py-2.5 pl-2 text-sm text-white/75"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <Link to="/insights" className="border-b border-white/10 py-4 font-display text-2xl font-semibold text-white">
+                  Insights
+                </Link>
+                <Link to="/contact" className="border-b border-white/10 py-4 font-display text-2xl font-semibold text-white">
+                  Contact
+                </Link>
+              </div>
+
+              <div className="mt-auto space-y-3 pt-8 pb-8">
                 <Button to="/contact#consultation" variant="gold" size="lg" className="w-full">
                   Schedule Consultation
                 </Button>

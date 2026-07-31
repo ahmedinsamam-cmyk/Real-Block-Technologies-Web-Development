@@ -20,6 +20,8 @@ export interface ServiceItem {
   icon: LucideIcon
   href: string
   details: string[]
+  longDescription?: string
+  outcomes?: string[]
 }
 
 export const services: ServiceItem[] = [
@@ -36,6 +38,13 @@ export const services: ServiceItem[] = [
       'Compliance-aligned architecture',
       'Investor access platforms',
     ],
+    longDescription:
+      'We help enterprises structure, digitize, and manage real-world assets with blockchain infrastructure designed for institutional controls, investor access, and long-term operations.',
+    outcomes: [
+      'Clear tokenization readiness roadmap',
+      'Digital ownership and access models',
+      'Lifecycle management operating design',
+    ],
   },
   {
     id: 'ai',
@@ -49,18 +58,32 @@ export const services: ServiceItem[] = [
       'Predictive analytics',
       'Document understanding',
     ],
+    longDescription:
+      'From strategy to production systems, we design AI capabilities that automate work, improve decisions, and create durable operating advantage.',
+    outcomes: [
+      'Prioritized AI use-case portfolio',
+      'Measurable automation ROI',
+      'Governed path from pilot to scale',
+    ],
   },
   {
     id: 'consulting',
     title: 'Enterprise Technology Consulting',
     description: 'Digital transformation advisory and implementation services.',
     icon: Briefcase,
-    href: '/services',
+    href: '/services/enterprise-consulting',
     details: [
       'Transformation roadmaps',
       'Architecture advisory',
       'Implementation oversight',
       'Operating model redesign',
+    ],
+    longDescription:
+      'We partner with leadership teams to define transformation priorities, design target architectures, and oversee delivery so technology investments translate into business outcomes.',
+    outcomes: [
+      'Executive-aligned transformation roadmap',
+      'Architecture and vendor decision support',
+      'Delivery governance that reduces risk',
     ],
   },
   {
@@ -68,12 +91,19 @@ export const services: ServiceItem[] = [
     title: 'Blockchain Advisory',
     description: 'Blockchain strategy, architecture, and implementation guidance.',
     icon: Blocks,
-    href: '/services',
+    href: '/services/blockchain-advisory',
     details: [
       'Protocol selection',
       'Smart contract strategy',
       'Security reviews',
       'Integration planning',
+    ],
+    longDescription:
+      'Our blockchain advisory helps enterprises evaluate fit, select architecture patterns, and plan secure implementations connected to existing systems and controls.',
+    outcomes: [
+      'Practical blockchain strategy',
+      'Security-aware architecture choices',
+      'Integration plan for enterprise systems',
     ],
   },
   {
@@ -81,12 +111,19 @@ export const services: ServiceItem[] = [
     title: 'Treasury & Financial Technology Solutions',
     description: 'Modern solutions for CFOs, finance teams, and capital optimization.',
     icon: Landmark,
-    href: '/services',
+    href: '/services/treasury-fintech',
     details: [
       'Treasury modernization',
       'Capital optimization',
       'Financial workflows',
       'Reporting automation',
+    ],
+    longDescription:
+      'We help CFOs and finance leaders modernize treasury visibility, forecasting, and capital workflows with technology and process redesign built for scale.',
+    outcomes: [
+      'Unified cash and capital visibility',
+      'Faster forecasting and reporting cycles',
+      'Stronger decision support for finance leaders',
     ],
   },
   {
@@ -94,12 +131,19 @@ export const services: ServiceItem[] = [
     title: 'Software Development',
     description: 'Custom enterprise applications and SaaS solutions.',
     icon: Code2,
-    href: '/services',
+    href: '/services/software-development',
     details: [
       'Enterprise applications',
       'SaaS platforms',
       'API integrations',
       'Cloud-native delivery',
+    ],
+    longDescription:
+      'Our engineering teams design and build secure, cloud-native applications and SaaS platforms that support digital asset, AI, and enterprise operating models.',
+    outcomes: [
+      'Production-ready custom applications',
+      'Reliable API and system integrations',
+      'Scalable cloud delivery practices',
     ],
   },
 ]
@@ -110,12 +154,16 @@ export interface IndustryItem {
   description: string
   icon: LucideIcon
   outcomes: string[]
+  href: string
+  challenges?: string[]
+  capabilities?: string[]
 }
 
 export const industries: IndustryItem[] = [
   {
     id: 'real-estate',
     title: 'Real Estate',
+    href: '/industries/real-estate',
     description:
       'Digitize property portfolios, streamline transactions, and unlock new capital pathways through tokenization and intelligent operations.',
     icon: Home,
@@ -124,46 +172,111 @@ export const industries: IndustryItem[] = [
       'Fractional ownership models',
       'Operational automation',
     ],
+    challenges: [
+      'Illiquid assets and fragmented ownership processes',
+      'Manual portfolio and investor reporting',
+      'Limited pathways for institutional digital participation',
+    ],
+    capabilities: [
+      'RWA tokenization readiness',
+      'Investor access design',
+      'Property operations automation',
+    ],
   },
   {
     id: 'financial-services',
     title: 'Financial Services',
+    href: '/industries/financial-services',
     description:
       'Modernize treasury, compliance, and client experiences with AI-enabled workflows and blockchain-ready infrastructure.',
     icon: Landmark,
     outcomes: ['Treasury efficiency', 'Risk intelligence', 'Digital asset readiness'],
+    challenges: [
+      'Fragmented finance operations across entities',
+      'Slow reporting and reconciliation cycles',
+      'Pressure to prepare for digital asset markets',
+    ],
+    capabilities: [
+      'AI-assisted finance workflows',
+      'Treasury modernization',
+      'Blockchain and digital asset advisory',
+    ],
   },
   {
     id: 'manufacturing',
     title: 'Manufacturing',
+    href: '/industries/manufacturing',
     description:
       'Connect physical production with digital intelligence to improve visibility, quality, and supply-chain resilience.',
     icon: Factory,
     outcomes: ['Process optimization', 'Predictive maintenance', 'Supply transparency'],
+    challenges: [
+      'Unplanned downtime and weak early-warning signals',
+      'Disconnected plant and supply data',
+      'Limited predictive decision support',
+    ],
+    capabilities: [
+      'Predictive analytics',
+      'Operations intelligence dashboards',
+      'Process automation programs',
+    ],
   },
   {
     id: 'healthcare',
     title: 'Healthcare',
+    href: '/industries/healthcare',
     description:
       'Apply secure automation and analytics to improve operational performance while protecting sensitive information.',
     icon: HeartPulse,
     outcomes: ['Administrative automation', 'Data intelligence', 'Secure workflows'],
+    challenges: [
+      'High administrative burden',
+      'Fragmented operational data',
+      'Strict security and compliance requirements',
+    ],
+    capabilities: [
+      'Document intelligence',
+      'Secure workflow automation',
+      'Operational analytics',
+    ],
   },
   {
     id: 'logistics',
     title: 'Logistics',
+    href: '/industries/logistics',
     description:
       'Increase shipment visibility, reduce friction, and create trusted digital records across complex supply networks.',
     icon: Truck,
     outcomes: ['Traceability', 'Exception handling', 'Partner coordination'],
+    challenges: [
+      'Limited end-to-end shipment visibility',
+      'Exception handling delays',
+      'Partner coordination across networks',
+    ],
+    capabilities: [
+      'Traceability architectures',
+      'Exception automation',
+      'Partner data coordination',
+    ],
   },
   {
     id: 'professional-services',
     title: 'Professional Services',
+    href: '/industries/professional-services',
     description:
       'Equip advisory and delivery teams with AI tools that accelerate insight generation and client value.',
     icon: Users,
     outcomes: ['Knowledge automation', 'Delivery acceleration', 'Client intelligence'],
+    challenges: [
+      'Knowledge trapped in documents and inboxes',
+      'Inconsistent delivery speed across teams',
+      'Limited reusable client intelligence',
+    ],
+    capabilities: [
+      'Knowledge automation',
+      'AI-assisted delivery tooling',
+      'Client insight systems',
+    ],
   },
 ]
 

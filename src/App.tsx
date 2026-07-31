@@ -3,9 +3,11 @@ import { MainLayout } from '@/layouts/MainLayout'
 import { HomePage } from '@/pages/Home'
 import { AboutPage } from '@/pages/About'
 import { ServicesPage } from '@/pages/Services'
+import { ServiceDetailPage } from '@/pages/ServiceDetail'
 import { RealEstateTokenizationPage } from '@/pages/RealEstateTokenization'
 import { AISolutionsPage } from '@/pages/AISolutions'
 import { IndustriesPage } from '@/pages/Industries'
+import { IndustryDetailPage } from '@/pages/IndustryDetail'
 import { CaseStudiesPage } from '@/pages/CaseStudies'
 import { InsightsPage } from '@/pages/Insights'
 import { CareersPage } from '@/pages/Careers'
@@ -26,7 +28,9 @@ export default function App() {
         { path: 'services', element: <ServicesPage /> },
         { path: 'services/real-estate-tokenization', element: <RealEstateTokenizationPage /> },
         { path: 'services/ai-solutions', element: <AISolutionsPage /> },
+        { path: 'services/:slug', element: <ServiceDetailPage /> },
         { path: 'industries', element: <IndustriesPage /> },
+        { path: 'industries/:slug', element: <IndustryDetailPage /> },
         { path: 'case-studies', element: <CaseStudiesPage /> },
         { path: 'insights', element: <InsightsPage /> },
         { path: 'careers', element: <CareersPage /> },

@@ -64,10 +64,10 @@ export const NAV_LINKS = [
 export const FOOTER_SERVICES = [
   { label: 'RWA Tokenization', href: '/services/real-estate-tokenization' },
   { label: 'AI Solutions', href: '/services/ai-solutions' },
-  { label: 'Enterprise Consulting', href: '/services' },
-  { label: 'Blockchain Advisory', href: '/services' },
-  { label: 'Treasury & FinTech', href: '/services' },
-  { label: 'Software Development', href: '/services' },
+  { label: 'Enterprise Consulting', href: '/services/enterprise-consulting' },
+  { label: 'Blockchain Advisory', href: '/services/blockchain-advisory' },
+  { label: 'Treasury & FinTech', href: '/services/treasury-fintech' },
+  { label: 'Software Development', href: '/services/software-development' },
 ] as const
 
 export const FOOTER_COMPANY = [
