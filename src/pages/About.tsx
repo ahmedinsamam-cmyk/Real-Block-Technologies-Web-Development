@@ -128,20 +128,26 @@ export function AboutPage() {
             {LEADERSHIP.map((leader, index) => (
               <motion.article
                 key={leader.name}
-                className="overflow-hidden border border-border bg-surface"
+                className="overflow-hidden border border-border bg-white shadow-[0_12px_40px_rgba(10,10,11,0.06)]"
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
               >
-                <img
-                  src={leader.photo}
-                  alt={`${leader.name}, ${leader.role}`}
-                  className="aspect-square w-full object-cover object-top"
-                  width={512}
-                  height={512}
-                  loading="lazy"
-                />
+                <div className="relative aspect-[4/5] overflow-hidden bg-navy">
+                  <img
+                    src={leader.photo}
+                    alt={`${leader.name}, ${leader.role}`}
+                    className="h-full w-full object-cover object-[center_18%]"
+                    width={512}
+                    height={640}
+                    loading="lazy"
+                  />
+                  <div
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-navy/35 to-transparent"
+                    aria-hidden
+                  />
+                </div>
                 <div className="p-6 md:p-7">
                   <h3 className="font-display text-2xl font-medium text-navy">{leader.name}</h3>
                   <p className="mt-1 text-sm font-semibold tracking-wide text-royal uppercase">
