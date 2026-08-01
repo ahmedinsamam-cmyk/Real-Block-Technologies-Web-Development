@@ -30,7 +30,7 @@ export const services: ServiceItem[] = [
     title: 'RWA Tokenization (TaaS)',
     shortTitle: 'RWA Tokenization',
     description:
-      'Tokenization-as-a-Service for real estate, artworks, antiques, rent-share distribution, and membership programs—not financial assets.',
+      'Tokenization-as-a-Service for real estate, artworks, antiques, rent-share distribution, and membership programs.',
     icon: Building2,
     href: '/services/real-estate-tokenization',
     details: [
@@ -41,7 +41,7 @@ export const services: ServiceItem[] = [
       'Membership & access services',
     ],
     longDescription:
-      'We provide Tokenization-as-a-Service (TaaS) for physical and experiential assets—real estate, artworks, antiques, rent-share distribution, and membership services. We do not tokenize financial instruments or securities.',
+      'We provide Tokenization-as-a-Service (TaaS) for physical and experiential assets—real estate, artworks, antiques, rent-share distribution, and membership services.',
     outcomes: [
       'Clear TaaS readiness and operating model',
       'Digital representation for physical assets',

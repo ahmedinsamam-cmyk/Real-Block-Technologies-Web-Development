@@ -214,7 +214,7 @@ export const serviceDetailsById: Record<string, ServiceDetailContent> = {
     problem:
       'Owners of real estate, collectibles, and membership businesses lack practical ways to digitize ownership, distribute rent share, or manage membership access without entering financial-asset tokenization.',
     solution:
-      'We provide Tokenization-as-a-Service (TaaS) for real estate, artworks, antiques, rent-share distribution, and membership services. We do not tokenize financial assets or securities.',
+      'We provide Tokenization-as-a-Service (TaaS) for real estate, artworks, antiques, rent-share distribution, and membership services.',
     benefits: [
       'TaaS model tailored to physical and experiential assets',
       'Real estate digitization pathways',
@@ -232,7 +232,7 @@ export const serviceDetailsById: Record<string, ServiceDetailContent> = {
     process: [
       {
         title: 'Asset & use-case readiness',
-        description: 'Confirm asset type fit (real estate, art, antiques, rent share, membership)—excluding financial assets.',
+        description: 'Confirm asset type fit across real estate, art, antiques, rent share, and membership programs.',
       },
       {
         title: 'TaaS solution design',
@@ -254,9 +254,9 @@ export const serviceDetailsById: Record<string, ServiceDetailContent> = {
     ],
     faqs: [
       {
-        question: 'Do you tokenize financial assets?',
+        question: 'What assets does your TaaS cover?',
         answer:
-          'No. Our TaaS offering covers real estate, artworks, antiques, rent-share distribution, and membership services only—not financial instruments or securities.',
+          'Our TaaS offering focuses on real estate, artworks, antiques, rent-share distribution, and membership services.',
       },
       {
         question: 'What is Tokenization-as-a-Service (TaaS)?',

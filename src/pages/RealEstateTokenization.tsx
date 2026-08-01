@@ -17,7 +17,7 @@ const workflow = [
   {
     icon: Building2,
     title: 'Qualify the asset',
-    text: 'Confirm fit for real estate, artworks, antiques, rent share, or membership—never financial assets.',
+    text: 'Confirm fit for real estate, artworks, antiques, rent share, or membership programs.',
   },
   {
     icon: Home,
@@ -55,14 +55,14 @@ export function RealEstateTokenizationPage() {
     <PageTransition>
       <SEO
         title="RWA Tokenization (TaaS)"
-        description="Tokenization-as-a-Service for real estate, artworks, antiques, rent-share distribution, and membership services—not financial assets."
+        description="Tokenization-as-a-Service for real estate, artworks, antiques, rent-share distribution, and membership services."
         path="/services/real-estate-tokenization"
         jsonLd={faqSchema(detail.faqs)}
       />
       <PageHero
         eyebrow="Tokenization-as-a-Service"
-        title="RWA tokenization for physical assets—not financial instruments"
-        description="We provide TaaS for real estate, artworks, antiques, rent-share distribution, and membership services. We do not tokenize financial assets."
+        title="RWA tokenization for physical and experiential assets"
+        description="We provide TaaS for real estate, artworks, antiques, rent-share distribution, and membership services."
       />
 
       <section className="bg-surface py-16 md:py-20">
@@ -101,9 +101,6 @@ export function RealEstateTokenizationPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 border-t border-border pt-5 text-sm font-semibold text-navy">
-                Out of scope: financial assets, securities, and capital-markets instruments.
-              </p>
             </div>
           </div>
         </div>

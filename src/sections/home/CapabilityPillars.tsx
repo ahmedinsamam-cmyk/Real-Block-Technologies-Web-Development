@@ -6,7 +6,7 @@ import { Button } from '@/components/Button'
 const features = [
   {
     title: 'RWA Tokenization (TaaS)',
-    text: 'Tokenize real estate, artworks, antiques, rent share, and memberships—not financial assets.',
+    text: 'Tokenize real estate, artworks, antiques, rent share, and memberships.',
     href: '/services/real-estate-tokenization',
     imageClass: 'section-photo-a',
   },

@@ -16,7 +16,7 @@ const KNOWLEDGE: Array<{ keywords: string[]; answer: string }> = [
   {
     keywords: ['rwa', 'token', 'tokenization', 'taas', 'real world', 'asset', 'art', 'antique', 'membership', 'rent'],
     answer:
-      'We offer Tokenization-as-a-Service (TaaS) for real estate, artworks, antiques, rent-share distribution, and membership services. We do not tokenize financial assets. Explore the RWA page or book a discovery call.',
+      'We offer Tokenization-as-a-Service (TaaS) for real estate, artworks, antiques, rent-share distribution, and membership services. Explore the RWA page or book a discovery call.',
   },
   {
     keywords: ['ai', 'artificial', 'automation', 'agent', 'analytics'],
