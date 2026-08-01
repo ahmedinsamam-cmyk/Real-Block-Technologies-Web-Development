@@ -13,7 +13,6 @@ import { Stats } from '@/sections/home/Stats'
 import { ServiceHighlights } from '@/sections/home/ServiceHighlights'
 import { CapabilityPillars } from '@/sections/home/CapabilityPillars'
 import { TrustSignals } from '@/sections/home/TrustSignals'
-import { ProcessTimeline } from '@/sections/home/ProcessTimeline'
 import { TechnologyShowcase } from '@/sections/home/TechnologyShowcase'
 import { BusinessOutcomes } from '@/sections/home/BusinessOutcomes'
 import { trackCtaClick } from '@/utils/analytics'
@@ -31,7 +30,6 @@ export function HomePage() {
       <CapabilityPillars />
       <PlatformExpertise />
       <Stats />
-      <ProcessTimeline />
       <ServiceHighlights />
       <TechnologyShowcase />
       <BusinessOutcomes />
