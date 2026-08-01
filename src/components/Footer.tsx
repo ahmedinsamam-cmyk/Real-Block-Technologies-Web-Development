@@ -65,6 +65,11 @@ export function Footer() {
                   {COMPANY.email}
                 </a>
               </li>
+              <li>
+                <a href={`tel:${COMPANY.phoneHref}`} className="transition hover:text-white">
+                  {COMPANY.phone}
+                </a>
+              </li>
               <li className="text-white/45">{COMPANY.address}</li>
             </ul>
           </div>

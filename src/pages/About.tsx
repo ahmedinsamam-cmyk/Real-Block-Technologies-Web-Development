@@ -5,6 +5,9 @@ import { PageTransition } from '@/components/PageTransition'
 import { PageHero } from '@/components/PageHero'
 import { SectionHeading } from '@/components/SectionHeading'
 import { CTASection } from '@/components/CTASection'
+import { PlatformExpertise } from '@/components/PlatformExpertise'
+import { LinkedInIcon } from '@/components/icons/SocialIcons'
+import { LEADERSHIP } from '@/utils/constants'
 
 const values = [
   {
@@ -34,13 +37,13 @@ export function AboutPage() {
     <PageTransition>
       <SEO
         title="About Us"
-        description="Learn about Real Block Technologies—our mission, vision, values, and approach to enterprise AI, blockchain, and RWA consulting."
+        description="Learn about Real Block Technologies—our mission, leadership, and approach to AI, FinTech, enterprise platforms, and RWA Tokenization-as-a-Service."
         path="/about"
       />
       <PageHero
         eyebrow="About Us"
-        title="A consulting partner for the next era of digital assets"
-        description="Real Block Technologies helps enterprises transform physical assets, financial operations, and business processes using emerging technologies."
+        title="A consulting partner for practical enterprise digital programs"
+        description="Real Block Technologies helps mid-market enterprises modernize operations with AI, FinTech, platform professional services, and RWA Tokenization-as-a-Service."
       />
 
       <section className="bg-white py-20 md:py-24">
@@ -48,17 +51,17 @@ export function AboutPage() {
           <div>
             <p className="mb-3 text-xs font-semibold tracking-[0.18em] text-royal uppercase">Our Story</p>
             <h2 className="font-display text-3xl font-bold text-navy md:text-4xl">
-              Built for enterprises navigating complexity
+              Built for enterprises that need scoped, outcome-led delivery
             </h2>
             <p className="mt-5 text-base leading-relaxed text-ink-muted">
-              Organizations today face a dual mandate: modernize legacy operations while preparing for
-              markets shaped by AI, blockchain, and digitally represented assets. Real Block Technologies
-              was founded to bridge that gap—combining deep technology expertise with an enterprise
-              consulting mindset.
+              Organizations face a dual mandate: modernize operations while preparing for markets shaped
+              by AI, blockchain, and digitally represented assets. Real Block Technologies was founded
+              to bridge that gap—with professional services that fit real budgets and decision cycles.
             </p>
             <p className="mt-4 text-base leading-relaxed text-ink-muted">
-              We work alongside leadership teams to translate emerging capabilities into structured
-              roadmaps, secure architectures, and implementations that deliver measurable business value.
+              Typical enterprise engagements are scoped between $5,000 and $50,000, with clear
+              deliverables across platforms, automation, FinTech, and Tokenization-as-a-Service for
+              qualifying physical assets.
             </p>
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
@@ -66,26 +69,28 @@ export function AboutPage() {
               <h3 className="font-display text-lg font-bold text-navy">Mission</h3>
               <p className="mt-3 text-sm leading-relaxed text-ink-muted">
                 To help enterprises unlock value from real-world assets and digital operations through
-                trusted AI, blockchain, and technology consulting.
+                trusted AI, FinTech, platform consulting, and tokenization services.
               </p>
             </div>
             <div className="rounded-xl border border-border bg-surface p-6 sm:col-span-2">
               <h3 className="font-display text-lg font-bold text-navy">Vision</h3>
               <p className="mt-3 text-sm leading-relaxed text-ink-muted">
                 A world where physical assets, financial systems, and business processes are intelligently
-                connected—secure, transparent, and optimized for global scale.
+                connected—secure, transparent, and optimized for growth.
               </p>
             </div>
           </div>
         </div>
       </section>
 
+      <PlatformExpertise />
+
       <section className="bg-surface py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Values"
             title="Principles that guide every engagement"
-            description="Our values shape how we advise, design, and deliver for enterprise clients worldwide."
+            description="Our values shape how we advise, design, and deliver for enterprise clients."
           />
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {values.map((value, index) => {
@@ -100,7 +105,7 @@ export function AboutPage() {
                   transition={{ delay: index * 0.08 }}
                 >
                   <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-navy text-gold">
-                    <Icon className="h-5 w-5" />
+                    <Icon className="h-5 w-5" aria-hidden />
                   </div>
                   <h3 className="font-display text-lg font-bold text-navy">{value.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-muted">{value.text}</p>
@@ -116,30 +121,54 @@ export function AboutPage() {
           <SectionHeading
             eyebrow="Leadership"
             title="Leadership team"
-            description="Leadership profiles and executive biographies will be published here as our team roster is finalized."
+            description="Meet the founder leading Real Block Technologies."
+            align="left"
           />
-          <div className="grid gap-6 md:grid-cols-3">
-            {['Executive Leadership', 'Technology Practice', 'Client Delivery'].map((role, index) => (
-              <motion.div
-                key={role}
-                className="rounded-xl border border-dashed border-border bg-surface p-8 text-center"
+          <div className="mt-2 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {LEADERSHIP.map((leader, index) => (
+              <motion.article
+                key={leader.name}
+                className="overflow-hidden border border-border bg-surface"
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
               >
-                <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-navy/5 font-display text-lg font-bold text-navy/40">
-                  RBT
+                <img
+                  src={leader.photo}
+                  alt={`${leader.name}, ${leader.role}`}
+                  className="aspect-square w-full object-cover object-top"
+                  width={512}
+                  height={512}
+                  loading="lazy"
+                />
+                <div className="p-6 md:p-7">
+                  <h3 className="font-display text-2xl font-medium text-navy">{leader.name}</h3>
+                  <p className="mt-1 text-sm font-semibold tracking-wide text-royal uppercase">
+                    {leader.role}
+                  </p>
+                  <p className="mt-4 text-sm leading-relaxed text-ink-muted">{leader.bio}</p>
+                  <a
+                    href={leader.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-navy transition hover:text-royal"
+                  >
+                    <LinkedInIcon className="h-4 w-4" />
+                    LinkedIn profile
+                  </a>
                 </div>
-                <h3 className="font-display font-bold text-navy">{role}</h3>
-                <p className="mt-2 text-sm text-ink-muted">Profile coming soon</p>
-              </motion.div>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
 
-      <CTASection />
+      <CTASection
+        title="Ready to scope a practical enterprise engagement?"
+        description="Book a discovery consultation. Typical projects range from $5,000 to $50,000 with clear deliverables."
+        primaryTo="/contact#consultation"
+      />
     </PageTransition>
   )
 }

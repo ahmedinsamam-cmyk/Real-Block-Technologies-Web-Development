@@ -14,14 +14,14 @@ interface ChatMessage {
 
 const KNOWLEDGE: Array<{ keywords: string[]; answer: string }> = [
   {
-    keywords: ['rwa', 'token', 'tokenization', 'real world', 'asset'],
+    keywords: ['rwa', 'token', 'tokenization', 'taas', 'real world', 'asset', 'art', 'antique', 'membership', 'rent'],
     answer:
-      'Real World Asset (RWA) tokenization creates a digital representation of physical assets on blockchain—supporting ownership models, investor access, and lifecycle management. Explore our guide or book a discovery call to assess fit.',
+      'We offer Tokenization-as-a-Service (TaaS) for real estate, artworks, antiques, rent-share distribution, and membership services. We do not tokenize financial assets. Explore the RWA page or book a discovery call.',
   },
   {
     keywords: ['ai', 'artificial', 'automation', 'agent', 'analytics'],
     answer:
-      'Our AI solutions cover strategy, automation, agents, business intelligence, predictive analytics, and document intelligence. We help enterprises move from pilots to scaled operating impact.',
+      'Our AI solutions cover strategy, automation, agents, business intelligence, predictive analytics, and document intelligence—scoped for practical mid-market enterprise ROI.',
   },
   {
     keywords: ['blockchain', 'web3', 'smart contract'],
@@ -29,19 +29,29 @@ const KNOWLEDGE: Array<{ keywords: string[]; answer: string }> = [
       'We provide blockchain advisory spanning strategy, architecture, security considerations, and implementation guidance aligned to enterprise controls.',
   },
   {
-    keywords: ['consult', 'book', 'meeting', 'call', 'schedule', 'calendly'],
+    keywords: ['workday', 'dynamics', 'hubspot', 'd365', 'consulting', 'platform'],
     answer:
-      'You can book a 30-minute Discovery Call, 60-minute Strategy Session, or Enterprise Transformation Workshop on our Contact page. Would you like me to capture your details for follow-up?',
+      'Under Enterprise Technology Consulting we provide professional services for Workday, Microsoft Dynamics 365, and HubSpot—plus broader transformation advisory.',
   },
   {
-    keywords: ['price', 'cost', 'fee', 'pricing'],
+    keywords: ['fintech', 'finance', 'payment'],
     answer:
-      'Engagements are proposal-based and scoped to objectives—currency-neutral and tailored for global clients. Share your priorities and we will recommend a suitable approach.',
+      'Our FinTech solutions help finance teams modernize workflows, reporting, and digital financial operations—distinct from classic treasury TMS replacement.',
+  },
+  {
+    keywords: ['consult', 'book', 'meeting', 'call', 'schedule', 'calendly'],
+    answer:
+      'You can book a Discovery Call, Strategy Session, or Enterprise Workshop on our Contact page. Typical engagements range from $5,000 to $50,000.',
+  },
+  {
+    keywords: ['price', 'cost', 'fee', 'pricing', 'budget'],
+    answer:
+      'Typical enterprise engagements range from $5,000 to $50,000, scoped to objectives and complexity. Share your priorities and we will recommend a suitable approach.',
   },
   {
     keywords: ['service', 'offer', 'help', 'what do you'],
     answer:
-      'Real Block Technologies helps enterprises with RWA tokenization, AI business solutions, blockchain advisory, treasury/fintech, enterprise consulting, and custom software development.',
+      'Real Block Technologies helps enterprises with RWA Tokenization-as-a-Service, AI solutions, blockchain advisory, FinTech solutions, and enterprise consulting (Workday, Dynamics 365, HubSpot).',
   },
 ]
 
@@ -49,7 +59,7 @@ const OPENERS: ChatMessage[] = [
   {
     id: 'welcome',
     role: 'assistant',
-    text: 'Hello — I am the Real Block Technologies assistant. Ask about AI solutions, RWA tokenization, blockchain consulting, or book a consultation. How can I help?',
+    text: 'Hello — I am the Real Block Technologies assistant. Ask about AI, FinTech, RWA TaaS, Workday/D365/HubSpot services, or book a consultation. How can I help?',
   },
 ]
 
@@ -57,7 +67,7 @@ function matchAnswer(input: string): string {
   const q = input.toLowerCase()
   const hit = KNOWLEDGE.find((item) => item.keywords.some((k) => q.includes(k)))
   if (hit) return hit.answer
-  return 'Thanks for your question. Our team specializes in AI, blockchain, and real-world asset consulting. You can browse Services, download resources, or share your email and we will follow up.'
+  return 'Thanks for your question. Our team specializes in AI, FinTech, enterprise platforms, and RWA Tokenization-as-a-Service. You can browse Services or share your email and we will follow up.'
 }
 
 type ChatProvider = 'builtin' | 'intercom' | 'crisp' | 'hubspot'

@@ -21,11 +21,13 @@ export const DEFAULT_LOCALE: AppLocale = 'en'
 export const COMMERCIAL_POSITIONING = {
   model: 'Scoped professional services engagements',
   pricingNote:
-    'Pricing is proposal-based and scoped to objectives, complexity, and delivery model—not published as fixed product SKUs.',
+    'Typical enterprise engagements range from $5,000 to $50,000, scoped to objectives, complexity, and delivery model.',
   currencyNeutral: true,
+  engagementRange: { min: 5000, max: 50000, currency: 'USD' },
 } as const
 
 export const COUNTRY_OPTIONS = [
+  'Sri Lanka',
   'United States',
   'United Kingdom',
   'United Arab Emirates',

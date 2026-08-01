@@ -88,7 +88,7 @@ export const trustSections: TrustPillar[] = [
     id: 'architecture',
     title: 'Enterprise architecture',
     description:
-      'Target-state architectures that integrate with existing ERP, CRM, treasury, and data platforms—built to scale beyond the pilot.',
+      'Target-state architectures that integrate with existing ERP, CRM, FinTech, and data platforms—built to scale beyond the pilot.',
     icon: Layers3,
   },
   {

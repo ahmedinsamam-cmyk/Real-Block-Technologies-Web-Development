@@ -1,18 +1,45 @@
 export const COMPANY = {
   name: 'Real Block Technologies',
   shortName: 'Real Block',
-  tagline: 'Institutional consulting for AI, blockchain, and real-world asset transformation',
+  tagline: 'Enterprise consulting for AI, blockchain, FinTech, and real-world asset tokenization',
   email: 'contact@realblocktechnologies.com',
-  phone: '',
-  address: 'Serving enterprises worldwide',
+  phone: '+94 78 321 4747',
+  phoneHref: '+94783214747',
+  address: '14, Sir Baron Jayathilake Mawatha, Colombo 01, Sri Lanka',
   url: 'https://realblocktechnologies.com',
 } as const
 
 export const SOCIAL_LINKS = {
-  linkedin: 'https://www.linkedin.com/company/real-block-technologies/',
+  linkedin: 'https://www.linkedin.com/in/insamam-mushny-34b35815b/',
   twitter: 'https://twitter.com/realblocktech',
   youtube: 'https://www.youtube.com/@realblocktechnologies',
 } as const
+
+export const LEADERSHIP = [
+  {
+    name: 'Insamam Mushny',
+    role: 'CEO & Founder',
+    photo: '/team/insamam-mushny.jpg',
+    linkedin: 'https://www.linkedin.com/in/insamam-mushny-34b35815b/',
+    bio: 'Founder of Real Block Technologies. ERP and finance implementation background with deep interest in blockchain and real-world asset digitization—helping mid-market enterprises adopt practical AI, FinTech, and tokenization programs.',
+  },
+] as const
+
+/** Platforms featured under Enterprise Technology Consulting */
+export const CONSULTING_PLATFORMS = [
+  {
+    name: 'Workday',
+    description: 'HR, finance, and workforce platform professional services.',
+  },
+  {
+    name: 'Microsoft Dynamics 365',
+    description: 'ERP and CRM implementation, integration, and advisory.',
+  },
+  {
+    name: 'HubSpot',
+    description: 'CRM, marketing, and revenue operations professional services.',
+  },
+] as const
 
 export const CALENDLY_URL = 'https://calendly.com/realblocktechnologies'
 
@@ -27,7 +54,7 @@ export const MEETING_TYPES = [
     slug: 'strategy-session',
     title: '60 Minute Strategy Session',
     duration: '60 minutes',
-    description: 'Deep-dive on AI, RWA, or blockchain strategy with advisors.',
+    description: 'Deep-dive on AI, RWA, FinTech, or blockchain strategy with advisors.',
   },
   {
     slug: 'enterprise-workshop',
@@ -39,17 +66,22 @@ export const MEETING_TYPES = [
 
 export const CONSULTATION_TOPICS = [
   'AI Transformation',
-  'RWA Tokenization',
+  'RWA Tokenization (TaaS)',
+  'FinTech Solutions',
+  'Enterprise Platforms',
   'Blockchain Strategy',
-  'Enterprise Automation',
 ] as const
 
 export const SEO_KEYWORDS = [
   'AI Consulting Company',
   'Blockchain Consulting',
   'Real World Asset Tokenization',
+  'Tokenization as a Service',
+  'FinTech Consulting',
+  'Workday Professional Services',
+  'Dynamics 365 Consulting',
+  'HubSpot Professional Services',
   'Enterprise AI Solutions',
-  'Digital Transformation Consulting',
 ] as const
 
 export const NAV_LINKS = [
@@ -62,12 +94,11 @@ export const NAV_LINKS = [
 ] as const
 
 export const FOOTER_SERVICES = [
-  { label: 'RWA Tokenization', href: '/services/real-estate-tokenization' },
+  { label: 'RWA Tokenization (TaaS)', href: '/services/real-estate-tokenization' },
   { label: 'AI Solutions', href: '/services/ai-solutions' },
   { label: 'Enterprise Consulting', href: '/services/enterprise-consulting' },
   { label: 'Blockchain Advisory', href: '/services/blockchain-advisory' },
-  { label: 'Treasury & FinTech', href: '/services/treasury-fintech' },
-  { label: 'Software Development', href: '/services/software-development' },
+  { label: 'FinTech Solutions', href: '/services/fintech' },
 ] as const
 
 export const FOOTER_COMPANY = [
@@ -105,18 +136,8 @@ export const STATS = [
 ] as const
 
 export const TRUST_INDICATORS = [
-  'Enterprise-grade security practices',
-  'Cross-industry delivery experience',
+  'Scoped engagements from $5,000–$50,000',
+  'Enterprise platform professional services',
   'AI + blockchain specialists',
-  'Outcome-focused engagements',
-] as const
-
-/** Sector marks — replace with client logos when approved */
-export const TRUSTED_PARTNERS = [
-  'Real Estate',
-  'Financial Services',
-  'Manufacturing',
-  'Healthcare',
-  'Logistics',
-  'Professional Services',
+  'Outcome-focused delivery',
 ] as const

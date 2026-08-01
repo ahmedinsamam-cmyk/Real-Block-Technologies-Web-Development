@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { CheckCircle2, Mail, MapPin, Globe2 } from 'lucide-react'
+import { CheckCircle2, Mail, MapPin, Globe2, Phone } from 'lucide-react'
 import { SEO } from '@/components/SEO'
 import { PageTransition } from '@/components/PageTransition'
 import { PageHero } from '@/components/PageHero'
@@ -41,11 +41,10 @@ const industries = [
 
 const serviceInterests = [
   { value: 'ai_transformation', label: 'AI Transformation' },
-  { value: 'rwa_tokenization', label: 'RWA Tokenization' },
+  { value: 'rwa_tokenization', label: 'RWA Tokenization (TaaS)' },
   { value: 'blockchain_strategy', label: 'Blockchain Strategy' },
-  { value: 'enterprise_automation', label: 'Enterprise Automation' },
-  { value: 'treasury_fintech', label: 'Treasury & FinTech' },
-  { value: 'software_development', label: 'Software Development' },
+  { value: 'enterprise_consulting', label: 'Enterprise Consulting (Workday / D365 / HubSpot)' },
+  { value: 'fintech', label: 'FinTech Solutions' },
   { value: 'general', label: 'General Inquiry' },
 ]
 
@@ -123,6 +122,12 @@ export function ContactPage() {
                 <Mail className="mt-0.5 h-4 w-4 text-royal" aria-hidden />
                 <a href={`mailto:${COMPANY.email}`} className="hover:text-royal">
                   {COMPANY.email}
+                </a>
+              </li>
+              <li className="flex items-start gap-3 text-sm text-ink-muted">
+                <Phone className="mt-0.5 h-4 w-4 text-royal" aria-hidden />
+                <a href={`tel:${COMPANY.phoneHref}`} className="hover:text-royal">
+                  {COMPANY.phone}
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-ink-muted">

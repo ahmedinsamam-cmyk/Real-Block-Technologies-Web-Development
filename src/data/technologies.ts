@@ -42,7 +42,7 @@ export const technologyShowcase: TechCategory[] = [
     id: 'enterprise',
     title: 'Enterprise systems',
     items: [
-      'ERP / CRM / treasury integrations',
+      'ERP / CRM / FinTech integrations',
       'Workflow orchestration',
       'Identity and access management',
       'Observability and audit logging',

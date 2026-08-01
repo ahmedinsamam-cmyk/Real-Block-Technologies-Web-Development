@@ -11,7 +11,7 @@ import { services, industries } from '@/data/content'
 import { trackCtaClick, trackEvent } from '@/utils/analytics'
 
 const serviceMenu = services.map((s) => ({
-  label: s.title,
+  label: s.shortTitle ?? s.title,
   href: s.href,
 }))
 

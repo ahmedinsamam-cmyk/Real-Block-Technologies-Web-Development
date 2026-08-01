@@ -4,6 +4,7 @@ import { PageHero } from '@/components/PageHero'
 import { SectionHeading } from '@/components/SectionHeading'
 import { ServiceCard } from '@/components/ServiceCard'
 import { ConsultationBooking } from '@/components/ConsultationBooking'
+import { PlatformExpertise } from '@/components/PlatformExpertise'
 import { services } from '@/data/content'
 
 export function ServicesPage() {
@@ -11,20 +12,20 @@ export function ServicesPage() {
     <PageTransition>
       <SEO
         title="Services"
-        description="Explore Real Block Technologies services: RWA tokenization, AI solutions, enterprise consulting, blockchain advisory, treasury technology, and software development."
+        description="RWA Tokenization-as-a-Service, AI solutions, enterprise consulting (Workday, Dynamics 365, HubSpot), blockchain advisory, and FinTech solutions."
         path="/services"
       />
       <PageHero
         eyebrow="Services"
-        title="Technology consulting for enterprise transformation"
-        description="End-to-end advisory and implementation services spanning AI, blockchain, real-world assets, finance technology, and custom software."
+        title="Professional services for focused enterprise outcomes"
+        description="Advisory and implementation across AI, FinTech, enterprise platforms, blockchain, and RWA Tokenization-as-a-Service—typically scoped from $5,000 to $50,000."
       />
       <section className="bg-surface py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Capabilities"
-            title="Six practice areas. One integrated delivery model."
-            description="Engage us for a focused initiative or a broader transformation program—our teams connect strategy, architecture, and execution."
+            title="Five practice areas. One practical delivery model."
+            description="Engage us for a focused initiative with clear deliverables—strategy, architecture, and execution connected."
           />
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {services.map((service, index) => (
@@ -33,10 +34,11 @@ export function ServicesPage() {
           </div>
         </div>
       </section>
+      <PlatformExpertise />
       <ConsultationBooking
-        title="Discuss Your Digital Transformation Strategy"
-        description="Schedule a discovery call to prioritize AI, blockchain, and RWA initiatives against your operating goals."
-        ctaLabel="Book a Free Consultation"
+        title="Discuss your next enterprise initiative"
+        description="Schedule a discovery call to prioritize AI, FinTech, platforms, or RWA TaaS against your operating goals."
+        ctaLabel="Book a consultation"
       />
     </PageTransition>
   )

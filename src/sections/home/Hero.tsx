@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/Button'
 import { trackCtaClick } from '@/utils/analytics'
 
@@ -26,12 +26,12 @@ export function Hero() {
         </motion.div>
 
         <motion.h1
-          className="mt-8 max-w-5xl font-display text-[2.5rem] leading-[1.06] font-medium text-white text-balance sm:text-5xl md:text-6xl lg:text-[4.75rem]"
+          className="mt-8 max-w-5xl font-display text-[2.5rem] leading-[1.06] font-medium text-white text-balance sm:text-5xl md:text-6xl lg:text-[4.5rem]"
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.08 }}
         >
-          Institutional consulting for AI, blockchain, and real-world assets.
+          Enterprise consulting for AI, FinTech, and real-world asset tokenization.
         </motion.h1>
 
         <motion.p
@@ -40,8 +40,8 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.16 }}
         >
-          We help enterprises turn physical assets, financial operations, and complex workflows into
-          governed digital advantage—with the rigor executives expect.
+          Scoped professional services for mid-market enterprises—platforms, automation, and
+          Tokenization-as-a-Service with clear deliverables and practical ROI.
         </motion.p>
 
         <motion.div
@@ -71,13 +71,11 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.4 }}
           aria-label="Focus areas"
         >
-          {['RWA tokenization', 'Enterprise AI', 'Blockchain advisory', 'Treasury technology'].map(
-            (item) => (
-              <li key={item} className="font-medium tracking-wide">
-                {item}
-              </li>
-            ),
-          )}
+          {['RWA TaaS', 'Enterprise AI', 'FinTech', 'Workday · D365 · HubSpot'].map((item) => (
+            <li key={item} className="font-medium tracking-wide">
+              {item}
+            </li>
+          ))}
         </motion.ul>
       </div>
     </section>

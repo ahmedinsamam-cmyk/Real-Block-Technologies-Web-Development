@@ -5,7 +5,6 @@ import {
   Briefcase,
   Blocks,
   Landmark,
-  Code2,
   Factory,
   HeartPulse,
   Truck,
@@ -16,6 +15,7 @@ import {
 export interface ServiceItem {
   id: string
   title: string
+  shortTitle?: string
   description: string
   icon: LucideIcon
   href: string
@@ -27,29 +27,32 @@ export interface ServiceItem {
 export const services: ServiceItem[] = [
   {
     id: 'rwa',
-    title: 'Real World Asset (RWA) Tokenization',
+    title: 'RWA Tokenization (TaaS)',
+    shortTitle: 'RWA Tokenization',
     description:
-      'Helping businesses digitize and manage physical assets using blockchain infrastructure.',
+      'Tokenization-as-a-Service for real estate, artworks, antiques, rent-share distribution, and membership programs—not financial assets.',
     icon: Building2,
     href: '/services/real-estate-tokenization',
     details: [
-      'Asset digitization frameworks',
-      'On-chain ownership models',
-      'Compliance-aligned architecture',
-      'Investor access platforms',
+      'Tokenization-as-a-Service (TaaS)',
+      'Real estate digitization',
+      'Artworks & antiques tokenization',
+      'Rent-share distribution models',
+      'Membership & access services',
     ],
     longDescription:
-      'We help enterprises structure, digitize, and manage real-world assets with blockchain infrastructure designed for institutional controls, investor access, and long-term operations.',
+      'We provide Tokenization-as-a-Service (TaaS) for physical and experiential assets—real estate, artworks, antiques, rent-share distribution, and membership services. We do not tokenize financial instruments or securities.',
     outcomes: [
-      'Clear tokenization readiness roadmap',
-      'Digital ownership and access models',
-      'Lifecycle management operating design',
+      'Clear TaaS readiness and operating model',
+      'Digital representation for physical assets',
+      'Rent-share and membership distribution design',
     ],
   },
   {
     id: 'ai',
     title: 'AI Business Solutions',
-    description: 'AI-powered automation, analytics, and decision intelligence solutions.',
+    shortTitle: 'AI Solutions',
+    description: 'Practical AI automation, analytics, and decision intelligence scoped for mid-market enterprise ROI.',
     icon: Brain,
     href: '/services/ai-solutions',
     details: [
@@ -59,7 +62,7 @@ export const services: ServiceItem[] = [
       'Document understanding',
     ],
     longDescription:
-      'From strategy to production systems, we design AI capabilities that automate work, improve decisions, and create durable operating advantage.',
+      'From discovery to production, we design AI capabilities that automate work, improve decisions, and create durable operating advantage within focused $5k–$50k engagement scopes.',
     outcomes: [
       'Prioritized AI use-case portfolio',
       'Measurable automation ROI',
@@ -69,19 +72,22 @@ export const services: ServiceItem[] = [
   {
     id: 'consulting',
     title: 'Enterprise Technology Consulting',
-    description: 'Digital transformation advisory and implementation services.',
+    shortTitle: 'Enterprise Consulting',
+    description:
+      'Professional services for Workday, Microsoft Dynamics 365, HubSpot, and broader digital transformation advisory.',
     icon: Briefcase,
     href: '/services/enterprise-consulting',
     details: [
+      'Workday professional services',
+      'Microsoft Dynamics 365 advisory',
+      'HubSpot CRM professional services',
       'Transformation roadmaps',
-      'Architecture advisory',
       'Implementation oversight',
-      'Operating model redesign',
     ],
     longDescription:
-      'We partner with leadership teams to define transformation priorities, design target architectures, and oversee delivery so technology investments translate into business outcomes.',
+      'We provide professional services across leading enterprise platforms—Workday, Microsoft Dynamics 365, and HubSpot—alongside architecture advisory and delivery governance so technology investments translate into business outcomes.',
     outcomes: [
-      'Executive-aligned transformation roadmap',
+      'Platform-aligned implementation plans',
       'Architecture and vendor decision support',
       'Delivery governance that reduces risk',
     ],
@@ -89,7 +95,8 @@ export const services: ServiceItem[] = [
   {
     id: 'blockchain',
     title: 'Blockchain Advisory',
-    description: 'Blockchain strategy, architecture, and implementation guidance.',
+    shortTitle: 'Blockchain Advisory',
+    description: 'Blockchain strategy, architecture, and implementation guidance for enterprise use cases.',
     icon: Blocks,
     href: '/services/blockchain-advisory',
     details: [
@@ -107,43 +114,24 @@ export const services: ServiceItem[] = [
     ],
   },
   {
-    id: 'treasury',
-    title: 'Treasury & Financial Technology Solutions',
-    description: 'Modern solutions for CFOs, finance teams, and capital optimization.',
+    id: 'fintech',
+    title: 'FinTech Solutions',
+    shortTitle: 'FinTech',
+    description: 'Modern FinTech solutions for finance teams, payment workflows, and digital financial operations.',
     icon: Landmark,
-    href: '/services/treasury-fintech',
+    href: '/services/fintech',
     details: [
-      'Treasury modernization',
-      'Capital optimization',
-      'Financial workflows',
-      'Reporting automation',
+      'FinTech stack advisory',
+      'Finance workflow automation',
+      'Payment & reporting modernization',
+      'Digital financial operations',
     ],
     longDescription:
-      'We help CFOs and finance leaders modernize treasury visibility, forecasting, and capital workflows with technology and process redesign built for scale.',
+      'We help finance and operations leaders modernize FinTech capabilities—visibility, workflows, reporting, and digital financial operations—with technology and process redesign built for practical enterprise adoption.',
     outcomes: [
-      'Unified cash and capital visibility',
-      'Faster forecasting and reporting cycles',
-      'Stronger decision support for finance leaders',
-    ],
-  },
-  {
-    id: 'software',
-    title: 'Software Development',
-    description: 'Custom enterprise applications and SaaS solutions.',
-    icon: Code2,
-    href: '/services/software-development',
-    details: [
-      'Enterprise applications',
-      'SaaS platforms',
-      'API integrations',
-      'Cloud-native delivery',
-    ],
-    longDescription:
-      'Our engineering teams design and build secure, cloud-native applications and SaaS platforms that support digital asset, AI, and enterprise operating models.',
-    outcomes: [
-      'Production-ready custom applications',
-      'Reliable API and system integrations',
-      'Scalable cloud delivery practices',
+      'Clearer financial operations visibility',
+      'Faster reporting and workflow cycles',
+      'Stronger decision support for finance teams',
     ],
   },
 ]
@@ -188,7 +176,7 @@ export const industries: IndustryItem[] = [
     title: 'Financial Services',
     href: '/industries/financial-services',
     description:
-      'Modernize treasury, compliance, and client experiences with AI-enabled workflows and blockchain-ready infrastructure.',
+      'Modernize compliance, client experiences, and digital finance workflows with AI-enabled and FinTech-ready infrastructure.',
     icon: Landmark,
     outcomes: ['Treasury efficiency', 'Risk intelligence', 'Digital asset readiness'],
     challenges: [

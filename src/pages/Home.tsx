@@ -5,9 +5,9 @@ import { Testimonials } from '@/components/Testimonials'
 import { ConsultationBooking } from '@/components/ConsultationBooking'
 import { LinkedInCTA } from '@/components/LinkedInCTA'
 import { NewsletterSignup } from '@/components/NewsletterSignup'
-import { TrustedPartners } from '@/components/TrustedPartners'
 import { CTASection } from '@/components/CTASection'
 import { Button } from '@/components/Button'
+import { PlatformExpertise } from '@/components/PlatformExpertise'
 import { Hero } from '@/sections/home/Hero'
 import { Stats } from '@/sections/home/Stats'
 import { ServiceHighlights } from '@/sections/home/ServiceHighlights'
@@ -22,14 +22,14 @@ export function HomePage() {
   return (
     <PageTransition>
       <SEO
-        title="Real Block Technologies | AI, Blockchain & RWA Consulting"
-        description="Institutional consulting for AI, blockchain, and real-world asset transformation. Strategy, architecture, and delivery for enterprise executives."
+        title="Real Block Technologies | AI, Blockchain, FinTech & RWA Consulting"
+        description="Enterprise consulting for AI, FinTech, blockchain, and RWA Tokenization-as-a-Service. Scoped engagements typically $5,000–$50,000."
         path="/"
       />
       <Hero />
-      <TrustedPartners />
       <TrustSignals />
       <CapabilityPillars />
+      <PlatformExpertise />
       <Stats />
       <ProcessTimeline />
       <ServiceHighlights />

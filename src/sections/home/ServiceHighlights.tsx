@@ -11,11 +11,11 @@ export function ServiceHighlights() {
         <div className="mx-auto max-w-3xl text-center">
           <p className="eyebrow text-royal">Solutions</p>
           <h2 className="mt-4 font-display text-4xl font-medium text-navy md:text-5xl lg:text-[3.35rem]">
-            Solutions designed for institutional outcomes
+            Solutions designed for focused enterprise outcomes
           </h2>
           <p className="mt-5 text-base leading-relaxed text-ink-muted md:text-lg">
-            Advisory and implementation across tokenization, AI, blockchain, treasury technology,
-            and custom software—sequenced to reduce risk and accelerate value.
+            Advisory and implementation across TaaS tokenization, AI, blockchain, FinTech, and
+            enterprise platforms—sequenced for clear ROI on focused professional-services engagements.
           </p>
         </div>
 

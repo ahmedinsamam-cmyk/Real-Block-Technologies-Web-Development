@@ -5,21 +5,21 @@ import { Button } from '@/components/Button'
 
 const features = [
   {
-    title: 'Real World Assets',
-    text: 'Digitize ownership, access, and lifecycle management for physical and financial assets.',
+    title: 'RWA Tokenization (TaaS)',
+    text: 'Tokenize real estate, artworks, antiques, rent share, and memberships—not financial assets.',
     href: '/services/real-estate-tokenization',
     imageClass: 'section-photo-a',
   },
   {
     title: 'AI Transformation',
-    text: 'Automate operations and elevate decision quality with enterprise-grade intelligence.',
+    text: 'Automate operations and elevate decision quality with practical enterprise AI.',
     href: '/services/ai-solutions',
     imageClass: 'section-photo-b',
   },
   {
-    title: 'Blockchain Strategy',
-    text: 'Design secure, scalable architectures aligned to institutional controls and markets.',
-    href: '/services/blockchain-advisory',
+    title: 'Enterprise Platforms',
+    text: 'Professional services for Workday, Microsoft Dynamics 365, and HubSpot.',
+    href: '/services/enterprise-consulting',
     imageClass: 'section-photo-c',
   },
 ]

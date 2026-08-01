@@ -7,6 +7,7 @@ import { CTASection } from '@/components/CTASection'
 import { FAQ } from '@/components/FAQ'
 import { Button } from '@/components/Button'
 import { SectionHeading } from '@/components/SectionHeading'
+import { PlatformExpertise } from '@/components/PlatformExpertise'
 import { services } from '@/data/content'
 import { serviceDetailsById } from '@/data/serviceDetails'
 import { faqSchema } from '@/utils/schema'
@@ -16,12 +17,20 @@ const SLUG_TO_ID: Record<string, string> = {
   'ai-solutions': 'ai',
   'enterprise-consulting': 'consulting',
   'blockchain-advisory': 'blockchain',
-  'treasury-fintech': 'treasury',
-  'software-development': 'software',
+  fintech: 'fintech',
+  'treasury-fintech': 'fintech',
 }
 
 export function ServiceDetailPage() {
   const { slug } = useParams<{ slug: string }>()
+
+  if (slug === 'treasury-fintech') {
+    return <Navigate to="/services/fintech" replace />
+  }
+  if (slug === 'software-development') {
+    return <Navigate to="/services" replace />
+  }
+
   const serviceId = slug ? SLUG_TO_ID[slug] : undefined
   const service = services.find((item) => item.id === serviceId)
   const detail = serviceId ? serviceDetailsById[serviceId] : undefined
@@ -41,6 +50,8 @@ export function ServiceDetailPage() {
         jsonLd={faqSchema(detail.faqs)}
       />
       <PageHero eyebrow="Services" title={service.title} description={service.description} />
+
+      {serviceId === 'consulting' && <PlatformExpertise />}
 
       {/* Problem / Solution */}
       <section className="bg-white py-16 md:py-24">

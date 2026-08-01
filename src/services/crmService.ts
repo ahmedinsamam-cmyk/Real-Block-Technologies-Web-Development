@@ -17,9 +17,8 @@ export type ServiceInterest =
   | 'ai_transformation'
   | 'rwa_tokenization'
   | 'blockchain_strategy'
-  | 'enterprise_automation'
-  | 'treasury_fintech'
-  | 'software_development'
+  | 'enterprise_consulting'
+  | 'fintech'
   | 'general'
 
 export type CrmLeadSource =
