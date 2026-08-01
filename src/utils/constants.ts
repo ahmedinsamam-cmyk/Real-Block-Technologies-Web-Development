@@ -19,7 +19,7 @@ export const LEADERSHIP = [
   {
     name: 'Insamam Mushny',
     role: 'CEO & Founder',
-    photo: '/team/insamam-mushny-photo.jpg',
+    photo: '/team/insamam-mushny-ceo-v2.jpg',
     linkedin: 'https://www.linkedin.com/in/insamam-mushny-34b35815b/',
     bio: 'Founder of Real Block Technologies. ERP and finance implementation background with deep interest in blockchain and real-world asset digitization—helping enterprises adopt practical AI, FinTech, and tokenization programs.',
   },
