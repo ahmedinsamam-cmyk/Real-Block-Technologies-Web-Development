@@ -134,18 +134,14 @@ export function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
               >
-                <div className="relative aspect-[4/5] overflow-hidden bg-navy">
+                <div className="relative aspect-square overflow-hidden bg-[#f3f3f1]">
                   <img
                     src={leader.photo}
                     alt={`${leader.name}, ${leader.role}`}
-                    className="h-full w-full object-cover object-[center_18%]"
-                    width={512}
-                    height={640}
+                    className="h-full w-full object-cover object-center"
+                    width={1024}
+                    height={1024}
                     loading="lazy"
-                  />
-                  <div
-                    className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-navy/35 to-transparent"
-                    aria-hidden
                   />
                 </div>
                 <div className="p-6 md:p-7">
