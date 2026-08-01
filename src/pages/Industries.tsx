@@ -13,13 +13,13 @@ export function IndustriesPage() {
     <PageTransition>
       <SEO
         title="Industries"
-        description="Industry solutions from Real Block Technologies across real estate, financial services, manufacturing, healthcare, logistics, and professional services."
+        description="Industry solutions from Real Block Technologies across real estate, banking, manufacturing, healthcare, logistics, and professional services."
         path="/industries"
       />
       <PageHero
         eyebrow="Industries"
         title="Domain expertise for complex operating environments"
-        description="We adapt AI, blockchain, and digital asset strategies to the realities of regulated industries and capital-intensive businesses."
+        description="Dedicated landing pages for Real Estate, Banking, Manufacturing, and Healthcare—plus logistics and professional services."
       />
       <section className="bg-surface py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

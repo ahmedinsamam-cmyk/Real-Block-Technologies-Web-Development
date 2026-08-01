@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react'
+import { Menu, X, ArrowRight, ChevronDown, Search } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Logo } from '@/components/Logo'
 import { Button } from '@/components/Button'
 import { NavDropdown } from '@/components/NavDropdown'
+import { LanguageSwitcher } from '@/components/LocaleProvider'
 import { LinkedInIcon } from '@/components/icons/SocialIcons'
 import { SOCIAL_LINKS } from '@/utils/constants'
 import { services, industries } from '@/data/content'
@@ -20,11 +21,20 @@ const industryMenu = industries.map((i) => ({
   href: i.href,
 }))
 
+const resourceMenu = [
+  { label: 'Resource Library', href: '/resources' },
+  { label: 'Insights', href: '/insights' },
+  { label: 'Success Stories', href: '/success-stories' },
+  { label: 'Help Center', href: '/help' },
+  { label: 'Client Portal', href: '/portal' },
+]
+
 export function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
   const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false)
+  const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false)
   const location = useLocation()
   const isHome = location.pathname === '/'
   const darkHero = isHome && !scrolled
@@ -40,6 +50,7 @@ export function Navbar() {
     setOpen(false)
     setMobileServicesOpen(false)
     setMobileIndustriesOpen(false)
+    setMobileResourcesOpen(false)
   }, [location.pathname])
 
   useEffect(() => {
@@ -96,23 +107,8 @@ export function Navbar() {
 
           <NavDropdown label="Services" href="/services" items={serviceMenu} dark={darkHero} />
           <NavDropdown label="Industries" href="/industries" items={industryMenu} dark={darkHero} />
+          <NavDropdown label="Resources" href="/resources" items={resourceMenu} dark={darkHero} />
 
-          <NavLink
-            to="/insights"
-            className={({ isActive }) =>
-              `rounded-sm px-3 py-2 text-sm font-medium tracking-wide transition-colors ${
-                isActive
-                  ? darkHero
-                    ? 'text-white'
-                    : 'text-navy'
-                  : darkHero
-                    ? 'text-white/70 hover:text-white'
-                    : 'text-ink-muted hover:text-navy'
-              }`
-            }
-          >
-            Insights
-          </NavLink>
           <NavLink
             to="/contact"
             className={({ isActive }) =>
@@ -131,7 +127,19 @@ export function Navbar() {
           </NavLink>
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-2 lg:flex">
+          <LanguageSwitcher dark={darkHero} />
+          <Link
+            to="/search"
+            aria-label="Search insights and resources"
+            className={`flex h-9 w-9 items-center justify-center rounded-sm border transition ${
+              darkHero
+                ? 'border-white/20 text-white hover:border-white hover:bg-white/10'
+                : 'border-border text-navy hover:border-navy'
+            }`}
+          >
+            <Search className="h-4 w-4" />
+          </Link>
           <a
             href={SOCIAL_LINKS.linkedin}
             target="_blank"
@@ -147,12 +155,12 @@ export function Navbar() {
             <LinkedInIcon className="h-4 w-4" />
           </a>
           <Button
-            to="/contact#consultation"
+            to="/strategy-session"
             variant={darkHero ? 'gold' : 'primary'}
             size="sm"
-            onClick={() => trackCtaClick('navbar_schedule_consultation')}
+            onClick={() => trackCtaClick('navbar_strategy_session')}
           >
-            Schedule Consultation
+            Strategy Session
             <ArrowRight className="h-3.5 w-3.5" />
           </Button>
         </div>
@@ -251,8 +259,37 @@ export function Navbar() {
                   )}
                 </AnimatePresence>
 
-                <Link to="/insights" className="border-b border-white/10 py-4 font-display text-2xl font-semibold text-white">
-                  Insights
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between border-b border-white/10 py-4 font-display text-2xl font-semibold text-white"
+                  onClick={() => setMobileResourcesOpen((v) => !v)}
+                >
+                  Resources
+                  <ChevronDown className={`h-5 w-5 transition ${mobileResourcesOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence initial={false}>
+                  {mobileResourcesOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden border-b border-white/10"
+                    >
+                      {resourceMenu.map((item) => (
+                        <Link
+                          key={item.href}
+                          to={item.href}
+                          className="block py-2.5 pl-2 text-sm text-white/75"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <Link to="/search" className="border-b border-white/10 py-4 font-display text-2xl font-semibold text-white">
+                  Search
                 </Link>
                 <Link to="/contact" className="border-b border-white/10 py-4 font-display text-2xl font-semibold text-white">
                   Contact
@@ -260,8 +297,11 @@ export function Navbar() {
               </div>
 
               <div className="mt-auto space-y-3 pt-8 pb-8">
-                <Button to="/contact#consultation" variant="gold" size="lg" className="w-full">
-                  Schedule Consultation
+                <div className="pb-2">
+                  <LanguageSwitcher dark />
+                </div>
+                <Button to="/strategy-session" variant="gold" size="lg" className="w-full">
+                  Book Strategy Session
                 </Button>
                 <Button to="/services" variant="outline" size="lg" className="w-full">
                   Explore Services

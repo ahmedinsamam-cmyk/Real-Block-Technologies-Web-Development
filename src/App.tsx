@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react'
-import { useRoutes } from 'react-router-dom'
+import { Navigate, useRoutes } from 'react-router-dom'
 import { MainLayout } from '@/layouts/MainLayout'
 import { HomePage } from '@/pages/Home'
 
@@ -29,8 +29,17 @@ const IndustryDetailPage = lazy(() =>
 const CaseStudiesPage = lazy(() =>
   import('@/pages/CaseStudies').then((m) => ({ default: m.CaseStudiesPage })),
 )
+const SuccessStoriesPage = lazy(() =>
+  import('@/pages/SuccessStories').then((m) => ({ default: m.SuccessStoriesPage })),
+)
+const SuccessStoryDetailPage = lazy(() =>
+  import('@/pages/SuccessStoryDetail').then((m) => ({ default: m.SuccessStoryDetailPage })),
+)
 const InsightsPage = lazy(() =>
   import('@/pages/Insights').then((m) => ({ default: m.InsightsPage })),
+)
+const InsightDetailPage = lazy(() =>
+  import('@/pages/InsightDetail').then((m) => ({ default: m.InsightDetailPage })),
 )
 const CareersPage = lazy(() =>
   import('@/pages/Careers').then((m) => ({ default: m.CareersPage })),
@@ -52,6 +61,15 @@ const ResourcesPage = lazy(() =>
 )
 const HelpCenterPage = lazy(() =>
   import('@/pages/HelpCenter').then((m) => ({ default: m.HelpCenterPage })),
+)
+const StrategySessionPage = lazy(() =>
+  import('@/pages/StrategySession').then((m) => ({ default: m.StrategySessionPage })),
+)
+const ClientPortalPage = lazy(() =>
+  import('@/pages/ClientPortal').then((m) => ({ default: m.ClientPortalPage })),
+)
+const SearchPage = lazy(() =>
+  import('@/pages/Search').then((m) => ({ default: m.SearchPage })),
 )
 const NotFoundPage = lazy(() =>
   import('@/pages/NotFound').then((m) => ({ default: m.NotFoundPage })),
@@ -76,13 +94,21 @@ export default function App() {
         { path: 'services', element: <ServicesPage /> },
         { path: 'services/real-estate-tokenization', element: <RealEstateTokenizationPage /> },
         { path: 'services/ai-solutions', element: <AISolutionsPage /> },
+        { path: 'services/treasury-fintech', element: <Navigate to="/services/fintech" replace /> },
         { path: 'services/:slug', element: <ServiceDetailPage /> },
         { path: 'industries', element: <IndustriesPage /> },
+        { path: 'industries/financial-services', element: <Navigate to="/industries/banking" replace /> },
         { path: 'industries/:slug', element: <IndustryDetailPage /> },
         { path: 'case-studies', element: <CaseStudiesPage /> },
+        { path: 'success-stories', element: <SuccessStoriesPage /> },
+        { path: 'success-stories/:slug', element: <SuccessStoryDetailPage /> },
         { path: 'insights', element: <InsightsPage /> },
+        { path: 'insights/:slug', element: <InsightDetailPage /> },
         { path: 'careers', element: <CareersPage /> },
         { path: 'contact', element: <ContactPage /> },
+        { path: 'strategy-session', element: <StrategySessionPage /> },
+        { path: 'portal', element: <ClientPortalPage /> },
+        { path: 'search', element: <SearchPage /> },
         { path: 'resources', element: <ResourcesPage /> },
         { path: 'resources/rwa-tokenization-guide', element: <RWAGuidePage /> },
         { path: 'help', element: <HelpCenterPage /> },

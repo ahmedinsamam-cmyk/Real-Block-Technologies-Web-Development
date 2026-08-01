@@ -24,7 +24,7 @@ export function CaseStudiesPage() {
       <PageHero
         eyebrow="Case Study Library"
         title="Outcomes from enterprise technology engagements"
-        description="Explore challenge, solution, technology, and business impact—then download the full PDF after a short lead capture form."
+        description="Explore challenge, solution, technology, and business impact—then download the full PDF after a short lead capture form. For labeled illustrative narratives, see Success Stories."
       />
       <section className="bg-surface py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

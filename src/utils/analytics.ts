@@ -19,6 +19,7 @@ export type AnalyticsEvent =
   | 'chat_lead'
   | 'social_share'
   | 'help_center_view'
+  | 'strategy_session_qualified'
 
 export interface AnalyticsPayload {
   event: AnalyticsEvent

@@ -14,44 +14,89 @@ interface ChatMessage {
 
 const KNOWLEDGE: Array<{ keywords: string[]; answer: string }> = [
   {
-    keywords: ['rwa', 'token', 'tokenization', 'taas', 'real world', 'asset', 'art', 'antique', 'membership', 'rent'],
+    keywords: ['rwa', 'token', 'tokenization', 'taas', 'real world', 'asset', 'art', 'antique', 'membership', 'rent', 'real estate'],
     answer:
-      'We offer Tokenization-as-a-Service (TaaS) for real estate, artworks, antiques, rent-share distribution, and membership services. Explore the RWA page or book a discovery call.',
+      'We offer Tokenization-as-a-Service (TaaS) for real estate, artworks, antiques, rent-share distribution, and membership services. Start with /services/real-estate-tokenization or book a strategy session.',
   },
   {
-    keywords: ['ai', 'artificial', 'automation', 'agent', 'analytics'],
+    keywords: ['ai', 'artificial', 'automation', 'agent', 'analytics', 'machine learning'],
     answer:
-      'Our AI solutions cover strategy, automation, agents, business intelligence, predictive analytics, and document intelligence—designed for practical enterprise ROI.',
+      'Our AI solutions cover strategy, automation, agents, business intelligence, predictive analytics, and document intelligence—designed for practical enterprise ROI. See /services/ai-solutions.',
   },
   {
-    keywords: ['blockchain', 'web3', 'smart contract'],
+    keywords: ['blockchain', 'web3', 'smart contract', 'ledger'],
     answer:
-      'We provide blockchain advisory spanning strategy, architecture, security considerations, and implementation guidance aligned to enterprise controls.',
+      'We provide blockchain advisory spanning strategy, architecture, security considerations, and implementation guidance aligned to enterprise controls. See /services/blockchain-advisory.',
   },
   {
-    keywords: ['workday', 'dynamics', 'hubspot', 'd365', 'consulting', 'platform'],
+    keywords: ['workday', 'dynamics', 'hubspot', 'd365', 'consulting', 'platform', 'erp', 'crm'],
     answer:
-      'Under Enterprise Technology Consulting we provide professional services for Workday, Microsoft Dynamics 365, and HubSpot—plus broader transformation advisory.',
+      'Under Enterprise Technology Consulting we provide professional services for Workday, Microsoft Dynamics 365, and HubSpot—plus broader transformation advisory. See /services/enterprise-consulting.',
   },
   {
-    keywords: ['fintech', 'finance', 'payment'],
+    keywords: ['fintech', 'finance', 'payment', 'banking', 'treasury'],
     answer:
-      'Our FinTech solutions help finance teams modernize workflows, reporting, and digital financial operations—distinct from classic treasury TMS replacement.',
+      'Our FinTech solutions help finance and banking teams modernize workflows, payments, reporting, and digital financial operations. See /services/fintech and /industries/banking.',
   },
   {
-    keywords: ['consult', 'book', 'meeting', 'call', 'schedule', 'calendly'],
+    keywords: ['manufacturing', 'factory', 'supply chain', 'traceability'],
     answer:
-      'You can book a Discovery Call, Strategy Session, or Enterprise Workshop on our Contact page.',
+      'For manufacturing we focus on AI operations visibility and blockchain-backed traceability. Explore /industries/manufacturing and related success stories.',
+  },
+  {
+    keywords: ['healthcare', 'hospital', 'clinical', 'patient'],
+    answer:
+      'For healthcare we design privacy-conscious AI for scheduling and administrative operations. See /industries/healthcare.',
+  },
+  {
+    keywords: ['insight', 'blog', 'article', 'research'],
+    answer:
+      'We publish 15+ insights on AI, RWA, FinTech, and enterprise platforms. Browse /insights or use /search to find articles.',
+  },
+  {
+    keywords: ['resource', 'guide', 'checklist', 'whitepaper', 'capability'],
+    answer:
+      'Our resource library includes guides, checklists, whitepapers, capability statements, and playbooks at /resources.',
+  },
+  {
+    keywords: ['success', 'case study', 'story', 'engagement', 'client'],
+    answer:
+      'View illustrative success stories at /success-stories. Each narrative is clearly labeled when illustrative to protect confidentiality.',
+  },
+  {
+    keywords: ['consult', 'book', 'meeting', 'call', 'schedule', 'calendly', 'strategy', 'session', 'qualify'],
+    answer:
+      'Book a Strategy Session with qualification questions at /strategy-session, or visit Contact for discovery calls and workshops.',
+  },
+  {
+    keywords: ['portal', 'login', 'dashboard', 'client portal'],
+    answer:
+      'The client portal is reserved for future expansion at /portal. Active clients continue collaborating through engagement channels until launch.',
+  },
+  {
+    keywords: ['language', 'locale', 'translate', 'i18n', 'arabic', 'spanish'],
+    answer:
+      'The site includes multi-language architecture (EN, ES, FR, ZH, AR) with a language switcher in the header for global expansion.',
   },
   {
     keywords: ['price', 'cost', 'fee', 'pricing', 'budget'],
     answer:
-      'Engagements are proposal-based and scoped to objectives and complexity. Share your priorities and we will recommend a suitable approach.',
+      'Engagements are proposal-based and scoped to objectives and complexity. Share your priorities via /strategy-session and we will recommend a suitable approach.',
+  },
+  {
+    keywords: ['problem', 'solution', 'outcome', 'challenge'],
+    answer:
+      'On the homepage we map solutions to business problems—illiquid assets, manual operations, platform fragmentation, finance visibility, blockchain uncertainty, and executive alignment—not just technology labels.',
   },
   {
     keywords: ['service', 'offer', 'help', 'what do you'],
     answer:
       'Real Block Technologies helps enterprises with RWA Tokenization-as-a-Service, AI solutions, blockchain advisory, FinTech solutions, and enterprise consulting (Workday, Dynamics 365, HubSpot).',
+  },
+  {
+    keywords: ['contact', 'email', 'phone', 'address', 'colombo'],
+    answer:
+      'Email contact@realblocktechnologies.com, call +94 78 321 4747, or visit 14, Sir Baron Jayathilake Mawatha, Colombo 01, Sri Lanka. Full form: /contact.',
   },
 ]
 
@@ -59,7 +104,7 @@ const OPENERS: ChatMessage[] = [
   {
     id: 'welcome',
     role: 'assistant',
-    text: 'Hello — I am the Real Block Technologies assistant. Ask about AI, FinTech, RWA TaaS, Workday/D365/HubSpot services, or book a consultation. How can I help?',
+    text: 'Hello — I am trained on Real Block Technologies services, industries, insights, and resources. Ask about AI, FinTech, RWA TaaS, Workday/D365/HubSpot, success stories, or book a strategy session.',
   },
 ]
 

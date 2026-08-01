@@ -4,7 +4,7 @@ import { ArrowRight, X } from 'lucide-react'
 import { Button } from '@/components/Button'
 import { trackCtaClick } from '@/utils/analytics'
 
-const HIDDEN_PATHS = ['/contact', '/privacy', '/terms']
+const HIDDEN_PATHS = ['/contact', '/privacy', '/terms', '/strategy-session', '/portal']
 
 export function StickyConsultationBar() {
   const location = useLocation()
@@ -43,17 +43,17 @@ export function StickyConsultationBar() {
               Speak with an advisor
             </p>
             <p className="hidden text-xs text-ink-muted sm:block md:text-sm">
-              Book a discovery consultation for AI, RWA, or blockchain initiatives.
+              Book a strategy session for AI, RWA, FinTech, or blockchain initiatives.
             </p>
           </div>
           <div className="flex shrink-0 items-center gap-2">
             <Button
-              to="/contact#consultation"
+              to="/strategy-session"
               variant="primary"
               size="sm"
-              onClick={() => trackCtaClick('sticky_consultation')}
+              onClick={() => trackCtaClick('sticky_strategy_session')}
             >
-              <span className="hidden sm:inline">Schedule consultation</span>
+              <span className="hidden sm:inline">Book strategy session</span>
               <span className="sm:hidden">Book</span>
               <ArrowRight className="h-3.5 w-3.5" aria-hidden />
             </Button>

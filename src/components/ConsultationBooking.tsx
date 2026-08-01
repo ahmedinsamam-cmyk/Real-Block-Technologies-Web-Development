@@ -10,6 +10,7 @@ interface ConsultationBookingProps {
   title?: string
   description?: string
   ctaLabel?: string
+  ctaTo?: string
   embed?: boolean
   variant?: 'section' | 'compact'
 }
@@ -61,6 +62,7 @@ export function ConsultationBooking({
   title = 'Ready to Transform Your Business?',
   description = 'Book a consultation with our enterprise technology advisors. Calendar invites are sent automatically via Calendly.',
   ctaLabel = 'Book a Free Consultation',
+  ctaTo = '/strategy-session',
   embed = false,
   variant = 'section',
 }: ConsultationBookingProps) {
@@ -122,7 +124,7 @@ export function ConsultationBooking({
           ))}
         </ul>
         <Button
-          to="/contact#consultation"
+          to={ctaTo}
           variant="primary"
           className="mt-6"
           onClick={() => trackCtaClick(ctaLabel)}
@@ -207,7 +209,7 @@ export function ConsultationBooking({
         ) : (
           <div className="flex flex-col items-center gap-4">
             <Button
-              to="/contact#consultation"
+              to={ctaTo}
               variant="gold"
               size="lg"
               onClick={() => trackCtaClick(ctaLabel)}

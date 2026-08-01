@@ -11,6 +11,7 @@ import { PlatformExpertise } from '@/components/PlatformExpertise'
 import { Hero } from '@/sections/home/Hero'
 import { Stats } from '@/sections/home/Stats'
 import { ServiceHighlights } from '@/sections/home/ServiceHighlights'
+import { SolutionsByProblem } from '@/sections/home/SolutionsByProblem'
 import { CapabilityPillars } from '@/sections/home/CapabilityPillars'
 import { TrustSignals } from '@/sections/home/TrustSignals'
 import { TechnologyShowcase } from '@/sections/home/TechnologyShowcase'
@@ -28,6 +29,7 @@ export function HomePage() {
       <Hero />
       <TrustSignals />
       <CapabilityPillars />
+      <SolutionsByProblem />
       <PlatformExpertise />
       <Stats />
       <ServiceHighlights />
@@ -81,17 +83,17 @@ export function HomePage() {
       </section>
 
       <ConsultationBooking
-        title="Start with a structured discovery conversation"
-        description="Clarify priorities across AI transformation, RWA tokenization, blockchain strategy, and enterprise automation—then define the right engagement path."
-        ctaLabel="Book a consultation"
+        title="Start with a structured strategy session"
+        description="Qualify priorities across AI transformation, RWA tokenization, blockchain strategy, and enterprise platforms—then book the right conversation."
+        ctaLabel="Book a Strategy Session"
       />
       <FAQ />
       <LinkedInCTA />
       <CTASection
         title="Partner with an advisory team built for institutional outcomes."
         description="Real Block Technologies designs and delivers AI, blockchain, and real-world asset solutions with the governance executives require."
-        primaryLabel="Schedule consultation"
-        primaryTo="/contact#consultation"
+        primaryLabel="Book a Strategy Session"
+        primaryTo="/strategy-session"
       />
     </PageTransition>
   )

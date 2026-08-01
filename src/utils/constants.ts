@@ -103,8 +103,9 @@ export const FOOTER_SERVICES = [
 
 export const FOOTER_COMPANY = [
   { label: 'About Us', href: '/about' },
-  { label: 'Case Studies', href: '/case-studies' },
+  { label: 'Success Stories', href: '/success-stories' },
   { label: 'Careers', href: '/careers' },
+  { label: 'Client Portal', href: '/portal' },
   { label: 'Contact', href: '/contact' },
 ] as const
 
@@ -112,12 +113,14 @@ export const FOOTER_RESOURCES = [
   { label: 'Resource Library', href: '/resources' },
   { label: 'RWA Guide', href: '/resources/rwa-tokenization-guide' },
   { label: 'Insights', href: '/insights' },
+  { label: 'Search', href: '/search' },
   { label: 'Help Center', href: '/help' },
+  { label: 'Strategy Session', href: '/strategy-session' },
 ] as const
 
 export const FOOTER_INDUSTRIES = [
   { label: 'Real Estate', href: '/industries/real-estate' },
-  { label: 'Financial Services', href: '/industries/financial-services' },
+  { label: 'Banking', href: '/industries/banking' },
   { label: 'Manufacturing', href: '/industries/manufacturing' },
   { label: 'Healthcare', href: '/industries/healthcare' },
   { label: 'Logistics', href: '/industries/logistics' },
