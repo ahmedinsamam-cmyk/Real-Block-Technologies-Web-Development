@@ -1,0 +1,336 @@
+import { useEffect, useMemo, useRef, useState, type FormEvent, type KeyboardEvent } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { MessageCircle, Send, X, Bot, User } from 'lucide-react'
+import { Button } from '@/components/Button'
+import { captureLead } from '@/services/leadService'
+import { trackEvent } from '@/utils/analytics'
+import { sanitizeText, checkRateLimit } from '@/utils/security'
+
+interface ChatMessage {
+  id: string
+  role: 'assistant' | 'user'
+  text: string
+}
+
+const KNOWLEDGE: Array<{ keywords: string[]; answer: string }> = [
+  {
+    keywords: ['rwa', 'token', 'tokenization', 'taas', 'real world', 'asset', 'art', 'antique', 'membership', 'rent', 'real estate'],
+    answer:
+      'We offer Tokenization-as-a-Service (TaaS) for real estate, artworks, antiques, rent-share distribution, and membership services. Start with /services/real-estate-tokenization or book a strategy session.',
+  },
+  {
+    keywords: ['ai', 'artificial', 'automation', 'agent', 'analytics', 'machine learning'],
+    answer:
+      'Our AI solutions cover strategy, automation, agents, business intelligence, predictive analytics, and document intelligence—designed for practical enterprise ROI. See /services/ai-solutions.',
+  },
+  {
+    keywords: ['blockchain', 'web3', 'smart contract', 'ledger'],
+    answer:
+      'We provide blockchain advisory spanning strategy, architecture, security considerations, and implementation guidance aligned to enterprise controls. See /services/blockchain-advisory.',
+  },
+  {
+    keywords: ['workday', 'dynamics', 'hubspot', 'd365', 'consulting', 'platform', 'erp', 'crm'],
+    answer:
+      'Under Enterprise Technology Consulting we provide professional services for Workday, Microsoft Dynamics 365, and HubSpot—plus broader transformation advisory. See /services/enterprise-consulting.',
+  },
+  {
+    keywords: ['fintech', 'finance', 'payment', 'banking', 'treasury'],
+    answer:
+      'Our FinTech solutions help finance and banking teams modernize workflows, payments, reporting, and digital financial operations. See /services/fintech and /industries/banking.',
+  },
+  {
+    keywords: ['manufacturing', 'factory', 'supply chain', 'traceability'],
+    answer:
+      'For manufacturing we focus on AI operations visibility and blockchain-backed traceability. Explore /industries/manufacturing and related success stories.',
+  },
+  {
+    keywords: ['healthcare', 'hospital', 'clinical', 'patient'],
+    answer:
+      'For healthcare we design privacy-conscious AI for scheduling and administrative operations. See /industries/healthcare.',
+  },
+  {
+    keywords: ['insight', 'blog', 'article', 'research'],
+    answer:
+      'We publish 15+ insights on AI, RWA, FinTech, and enterprise platforms. Browse /insights or use /search to find articles.',
+  },
+  {
+    keywords: ['resource', 'guide', 'checklist', 'whitepaper', 'capability'],
+    answer:
+      'Our resource library includes guides, checklists, whitepapers, capability statements, and playbooks at /resources.',
+  },
+  {
+    keywords: ['success', 'case study', 'story', 'engagement', 'client'],
+    answer:
+      'View illustrative success stories at /success-stories. Each narrative is clearly labeled when illustrative to protect confidentiality.',
+  },
+  {
+    keywords: ['consult', 'book', 'meeting', 'call', 'schedule', 'calendly', 'strategy', 'session', 'qualify'],
+    answer:
+      'Book a Strategy Session with qualification questions at /strategy-session, or visit Contact for discovery calls and workshops.',
+  },
+  {
+    keywords: ['portal', 'login', 'dashboard', 'client portal'],
+    answer:
+      'The client portal is reserved for future expansion at /portal. Active clients continue collaborating through engagement channels until launch.',
+  },
+  {
+    keywords: ['language', 'locale', 'translate', 'i18n', 'arabic', 'spanish'],
+    answer:
+      'The site includes multi-language architecture (EN, ES, FR, ZH, AR) with a language switcher in the header for global expansion.',
+  },
+  {
+    keywords: ['price', 'cost', 'fee', 'pricing', 'budget'],
+    answer:
+      'Engagements are proposal-based and scoped to objectives and complexity. Share your priorities via /strategy-session and we will recommend a suitable approach.',
+  },
+  {
+    keywords: ['problem', 'solution', 'outcome', 'challenge'],
+    answer:
+      'On the homepage we map solutions to business problems—illiquid assets, manual operations, platform fragmentation, finance visibility, blockchain uncertainty, and executive alignment—not just technology labels.',
+  },
+  {
+    keywords: ['service', 'offer', 'help', 'what do you'],
+    answer:
+      'Real Block Technologies helps enterprises with RWA Tokenization-as-a-Service, AI solutions, blockchain advisory, FinTech solutions, and enterprise consulting (Workday, Dynamics 365, HubSpot).',
+  },
+  {
+    keywords: ['contact', 'email', 'phone', 'address', 'colombo'],
+    answer:
+      'Email contact@realblocktechnologies.com, call +94 78 321 4747, or visit 14, Sir Baron Jayathilake Mawatha, Colombo 01, Sri Lanka. Full form: /contact.',
+  },
+]
+
+const OPENERS: ChatMessage[] = [
+  {
+    id: 'welcome',
+    role: 'assistant',
+    text: 'Hello — I am trained on Real Block Technologies services, industries, insights, and resources. Ask about AI, FinTech, RWA TaaS, Workday/D365/HubSpot, success stories, or book a strategy session.',
+  },
+]
+
+function matchAnswer(input: string): string {
+  const q = input.toLowerCase()
+  const hit = KNOWLEDGE.find((item) => item.keywords.some((k) => q.includes(k)))
+  if (hit) return hit.answer
+  return 'Thanks for your question. Our team specializes in AI, FinTech, enterprise platforms, and RWA Tokenization-as-a-Service. You can browse Services or share your email and we will follow up.'
+}
+
+type ChatProvider = 'builtin' | 'intercom' | 'crisp' | 'hubspot'
+
+export function AIChatWidget() {
+  const provider = (import.meta.env.VITE_CHAT_PROVIDER as ChatProvider | undefined) ?? 'builtin'
+  const [open, setOpen] = useState(false)
+  const [messages, setMessages] = useState<ChatMessage[]>(OPENERS)
+  const [input, setInput] = useState('')
+  const [leadMode, setLeadMode] = useState(false)
+  const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
+  const [leadSent, setLeadSent] = useState(false)
+  const bottomRef = useRef<HTMLDivElement>(null)
+
+  const showBuiltin = provider === 'builtin' || !import.meta.env.VITE_CHAT_PROVIDER
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, open, leadMode])
+
+  // Placeholder hooks for third-party chat widgets
+  useEffect(() => {
+    if (provider === 'intercom' && import.meta.env.VITE_INTERCOM_APP_ID) {
+      // window.Intercom('boot', { app_id: ... })
+    }
+    if (provider === 'crisp' && import.meta.env.VITE_CRISP_WEBSITE_ID) {
+      // window.$crisp / CRISP_WEBSITE_ID
+    }
+    if (provider === 'hubspot' && import.meta.env.VITE_HUBSPOT_CHAT_ID) {
+      // HubSpot conversations widget
+    }
+  }, [provider])
+
+  const recommended = useMemo(
+    () => [
+      { label: 'AI Solutions', href: '/services/ai-solutions' },
+      { label: 'RWA Guide', href: '/resources/rwa-tokenization-guide' },
+      { label: 'Book Consultation', href: '/contact#consultation' },
+    ],
+    [],
+  )
+
+  if (!showBuiltin) return null
+
+  const sendMessage = () => {
+    const text = sanitizeText(input, 500)
+    if (!text) return
+    const rate = checkRateLimit('chat_message', 20, 60_000)
+    if (!rate.allowed) return
+
+    const userMsg: ChatMessage = { id: `u_${Date.now()}`, role: 'user', text }
+    const answer = matchAnswer(text)
+    const botMsg: ChatMessage = { id: `a_${Date.now()}`, role: 'assistant', text: answer }
+    setMessages((prev) => [...prev, userMsg, botMsg])
+    setInput('')
+
+    if (/email|contact|follow|call|consult/i.test(text)) {
+      setLeadMode(true)
+    }
+  }
+
+  const onKey = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      sendMessage()
+    }
+  }
+
+  const submitLead = async (event: FormEvent) => {
+    event.preventDefault()
+    if (!email.trim()) return
+    const result = await captureLead({
+      name: name.trim() || undefined,
+      email: email.trim(),
+      source: 'chat_widget',
+      message: 'Lead captured via AI chat assistant',
+    })
+    if (result.success) {
+      setLeadSent(true)
+      setLeadMode(false)
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `a_lead_${Date.now()}`,
+          role: 'assistant',
+          text: 'Thank you — your details were captured. Our team will follow up shortly. You can also book a consultation on the Contact page.',
+        },
+      ])
+      trackEvent({ event: 'chat_lead', label: 'ai_chat_widget' })
+    }
+  }
+
+  return (
+    <div className="fixed right-4 bottom-20 z-[70] flex flex-col items-end gap-3 sm:right-6 sm:bottom-24">
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="flex h-[min(32rem,70vh)] w-[min(22rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-2xl shadow-navy/20"
+            initial={{ opacity: 0, y: 16, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 12, scale: 0.96 }}
+          >
+            <div className="flex items-center justify-between bg-navy px-4 py-3 text-white">
+              <div className="flex items-center gap-2">
+                <Bot className="h-5 w-5 text-gold" />
+                <div>
+                  <p className="font-display text-sm font-bold">RBT Assistant</p>
+                  <p className="text-[0.65rem] text-white/60">AI sales & service guidance</p>
+                </div>
+              </div>
+              <button type="button" aria-label="Close chat" onClick={() => setOpen(false)}>
+                <X className="h-5 w-5 text-white/80" />
+              </button>
+            </div>
+
+            <div className="flex-1 space-y-3 overflow-y-auto bg-surface p-3">
+              {messages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={`flex gap-2 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  {msg.role === 'assistant' && (
+                    <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-navy text-gold">
+                      <Bot className="h-3.5 w-3.5" />
+                    </span>
+                  )}
+                  <div
+                    className={`max-w-[80%] rounded-2xl px-3 py-2 text-xs leading-relaxed ${
+                      msg.role === 'user'
+                        ? 'rounded-br-md bg-royal text-white'
+                        : 'rounded-bl-md border border-border bg-white text-ink'
+                    }`}
+                  >
+                    {msg.text}
+                  </div>
+                  {msg.role === 'user' && (
+                    <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-royal/10 text-royal">
+                      <User className="h-3.5 w-3.5" />
+                    </span>
+                  )}
+                </div>
+              ))}
+
+              <div className="flex flex-wrap gap-2 pt-1">
+                {recommended.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="rounded-full border border-border bg-white px-2.5 py-1 text-[0.65rem] font-semibold text-navy hover:border-royal hover:text-royal"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+
+              {leadMode && !leadSent && (
+                <form onSubmit={submitLead} className="space-y-2 rounded-xl border border-border bg-white p-3">
+                  <p className="text-[0.7rem] font-semibold text-navy">Leave your details for follow-up</p>
+                  <input
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Name"
+                    className="w-full rounded-md border border-border px-2.5 py-1.5 text-xs outline-none focus:border-royal"
+                  />
+                  <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Business email"
+                    type="email"
+                    required
+                    className="w-full rounded-md border border-border px-2.5 py-1.5 text-xs outline-none focus:border-royal"
+                  />
+                  <Button type="submit" size="sm" className="w-full">
+                    Submit
+                  </Button>
+                </form>
+              )}
+              <div ref={bottomRef} />
+            </div>
+
+            <div className="border-t border-border bg-white p-3">
+              <div className="flex gap-2">
+                <input
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={onKey}
+                  placeholder="Ask about AI, RWA, consulting..."
+                  className="flex-1 rounded-lg border border-border px-3 py-2 text-xs outline-none focus:border-royal"
+                />
+                <button
+                  type="button"
+                  onClick={sendMessage}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-royal text-white"
+                  aria-label="Send message"
+                >
+                  <Send className="h-4 w-4" />
+                </button>
+              </div>
+              <p className="mt-2 text-[0.6rem] text-ink-muted">
+                Ready for Intercom, Crisp, or HubSpot Chat via VITE_CHAT_PROVIDER.
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <button
+        type="button"
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-navy text-gold shadow-lg shadow-navy/30 transition hover:bg-royal hover:text-white"
+        aria-label={open ? 'Close chat' : 'Open chat assistant'}
+        onClick={() => {
+          setOpen((v) => !v)
+          if (!open) trackEvent({ event: 'chat_open', label: 'ai_chat_widget' })
+        }}
+      >
+        {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
+      </button>
+    </div>
+  )
+}
