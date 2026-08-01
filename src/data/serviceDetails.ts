@@ -212,7 +212,7 @@ export const serviceDetailsById: Record<string, ServiceDetailContent> = {
   },
   rwa: {
     problem:
-      'Owners of real estate, collectibles, and membership businesses lack practical ways to digitize ownership, distribute rent share, or manage membership access without entering financial-asset tokenization.',
+      'Owners of real estate, collectibles, and membership businesses lack practical ways to digitize ownership, distribute rent share, or manage membership access at scale.',
     solution:
       'We provide Tokenization-as-a-Service (TaaS) for real estate, artworks, antiques, rent-share distribution, and membership services.',
     benefits: [
