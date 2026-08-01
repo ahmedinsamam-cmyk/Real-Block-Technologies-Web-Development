@@ -10,7 +10,6 @@ import { Button } from '@/components/Button'
 import { PlatformExpertise } from '@/components/PlatformExpertise'
 import { useLocale } from '@/components/LocaleProvider'
 import { Hero } from '@/sections/home/Hero'
-import { Stats } from '@/sections/home/Stats'
 import { ServiceHighlights } from '@/sections/home/ServiceHighlights'
 import { SolutionsByProblem } from '@/sections/home/SolutionsByProblem'
 import { CapabilityPillars } from '@/sections/home/CapabilityPillars'
@@ -34,7 +33,6 @@ export function HomePage() {
       <CapabilityPillars />
       <SolutionsByProblem />
       <PlatformExpertise />
-      <Stats />
       <ServiceHighlights />
       <TechnologyShowcase />
       <BusinessOutcomes />

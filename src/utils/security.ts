@@ -114,12 +114,27 @@ export async function getRecaptchaToken(action: string): Promise<string> {
   if (!isRecaptchaEnabled()) return ''
   const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY as string
   await loadRecaptcha()
+
   return new Promise((resolve) => {
-    window.grecaptcha?.ready(() => {
+    const timeout = window.setTimeout(() => resolve(''), 2500)
+
+    if (!window.grecaptcha?.ready) {
+      window.clearTimeout(timeout)
+      resolve('')
+      return
+    }
+
+    window.grecaptcha.ready(() => {
       window.grecaptcha
         ?.execute(siteKey, { action })
-        .then(resolve)
-        .catch(() => resolve(''))
+        .then((token) => {
+          window.clearTimeout(timeout)
+          resolve(token)
+        })
+        .catch(() => {
+          window.clearTimeout(timeout)
+          resolve('')
+        })
     })
   })
 }

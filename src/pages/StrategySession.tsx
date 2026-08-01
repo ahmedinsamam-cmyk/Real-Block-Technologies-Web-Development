@@ -93,45 +93,69 @@ export function StrategySessionPage() {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setError('')
-    if (!checkRateLimit('strategy_session', 5, 60_000)) {
+
+    if (!canNext()) {
+      setError('Please complete the required fields before continuing.')
+      return
+    }
+
+    const rate = checkRateLimit('strategy_session', 8, 60_000)
+    if (!rate.allowed) {
       setError('Please wait a moment before submitting again.')
       return
     }
+
     setSubmitting(true)
+
+    // Always advance to scheduling — lead capture should not block booking
+    const advance = () => {
+      setSubmitted(true)
+      setStep(3)
+      setSubmitting(false)
+      window.setTimeout(() => {
+        document.getElementById('consultation')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 80)
+    }
+
     try {
-      await captureLead({
-        name: sanitizeText(answers.name),
-        email: sanitizeText(answers.email),
-        company: sanitizeText(answers.company),
-        country: answers.country,
-        serviceInterest: answers.focus,
-        source: 'consultation',
-        message: [
-          `Focus: ${answers.focus}`,
-          `Timeline: ${answers.timeline}`,
-          `Company size: ${answers.companySize}`,
-          `Role: ${answers.role}`,
-          `Country: ${answers.country}`,
-          `Challenge: ${sanitizeText(answers.challenge)}`,
-          `Qualified signal: ${qualified ? 'yes' : 'nurture'}`,
-        ].join('\n'),
-        metadata: {
-          flow: 'strategy_session',
-          timeline: answers.timeline,
-          companySize: answers.companySize,
-          role: answers.role,
-        },
-      })
+      const result = await Promise.race([
+        captureLead({
+          name: sanitizeText(answers.name),
+          email: answers.email.trim().toLowerCase(),
+          company: sanitizeText(answers.company),
+          country: answers.country,
+          serviceInterest: answers.focus,
+          source: 'consultation',
+          message: [
+            `Focus: ${answers.focus}`,
+            `Timeline: ${answers.timeline}`,
+            `Company size: ${answers.companySize}`,
+            `Role: ${answers.role}`,
+            `Country: ${answers.country}`,
+            `Challenge: ${sanitizeText(answers.challenge)}`,
+            `Qualified signal: ${qualified ? 'yes' : 'nurture'}`,
+          ].join('\n'),
+          metadata: {
+            flow: 'strategy_session',
+            timeline: answers.timeline,
+            companySize: answers.companySize,
+            role: answers.role,
+          },
+        }),
+        new Promise<{ success: false }>((resolve) =>
+          window.setTimeout(() => resolve({ success: false }), 4000),
+        ),
+      ])
+
       trackEvent({
         event: 'strategy_session_qualified',
         label: answers.focus,
+        metadata: { captured: Boolean(result && 'success' in result && result.success) },
       })
-      setSubmitted(true)
-      setStep(3)
     } catch {
-      setError('Something went wrong. Please try again or email us directly.')
+      // Non-blocking — user can still schedule
     } finally {
-      setSubmitting(false)
+      advance()
     }
   }
 
@@ -403,8 +427,9 @@ export function StrategySessionPage() {
       {(submitted || step === 3) && (
         <ConsultationBooking
           title="Select your strategy session time"
-          description="Choose a meeting type. Calendar confirmation is sent automatically."
+          description="Choose a meeting type, then open the calendar to pick a time. Confirmation is sent automatically."
           ctaLabel="Open calendar"
+          initialMeeting="strategy-session"
           embed
         />
       )}

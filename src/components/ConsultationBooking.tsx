@@ -14,6 +14,7 @@ interface ConsultationBookingProps {
   ctaTo?: string
   embed?: boolean
   variant?: 'section' | 'compact'
+  initialMeeting?: string
 }
 
 declare global {
@@ -66,32 +67,51 @@ export function ConsultationBooking({
   ctaTo = '/strategy-session',
   embed = false,
   variant = 'section',
+  initialMeeting,
 }: ConsultationBookingProps) {
   const { t } = useLocale()
   const containerRef = useRef<HTMLDivElement>(null)
-  const [selectedMeeting, setSelectedMeeting] = useState<string>(MEETING_TYPES[0].slug)
+  const [selectedMeeting, setSelectedMeeting] = useState<string>(
+    initialMeeting ?? MEETING_TYPES[1]?.slug ?? MEETING_TYPES[0].slug,
+  )
   const [confirmed, setConfirmed] = useState(false)
+  const [embedFailed, setEmbedFailed] = useState(false)
 
   const activeMeeting = MEETING_TYPES.find((m) => m.slug === selectedMeeting) ?? MEETING_TYPES[0]
+  // Prefer account root when event slugs are not yet configured in Calendly
   const calendlyEventUrl = `${CALENDLY_URL}/${activeMeeting.slug}`
+  const calendlyFallbackUrl = CALENDLY_URL
 
   useEffect(() => {
     if (!embed || !containerRef.current) return
 
     let cancelled = false
+    setEmbedFailed(false)
 
-    loadCalendlyAssets().then(() => {
-      if (cancelled || !containerRef.current || !window.Calendly) return
-      containerRef.current.innerHTML = ''
-      window.Calendly.initInlineWidget({
-        url: `${calendlyEventUrl}?hide_gdpr_banner=1`,
-        parentElement: containerRef.current,
+    const failTimer = window.setTimeout(() => {
+      if (!cancelled) setEmbedFailed(true)
+    }, 5000)
+
+    loadCalendlyAssets()
+      .then(() => {
+        if (cancelled || !containerRef.current || !window.Calendly) {
+          setEmbedFailed(true)
+          return
+        }
+        containerRef.current.innerHTML = ''
+        window.Calendly.initInlineWidget({
+          url: `${calendlyFallbackUrl}?hide_gdpr_banner=1`,
+          parentElement: containerRef.current,
+        })
+        window.clearTimeout(failTimer)
+        trackEvent({
+          event: 'consultation_booking',
+          label: `calendly_embed_${activeMeeting.slug}`,
+        })
       })
-      trackEvent({
-        event: 'consultation_booking',
-        label: `calendly_embed_${activeMeeting.slug}`,
+      .catch(() => {
+        if (!cancelled) setEmbedFailed(true)
       })
-    })
 
     const onMessage = (event: MessageEvent) => {
       if (typeof event.data !== 'object' || !event.data) return
@@ -105,9 +125,10 @@ export function ConsultationBooking({
 
     return () => {
       cancelled = true
+      window.clearTimeout(failTimer)
       window.removeEventListener('message', onMessage)
     }
-  }, [embed, calendlyEventUrl, activeMeeting.slug])
+  }, [embed, calendlyFallbackUrl, activeMeeting.slug])
 
   if (variant === 'compact') {
     return (
@@ -192,26 +213,57 @@ export function ConsultationBooking({
         )}
 
         {embed ? (
-          <motion.div
-            className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div
-              ref={containerRef}
-              className="calendly-inline-widget min-h-[700px] w-full"
-              data-url={calendlyEventUrl}
-            />
-            <p className="border-t border-border px-4 py-3 text-center text-xs text-ink-muted">
-              Embedded Calendly scheduler for <span className="font-semibold text-navy">{activeMeeting.title}</span>.
-              Replace event slugs under your Calendly account when live.
-            </p>
-          </motion.div>
+          <div className="space-y-5">
+            <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              <Button
+                href={calendlyFallbackUrl}
+                variant="gold"
+                size="lg"
+                onClick={() => trackCtaClick('open_calendly_primary')}
+              >
+                <CalendarDays className="h-4 w-4" />
+                {ctaLabel}
+              </Button>
+              <a
+                href={calendlyEventUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm font-semibold text-royal hover:underline"
+                onClick={() => trackEvent({ event: 'consultation_booking', label: 'calendly_meeting_link' })}
+              >
+                Open {activeMeeting.title}
+              </a>
+            </div>
+
+            {!embedFailed ? (
+              <motion.div
+                className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <div
+                  ref={containerRef}
+                  className="calendly-inline-widget min-h-[700px] w-full"
+                  data-url={calendlyFallbackUrl}
+                />
+              </motion.div>
+            ) : (
+              <div className="border border-border bg-white p-8 text-center">
+                <p className="text-sm text-ink-muted">
+                  Calendar embed could not load in this browser. Use the button above to open scheduling in a new tab.
+                </p>
+                <Button href={calendlyFallbackUrl} variant="primary" className="mt-5">
+                  <CalendarDays className="h-4 w-4" />
+                  Open Calendly
+                </Button>
+              </div>
+            )}
+          </div>
         ) : (
           <div className="flex flex-col items-center gap-4">
             <Button
-              to={ctaTo}
+              href={calendlyFallbackUrl}
               variant="gold"
               size="lg"
               onClick={() => trackCtaClick(ctaLabel)}
