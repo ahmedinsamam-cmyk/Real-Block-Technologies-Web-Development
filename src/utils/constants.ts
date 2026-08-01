@@ -21,7 +21,7 @@ export const LEADERSHIP = [
     role: 'CEO & Founder',
     photo: '/team/insamam-mushny.jpg',
     linkedin: 'https://www.linkedin.com/in/insamam-mushny-34b35815b/',
-    bio: 'Founder of Real Block Technologies. ERP and finance implementation background with deep interest in blockchain and real-world asset digitization—helping mid-market enterprises adopt practical AI, FinTech, and tokenization programs.',
+    bio: 'Founder of Real Block Technologies. ERP and finance implementation background with deep interest in blockchain and real-world asset digitization—helping enterprises adopt practical AI, FinTech, and tokenization programs.',
   },
 ] as const
 
@@ -136,7 +136,7 @@ export const STATS = [
 ] as const
 
 export const TRUST_INDICATORS = [
-  'Scoped engagements from $5,000–$50,000',
+  'Enterprise-grade security practices',
   'Enterprise platform professional services',
   'AI + blockchain specialists',
   'Outcome-focused delivery',

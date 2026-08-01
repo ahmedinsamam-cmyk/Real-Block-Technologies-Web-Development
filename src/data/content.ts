@@ -52,7 +52,7 @@ export const services: ServiceItem[] = [
     id: 'ai',
     title: 'AI Business Solutions',
     shortTitle: 'AI Solutions',
-    description: 'Practical AI automation, analytics, and decision intelligence scoped for mid-market enterprise ROI.',
+    description: 'Practical AI automation, analytics, and decision intelligence for enterprise ROI.',
     icon: Brain,
     href: '/services/ai-solutions',
     details: [
@@ -62,7 +62,7 @@ export const services: ServiceItem[] = [
       'Document understanding',
     ],
     longDescription:
-      'From discovery to production, we design AI capabilities that automate work, improve decisions, and create durable operating advantage within focused $5k–$50k engagement scopes.',
+      'From discovery to production, we design AI capabilities that automate work, improve decisions, and create durable operating advantage.',
     outcomes: [
       'Prioritized AI use-case portfolio',
       'Measurable automation ROI',

@@ -45,7 +45,7 @@ export const serviceDetailsById: Record<string, ServiceDetailContent> = {
       },
       {
         title: 'Scoped delivery plan',
-        description: 'Sequence work for $5k–$50k engagements by impact, feasibility, and dependency.',
+        description: 'Sequence work by impact, feasibility, and dependency with clear milestones.',
       },
       {
         title: 'Implementation support',
@@ -69,9 +69,9 @@ export const serviceDetailsById: Record<string, ServiceDetailContent> = {
           'Both. Engagements can be advisory-only or include hands-on professional services and implementation oversight.',
       },
       {
-        question: 'What engagement sizes do you take?',
+        question: 'How are engagements structured?',
         answer:
-          'We typically scope mid-market enterprise contracts between $5,000 and $50,000, with clear deliverables and timelines.',
+          'Every engagement is proposal-based with clear deliverables, timelines, and success criteria agreed up front.',
       },
     ],
     relatedResources: [
@@ -149,7 +149,7 @@ export const serviceDetailsById: Record<string, ServiceDetailContent> = {
     problem:
       'Finance and operations teams often struggle with fragmented FinTech tools, slow workflows, and limited visibility across digital financial operations.',
     solution:
-      'We modernize FinTech capabilities—stack advisory, workflow automation, payments and reporting modernization, and digital financial operations—scoped for practical mid-market enterprise adoption.',
+      'We modernize FinTech capabilities—stack advisory, workflow automation, payments and reporting modernization, and digital financial operations—designed for practical enterprise adoption.',
     benefits: [
       'Clearer financial operations visibility',
       'Faster reporting and workflow cycles',
@@ -194,9 +194,9 @@ export const serviceDetailsById: Record<string, ServiceDetailContent> = {
           'No. We focus on FinTech solutions—platforms, workflows, and digital financial operations—rather than classic treasury management system replacement.',
       },
       {
-        question: 'What size engagements do you take?',
+        question: 'How are FinTech engagements structured?',
         answer:
-          'Typical FinTech engagements are scoped between $5,000 and $50,000 with clear milestones and deliverables.',
+          'FinTech engagements are proposal-based with clear milestones, deliverables, and adoption support.',
       },
       {
         question: 'How quickly can we see value?',
@@ -264,9 +264,9 @@ export const serviceDetailsById: Record<string, ServiceDetailContent> = {
           'TaaS is a scoped service model where we design and deliver tokenization capabilities for qualifying real-world assets without requiring you to build the full stack in-house.',
       },
       {
-        question: 'What engagement sizes do you take?',
+        question: 'How are TaaS engagements structured?',
         answer:
-          'Typical TaaS and advisory engagements are scoped between $5,000 and $50,000 depending on asset complexity and deliverables.',
+          'TaaS and advisory engagements are proposal-based and sized to asset complexity, with clear deliverables and timelines.',
       },
     ],
     relatedResources: [

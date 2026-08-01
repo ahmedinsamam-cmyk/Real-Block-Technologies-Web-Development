@@ -18,7 +18,7 @@ export function ServicesPage() {
       <PageHero
         eyebrow="Services"
         title="Professional services for focused enterprise outcomes"
-        description="Advisory and implementation across AI, FinTech, enterprise platforms, blockchain, and RWA Tokenization-as-a-Service—typically scoped from $5,000 to $50,000."
+        description="Advisory and implementation across AI, FinTech, enterprise platforms, blockchain, and RWA Tokenization-as-a-Service."
       />
       <section className="bg-surface py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

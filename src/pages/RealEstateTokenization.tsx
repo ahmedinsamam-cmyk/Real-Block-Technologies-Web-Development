@@ -88,7 +88,7 @@ export function RealEstateTokenizationPage() {
                 align="left"
                 eyebrow="What is TaaS?"
                 title="Tokenization services for real-world physical assets"
-                description="Tokenization-as-a-Service lets you digitize qualifying physical and experiential assets without building a full stack in-house—scoped for practical mid-market enterprise delivery."
+                description="Tokenization-as-a-Service lets you digitize qualifying physical and experiential assets without building a full stack in-house—designed for practical enterprise delivery."
               />
             </div>
             <div className="border border-border bg-surface p-8">
@@ -167,8 +167,8 @@ export function RealEstateTokenizationPage() {
           <div className="border border-border bg-navy p-8 text-white md:p-10">
             <h3 className="font-display text-2xl font-bold">Scoped enterprise delivery</h3>
             <p className="mt-4 text-sm leading-relaxed text-white/70">
-              Typical TaaS and advisory engagements are scoped between $5,000 and $50,000—with clear
-              milestones, documentation, and operating design your team can run after go-live.
+              TaaS and advisory engagements are proposal-based—with clear milestones, documentation,
+              and operating design your team can run after go-live.
             </p>
             <Button to="/contact#consultation" variant="gold" className="mt-8">
               Discuss a tokenization initiative

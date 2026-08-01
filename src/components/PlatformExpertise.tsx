@@ -14,8 +14,8 @@ export function PlatformExpertise({
           Workday, Microsoft Dynamics 365, and HubSpot—delivered as professional services
         </h2>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted">
-          We help mid-market enterprises implement, integrate, and adopt leading platforms with
-          scoped engagements typically between $5,000 and $50,000.
+          We help enterprises implement, integrate, and adopt leading platforms with professional
+          services designed for clear deliverables and durable adoption.
         </p>
 
         <ul className="mt-10 grid gap-6 md:grid-cols-3">

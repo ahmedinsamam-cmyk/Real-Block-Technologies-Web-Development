@@ -21,7 +21,7 @@ const KNOWLEDGE: Array<{ keywords: string[]; answer: string }> = [
   {
     keywords: ['ai', 'artificial', 'automation', 'agent', 'analytics'],
     answer:
-      'Our AI solutions cover strategy, automation, agents, business intelligence, predictive analytics, and document intelligence—scoped for practical mid-market enterprise ROI.',
+      'Our AI solutions cover strategy, automation, agents, business intelligence, predictive analytics, and document intelligence—designed for practical enterprise ROI.',
   },
   {
     keywords: ['blockchain', 'web3', 'smart contract'],
@@ -41,12 +41,12 @@ const KNOWLEDGE: Array<{ keywords: string[]; answer: string }> = [
   {
     keywords: ['consult', 'book', 'meeting', 'call', 'schedule', 'calendly'],
     answer:
-      'You can book a Discovery Call, Strategy Session, or Enterprise Workshop on our Contact page. Typical engagements range from $5,000 to $50,000.',
+      'You can book a Discovery Call, Strategy Session, or Enterprise Workshop on our Contact page.',
   },
   {
     keywords: ['price', 'cost', 'fee', 'pricing', 'budget'],
     answer:
-      'Typical enterprise engagements range from $5,000 to $50,000, scoped to objectives and complexity. Share your priorities and we will recommend a suitable approach.',
+      'Engagements are proposal-based and scoped to objectives and complexity. Share your priorities and we will recommend a suitable approach.',
   },
   {
     keywords: ['service', 'offer', 'help', 'what do you'],

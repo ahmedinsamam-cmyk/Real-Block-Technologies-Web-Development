@@ -43,7 +43,7 @@ export function AboutPage() {
       <PageHero
         eyebrow="About Us"
         title="A consulting partner for practical enterprise digital programs"
-        description="Real Block Technologies helps mid-market enterprises modernize operations with AI, FinTech, platform professional services, and RWA Tokenization-as-a-Service."
+        description="Real Block Technologies helps enterprises modernize operations with AI, FinTech, platform professional services, and RWA Tokenization-as-a-Service."
       />
 
       <section className="bg-white py-20 md:py-24">
@@ -56,12 +56,12 @@ export function AboutPage() {
             <p className="mt-5 text-base leading-relaxed text-ink-muted">
               Organizations face a dual mandate: modernize operations while preparing for markets shaped
               by AI, blockchain, and digitally represented assets. Real Block Technologies was founded
-              to bridge that gap—with professional services that fit real budgets and decision cycles.
+              to bridge that gap—with professional services that deliver clear outcomes.
             </p>
             <p className="mt-4 text-base leading-relaxed text-ink-muted">
-              Typical enterprise engagements are scoped between $5,000 and $50,000, with clear
-              deliverables across platforms, automation, FinTech, and Tokenization-as-a-Service for
-              qualifying physical assets.
+              We partner with leadership teams across platforms, automation, FinTech, and
+              Tokenization-as-a-Service for qualifying physical assets—with clear deliverables and
+              practical adoption.
             </p>
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
@@ -166,7 +166,7 @@ export function AboutPage() {
 
       <CTASection
         title="Ready to scope a practical enterprise engagement?"
-        description="Book a discovery consultation. Typical projects range from $5,000 to $50,000 with clear deliverables."
+        description="Book a discovery consultation. We will map clear deliverables and the right engagement path for your team."
         primaryTo="/contact#consultation"
       />
     </PageTransition>

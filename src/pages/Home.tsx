@@ -23,7 +23,7 @@ export function HomePage() {
     <PageTransition>
       <SEO
         title="Real Block Technologies | AI, Blockchain, FinTech & RWA Consulting"
-        description="Enterprise consulting for AI, FinTech, blockchain, and RWA Tokenization-as-a-Service. Scoped engagements typically $5,000–$50,000."
+        description="Enterprise consulting for AI, FinTech, blockchain, and RWA Tokenization-as-a-Service."
         path="/"
       />
       <Hero />
