@@ -1,8 +1,9 @@
-import { useState, useId } from 'react'
+import { useMemo, useState, useId } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { faqs } from '@/data/content'
 import { SectionHeading } from '@/components/SectionHeading'
+import { useLocale } from '@/components/LocaleProvider'
 
 interface FaqItem {
   question: string
@@ -10,30 +11,46 @@ interface FaqItem {
 }
 
 export function FAQ({
-  items = faqs,
-  eyebrow = 'Enterprise FAQ',
-  title = 'Frequently asked questions',
-  description = 'Clear answers for executives evaluating AI, blockchain, and real-world asset initiatives.',
+  items,
+  eyebrow,
+  title,
+  description,
 }: {
   items?: FaqItem[]
   eyebrow?: string
   title?: string
   description?: string
 }) {
+  const { t } = useLocale()
   const [openId, setOpenId] = useState<number | null>(0)
   const baseId = useId()
 
+  const resolvedItems = useMemo(() => {
+    if (items) return items
+    // Prefer translated FAQ set when using defaults
+    return Array.from({ length: Math.min(faqs.length, 6) }, (_, i) => ({
+      question: t(`faq.${i}.q`),
+      answer: t(`faq.${i}.a`),
+    }))
+  }, [items, t])
+
+  const headingTitle = title ?? t('faq.title')
+
   return (
-    <section className="bg-surface py-20 md:py-24" aria-label={title}>
+    <section className="bg-surface py-20 md:py-24" aria-label={headingTitle}>
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading eyebrow={eyebrow} title={title} description={description} />
+        <SectionHeading
+          eyebrow={eyebrow ?? t('faq.eyebrow')}
+          title={headingTitle}
+          description={description ?? t('faq.description')}
+        />
         <div className="space-y-3">
-          {items.map((item, index) => {
+          {resolvedItems.map((item, index) => {
             const isOpen = openId === index
             const panelId = `${baseId}-panel-${index}`
             const buttonId = `${baseId}-button-${index}`
             return (
-              <div key={item.question} className="overflow-hidden border border-border bg-white">
+              <div key={`${index}-${item.question}`} className="overflow-hidden border border-border bg-white">
                 <h3>
                   <button
                     id={buttonId}
@@ -63,7 +80,7 @@ export function FAQ({
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.28 }}
+                      transition={{ duration: 0.2 }}
                     >
                       <p className="border-t border-border px-5 py-4 text-sm leading-relaxed text-ink-muted">
                         {item.answer}

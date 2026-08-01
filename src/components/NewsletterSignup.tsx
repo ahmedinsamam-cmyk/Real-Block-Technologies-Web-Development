@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/Button'
+import { useLocale } from '@/components/LocaleProvider'
 import { submitNewsletter } from '@/services/leadService'
 
 interface NewsletterSignupProps {
@@ -11,6 +12,7 @@ interface NewsletterSignupProps {
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function NewsletterSignup({ variant = 'light', className = '' }: NewsletterSignupProps) {
+  const { t } = useLocale()
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -68,10 +70,10 @@ export function NewsletterSignup({ variant = 'light', className = '' }: Newslett
           variant === 'footer' ? 'text-base' : ''
         }`}
       >
-        Stay Ahead of Digital Transformation
+        {t('footer.stayInformed')}
       </h3>
       <p className={`mt-2 text-sm ${isDark ? 'text-white/65' : 'text-ink-muted'}`}>
-        Receive insights on AI, Blockchain, Tokenization, and Enterprise Technology.
+        {t('footer.newsletterBody')}
       </p>
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3 sm:flex-row" noValidate>
         <div className="flex-1">
@@ -96,12 +98,9 @@ export function NewsletterSignup({ variant = 'light', className = '' }: Newslett
           {error && <p className="mt-1.5 text-xs text-red-400">{error}</p>}
         </div>
         <Button type="submit" variant={isDark ? 'gold' : 'primary'} disabled={submitting}>
-          {submitting ? 'Subscribing…' : 'Subscribe'}
+          {submitting ? '…' : t('common.subscribe')}
         </Button>
       </form>
-      <p className={`mt-3 text-[0.7rem] ${isDark ? 'text-white/40' : 'text-ink-muted'}`}>
-        Integration-ready for Mailchimp, ConvertKit, and HubSpot.
-      </p>
     </div>
   )
 }

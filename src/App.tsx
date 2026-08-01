@@ -77,9 +77,9 @@ const NotFoundPage = lazy(() =>
 
 function RouteFallback() {
   return (
-    <div className="flex min-h-[40vh] items-center justify-center" role="status" aria-live="polite">
-      <div className="h-8 w-8 animate-pulse border border-navy/20 border-t-navy" aria-hidden />
-      <span className="sr-only">Loading page</span>
+    <div className="flex min-h-[20vh] items-center justify-center" role="status" aria-live="polite">
+      <div className="h-6 w-6 animate-pulse border border-navy/20 border-t-navy" aria-hidden />
+      <span className="sr-only">Loading</span>
     </div>
   )
 }

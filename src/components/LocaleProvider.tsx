@@ -10,10 +10,10 @@ import {
 import {
   DEFAULT_LOCALE,
   SUPPORTED_LOCALES,
-  UI_STRINGS,
   detectLocale,
   type AppLocale,
 } from '@/utils/i18n'
+import { translate } from '@/i18n/translations'
 
 interface LocaleContextValue {
   locale: AppLocale
@@ -46,10 +46,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     document.documentElement.dir = meta.dir
   }, [locale, meta.dir])
 
-  const t = useCallback(
-    (key: string) => UI_STRINGS[locale][key] ?? UI_STRINGS.en[key] ?? key,
-    [locale],
-  )
+  const t = useCallback((key: string) => translate(locale, key), [locale])
 
   const value = useMemo(
     () => ({ locale, setLocale, t, dir: meta.dir }),
@@ -65,7 +62,7 @@ export function useLocale() {
     return {
       locale: DEFAULT_LOCALE,
       setLocale: () => undefined,
-      t: (key: string) => UI_STRINGS.en[key] ?? key,
+      t: (key: string) => translate(DEFAULT_LOCALE, key),
       dir: 'ltr' as const,
     }
   }
@@ -73,11 +70,11 @@ export function useLocale() {
 }
 
 export function LanguageSwitcher({ dark = false }: { dark?: boolean }) {
-  const { locale, setLocale } = useLocale()
+  const { locale, setLocale, t } = useLocale()
 
   return (
     <label className="relative inline-flex items-center">
-      <span className="sr-only">Language</span>
+      <span className="sr-only">{t('common.language')}</span>
       <select
         value={locale}
         onChange={(e) => setLocale(e.target.value as AppLocale)}
@@ -86,7 +83,7 @@ export function LanguageSwitcher({ dark = false }: { dark?: boolean }) {
             ? 'border-white/20 text-white/80 hover:border-white'
             : 'border-border text-ink-muted hover:border-navy hover:text-navy'
         }`}
-        aria-label="Select language"
+        aria-label={t('common.language')}
       >
         {SUPPORTED_LOCALES.map((l) => (
           <option key={l.code} value={l.code} className="text-navy">

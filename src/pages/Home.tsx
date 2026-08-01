@@ -8,6 +8,7 @@ import { NewsletterSignup } from '@/components/NewsletterSignup'
 import { CTASection } from '@/components/CTASection'
 import { Button } from '@/components/Button'
 import { PlatformExpertise } from '@/components/PlatformExpertise'
+import { useLocale } from '@/components/LocaleProvider'
 import { Hero } from '@/sections/home/Hero'
 import { Stats } from '@/sections/home/Stats'
 import { ServiceHighlights } from '@/sections/home/ServiceHighlights'
@@ -19,6 +20,8 @@ import { BusinessOutcomes } from '@/sections/home/BusinessOutcomes'
 import { trackCtaClick } from '@/utils/analytics'
 
 export function HomePage() {
+  const { t } = useLocale()
+
   return (
     <PageTransition>
       <SEO
@@ -41,13 +44,12 @@ export function HomePage() {
         <div className="absolute inset-0 section-photo-a" aria-hidden />
         <div className="absolute inset-0 bg-navy/70" aria-hidden />
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <p className="eyebrow text-gold-light">Enterprise resource</p>
+          <p className="eyebrow text-gold-light">{t('home.guideEyebrow')}</p>
           <h2 className="mt-4 font-display text-3xl font-medium text-white md:text-5xl lg:text-[3.25rem]">
-            The enterprise guide to real-world asset tokenization
+            {t('home.guideTitle')}
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base text-white/70 md:text-lg">
-            A practical leadership briefing covering architecture, infrastructure, use cases, and an
-            implementation roadmap.
+            {t('home.guideBody')}
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-3">
             <Button
@@ -56,10 +58,10 @@ export function HomePage() {
               size="lg"
               onClick={() => trackCtaClick('home_rwa_guide')}
             >
-              Download free guide
+              {t('home.guideCta')}
             </Button>
             <Button to="/resources" variant="outline" size="lg">
-              Browse resources
+              {t('home.browseResources')}
             </Button>
           </div>
         </div>
@@ -68,13 +70,11 @@ export function HomePage() {
       <section className="bg-white py-20 md:py-24">
         <div className="mx-auto max-w-xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="eyebrow text-royal">Insights</p>
+            <p className="eyebrow text-royal">{t('home.insightsEyebrow')}</p>
             <h2 className="mt-4 font-display text-3xl font-medium text-navy md:text-4xl">
-              Briefings for digital transformation leaders
+              {t('home.insightsTitle')}
             </h2>
-            <p className="mt-3 text-sm text-ink-muted md:text-base">
-              Occasional perspectives on AI, blockchain, and asset digitization—no noise.
-            </p>
+            <p className="mt-3 text-sm text-ink-muted md:text-base">{t('home.insightsBody')}</p>
           </div>
           <div className="mt-10">
             <NewsletterSignup />
@@ -83,16 +83,16 @@ export function HomePage() {
       </section>
 
       <ConsultationBooking
-        title="Start with a structured strategy session"
-        description="Qualify priorities across AI transformation, RWA tokenization, blockchain strategy, and enterprise platforms—then book the right conversation."
-        ctaLabel="Book a Strategy Session"
+        title={t('home.bookingTitle')}
+        description={t('home.bookingBody')}
+        ctaLabel={t('home.bookingCta')}
       />
       <FAQ />
       <LinkedInCTA />
       <CTASection
-        title="Partner with an advisory team built for institutional outcomes."
-        description="Real Block Technologies designs and delivers AI, blockchain, and real-world asset solutions with the governance executives require."
-        primaryLabel="Book a Strategy Session"
+        title={t('home.ctaTitle')}
+        description={t('home.ctaBody')}
+        primaryLabel={t('home.bookingCta')}
         primaryTo="/strategy-session"
       />
     </PageTransition>

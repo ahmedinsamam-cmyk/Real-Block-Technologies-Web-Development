@@ -10,26 +10,42 @@ import { LinkedInIcon } from '@/components/icons/SocialIcons'
 import { SOCIAL_LINKS } from '@/utils/constants'
 import { services, industries } from '@/data/content'
 import { trackCtaClick, trackEvent } from '@/utils/analytics'
+import { useLocale } from '@/components/LocaleProvider'
 
-const serviceMenu = services.map((s) => ({
-  label: s.shortTitle ?? s.title,
-  href: s.href,
-}))
+const SERVICE_KEYS: Record<string, string> = {
+  rwa: 'service.rwa',
+  ai: 'service.ai',
+  consulting: 'service.consulting',
+  blockchain: 'service.blockchain',
+  fintech: 'service.fintech',
+}
 
-const industryMenu = industries.map((i) => ({
-  label: i.title,
-  href: i.href,
-}))
-
-const resourceMenu = [
-  { label: 'Resource Library', href: '/resources' },
-  { label: 'Insights', href: '/insights' },
-  { label: 'Success Stories', href: '/success-stories' },
-  { label: 'Help Center', href: '/help' },
-  { label: 'Client Portal', href: '/portal' },
-]
+const INDUSTRY_KEYS: Record<string, string> = {
+  'real-estate': 'footer.realEstate',
+  banking: 'footer.banking',
+  manufacturing: 'footer.manufacturing',
+  healthcare: 'footer.healthcare',
+  logistics: 'footer.logistics',
+  'professional-services': 'footer.professionalServices',
+}
 
 export function Navbar() {
+  const { t } = useLocale()
+  const serviceMenu = services.map((s) => ({
+    label: SERVICE_KEYS[s.id] ? t(`${SERVICE_KEYS[s.id]}.title`) : (s.shortTitle ?? s.title),
+    href: s.href,
+  }))
+  const industryMenu = industries.map((i) => ({
+    label: INDUSTRY_KEYS[i.id] ? t(INDUSTRY_KEYS[i.id]) : i.title,
+    href: i.href,
+  }))
+  const resourceMenu = [
+    { label: t('nav.resourceLibrary'), href: '/resources' },
+    { label: t('nav.insights'), href: '/insights' },
+    { label: t('nav.successStories'), href: '/success-stories' },
+    { label: t('nav.helpCenter'), href: '/help' },
+    { label: t('nav.clientPortal'), href: '/portal' },
+  ]
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
@@ -86,7 +102,7 @@ export function Navbar() {
               }`
             }
           >
-            Home
+            {t('nav.home')}
           </NavLink>
           <NavLink
             to="/about"
@@ -102,12 +118,12 @@ export function Navbar() {
               }`
             }
           >
-            About
+            {t('nav.about')}
           </NavLink>
 
-          <NavDropdown label="Services" href="/services" items={serviceMenu} dark={darkHero} />
-          <NavDropdown label="Industries" href="/industries" items={industryMenu} dark={darkHero} />
-          <NavDropdown label="Resources" href="/resources" items={resourceMenu} dark={darkHero} />
+          <NavDropdown label={t('nav.services')} href="/services" items={serviceMenu} dark={darkHero} />
+          <NavDropdown label={t('nav.industries')} href="/industries" items={industryMenu} dark={darkHero} />
+          <NavDropdown label={t('nav.resources')} href="/resources" items={resourceMenu} dark={darkHero} />
 
           <NavLink
             to="/contact"
@@ -123,7 +139,7 @@ export function Navbar() {
               }`
             }
           >
-            Contact
+            {t('nav.contact')}
           </NavLink>
         </nav>
 
@@ -131,7 +147,7 @@ export function Navbar() {
           <LanguageSwitcher dark={darkHero} />
           <Link
             to="/search"
-            aria-label="Search insights and resources"
+            aria-label={t('nav.search')}
             className={`flex h-9 w-9 items-center justify-center rounded-sm border transition ${
               darkHero
                 ? 'border-white/20 text-white hover:border-white hover:bg-white/10'
@@ -160,7 +176,7 @@ export function Navbar() {
             size="sm"
             onClick={() => trackCtaClick('navbar_strategy_session')}
           >
-            Strategy Session
+            {t('nav.strategySession')}
             <ArrowRight className="h-3.5 w-3.5" />
           </Button>
         </div>
@@ -189,10 +205,10 @@ export function Navbar() {
             <nav className="flex min-h-full flex-col px-6 py-8" aria-label="Mobile">
               <div className="flex flex-col">
                 <Link to="/" className="border-b border-white/10 py-4 font-display text-2xl font-semibold text-white">
-                  Home
+                  {t('nav.home')}
                 </Link>
                 <Link to="/about" className="border-b border-white/10 py-4 font-display text-2xl font-semibold text-white">
-                  About
+                  {t('nav.about')}
                 </Link>
 
                 <button
@@ -200,7 +216,7 @@ export function Navbar() {
                   className="flex w-full items-center justify-between border-b border-white/10 py-4 font-display text-2xl font-semibold text-white"
                   onClick={() => setMobileServicesOpen((v) => !v)}
                 >
-                  Services
+                  {t('nav.services')}
                   <ChevronDown className={`h-5 w-5 transition ${mobileServicesOpen ? 'rotate-180' : ''}`} />
                 </button>
                 <AnimatePresence initial={false}>
@@ -212,7 +228,7 @@ export function Navbar() {
                       className="overflow-hidden border-b border-white/10"
                     >
                       <Link to="/services" className="block py-3 pl-2 text-sm font-semibold text-gold-light">
-                        View all services
+                        {t('nav.viewAllServices')}
                       </Link>
                       {serviceMenu.map((item) => (
                         <Link
@@ -232,7 +248,7 @@ export function Navbar() {
                   className="flex w-full items-center justify-between border-b border-white/10 py-4 font-display text-2xl font-semibold text-white"
                   onClick={() => setMobileIndustriesOpen((v) => !v)}
                 >
-                  Industries
+                  {t('nav.industries')}
                   <ChevronDown className={`h-5 w-5 transition ${mobileIndustriesOpen ? 'rotate-180' : ''}`} />
                 </button>
                 <AnimatePresence initial={false}>
@@ -244,7 +260,7 @@ export function Navbar() {
                       className="overflow-hidden border-b border-white/10"
                     >
                       <Link to="/industries" className="block py-3 pl-2 text-sm font-semibold text-gold-light">
-                        View all industries
+                        {t('nav.viewAllIndustries')}
                       </Link>
                       {industryMenu.map((item) => (
                         <Link
@@ -264,7 +280,7 @@ export function Navbar() {
                   className="flex w-full items-center justify-between border-b border-white/10 py-4 font-display text-2xl font-semibold text-white"
                   onClick={() => setMobileResourcesOpen((v) => !v)}
                 >
-                  Resources
+                  {t('nav.resources')}
                   <ChevronDown className={`h-5 w-5 transition ${mobileResourcesOpen ? 'rotate-180' : ''}`} />
                 </button>
                 <AnimatePresence initial={false}>
@@ -289,10 +305,10 @@ export function Navbar() {
                 </AnimatePresence>
 
                 <Link to="/search" className="border-b border-white/10 py-4 font-display text-2xl font-semibold text-white">
-                  Search
+                  {t('nav.search')}
                 </Link>
                 <Link to="/contact" className="border-b border-white/10 py-4 font-display text-2xl font-semibold text-white">
-                  Contact
+                  {t('nav.contact')}
                 </Link>
               </div>
 
@@ -301,10 +317,10 @@ export function Navbar() {
                   <LanguageSwitcher dark />
                 </div>
                 <Button to="/strategy-session" variant="gold" size="lg" className="w-full">
-                  Book Strategy Session
+                  {t('nav.bookStrategy')}
                 </Button>
                 <Button to="/services" variant="outline" size="lg" className="w-full">
-                  Explore Services
+                  {t('nav.exploreServices')}
                 </Button>
               </div>
             </nav>

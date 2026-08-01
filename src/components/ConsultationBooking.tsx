@@ -3,6 +3,7 @@ import { CalendarDays, Clock3, CheckCircle2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/Button'
 import { SectionHeading } from '@/components/SectionHeading'
+import { useLocale } from '@/components/LocaleProvider'
 import { CALENDLY_URL, CONSULTATION_TOPICS, MEETING_TYPES } from '@/utils/constants'
 import { trackEvent, trackCtaClick } from '@/utils/analytics'
 
@@ -66,6 +67,7 @@ export function ConsultationBooking({
   embed = false,
   variant = 'section',
 }: ConsultationBookingProps) {
+  const { t } = useLocale()
   const containerRef = useRef<HTMLDivElement>(null)
   const [selectedMeeting, setSelectedMeeting] = useState<string>(MEETING_TYPES[0].slug)
   const [confirmed, setConfirmed] = useState(false)
@@ -138,7 +140,7 @@ export function ConsultationBooking({
   return (
     <section className="bg-white py-20 md:py-24" id="consultation">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading eyebrow="Book a Consultation" title={title} description={description} />
+        <SectionHeading eyebrow={t('booking.eyebrow')} title={title} description={description} />
 
         <div className="mx-auto mb-8 grid max-w-4xl gap-3 md:grid-cols-3">
           {MEETING_TYPES.map((meeting) => (
