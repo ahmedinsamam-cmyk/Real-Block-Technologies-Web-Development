@@ -14,7 +14,7 @@ const sections = [
   },
   {
     title: '3. How We Use Information',
-    body: 'We use collected information to respond to inquiries, schedule consultations, improve website experience, communicate about services, and support legitimate business operations. We do not sell personal information.',
+    body: 'We use collected information to respond to inquiries, evaluate asset submissions, schedule consultations, improve website experience, communicate about services, and support legitimate business operations. We do not sell personal information. Submitting an asset does not constitute an application for funding.',
   },
   {
     title: '4. Sharing of Information',

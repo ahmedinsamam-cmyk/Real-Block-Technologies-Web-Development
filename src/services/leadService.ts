@@ -18,6 +18,7 @@ export type LeadSource =
   | 'consultation'
   | 'chat_widget'
   | 'resource_library'
+  | 'asset_submission'
   | 'other'
 
 export interface LeadPayload {

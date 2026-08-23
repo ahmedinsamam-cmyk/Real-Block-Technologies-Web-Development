@@ -1,1 +1,10 @@
-/*    /index.html   200
+/services/real-estate-tokenization /digital-capital 301
+/services/ai-solutions /digital-capital 301
+/industries /mining-companies 301
+/industries/* /mining-companies 301
+/case-studies /products 301
+/careers /about 301
+/resources /insights 301
+/resources/rwa-tokenization-guide /insights 301
+/help /contact 301
+/* /index.html 200

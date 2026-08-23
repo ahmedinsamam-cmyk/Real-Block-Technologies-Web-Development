@@ -1,43 +1,40 @@
 import { SEO } from '@/components/SEO'
 import { PageTransition } from '@/components/PageTransition'
 import { PageHero } from '@/components/PageHero'
-import { SectionHeading } from '@/components/SectionHeading'
-import { ServiceCard } from '@/components/ServiceCard'
-import { ConsultationBooking } from '@/components/ConsultationBooking'
-import { services } from '@/data/content'
+import { CTASection } from '@/components/CTASection'
+import { SERVICES } from '@/data/resourceCapital'
 
 export function ServicesPage() {
   return (
     <PageTransition>
       <SEO
-        title="Services"
-        description="Explore Real Block Technologies services: RWA tokenization, AI solutions, enterprise consulting, blockchain advisory, treasury technology, and software development."
+        title="Resource Capital Services"
+        description="From resource intelligence to capital-product creation and digital lifecycle management for mining and mineral companies."
         path="/services"
       />
       <PageHero
         eyebrow="Services"
-        title="Technology consulting for enterprise transformation"
-        description="End-to-end advisory and implementation services spanning AI, blockchain, real-world assets, finance technology, and custom software."
+        title="Resource Capital Services"
+        description="From resource intelligence to capital-product creation and digital lifecycle management."
       />
-      <section className="bg-surface py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Capabilities"
-            title="Six practice areas. One integrated delivery model."
-            description="Engage us for a focused initiative or a broader transformation program—our teams connect strategy, architecture, and execution."
-          />
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {services.map((service, index) => (
-              <ServiceCard key={service.id} service={service} index={index} />
-            ))}
-          </div>
+      <section className="bg-white py-20">
+        <div className="mx-auto max-w-7xl space-y-8 px-4 sm:px-6 lg:px-8">
+          {SERVICES.map((service) => (
+            <article key={service.id} id={service.id} className="scroll-mt-28 border border-border p-6 md:p-10">
+              <p className="eyebrow text-copper">{service.number}</p>
+              <h2 className="mt-3 font-display text-3xl text-navy">{service.title}</h2>
+              <p className="mt-4 max-w-3xl text-ink-muted">{service.description}</p>
+              <ul className="mt-6 grid gap-2 sm:grid-cols-2">
+                {service.items.map((item) => (
+                  <li key={item} className="text-sm text-navy">— {item}</li>
+                ))}
+              </ul>
+              <p className="mt-6 text-sm font-semibold text-copper">Deliverable: {service.deliverable}</p>
+            </article>
+          ))}
         </div>
       </section>
-      <ConsultationBooking
-        title="Discuss Your Digital Transformation Strategy"
-        description="Schedule a discovery call to prioritize AI, blockchain, and RWA initiatives against your operating goals."
-        ctaLabel="Book a Free Consultation"
-      />
+      <CTASection />
     </PageTransition>
   )
 }

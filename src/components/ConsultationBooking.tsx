@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { CalendarDays, Clock3, CheckCircle2 } from 'lucide-react'
+import { CalendarDays, Clock, CheckCircle2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/Button'
 import { SectionHeading } from '@/components/SectionHeading'
@@ -58,9 +58,9 @@ function loadCalendlyAssets(): Promise<void> {
 }
 
 export function ConsultationBooking({
-  title = 'Ready to Transform Your Business?',
-  description = 'Book a consultation with our enterprise technology advisors. Calendar invites are sent automatically via Calendly.',
-  ctaLabel = 'Book a Free Consultation',
+  title = 'Discuss a Resource Capital structure',
+  description = 'Book a conversation with the Real Block team on asset intelligence, economic rights and potential product architectures. This is not an application for funding.',
+  ctaLabel = 'Discuss Your Capital Options',
   embed = false,
   variant = 'section',
 }: ConsultationBookingProps) {
@@ -156,7 +156,7 @@ export function ConsultationBooking({
             >
               <p className="font-display text-sm font-bold text-navy">{meeting.title}</p>
               <p className="mt-1 flex items-center gap-1 text-xs text-ink-muted">
-                <Clock3 className="h-3.5 w-3.5" />
+                <Clock className="h-3.5 w-3.5" />
                 {meeting.duration}
               </p>
               <p className="mt-2 text-xs leading-relaxed text-ink-muted">{meeting.description}</p>

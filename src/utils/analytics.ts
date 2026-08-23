@@ -138,3 +138,4 @@ export function trackPageView(path: string): void {
 export function trackCtaClick(label: string): void {
   trackEvent({ event: 'cta_click', label })
 }
+

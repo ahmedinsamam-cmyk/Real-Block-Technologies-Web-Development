@@ -1,22 +1,29 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-navy: #0a0a0b;
-  --color-navy-light: #141416;
-  --color-navy-muted: #1e1e22;
-  --color-royal: #8a7a66;
-  --color-royal-dark: #6f6251;
-  --color-royal-light: #a89882;
-  --color-gold: #c4a574;
-  --color-gold-light: #d9c09a;
-  --color-gold-dark: #a08658;
-  --color-ink: #111111;
-  --color-ink-muted: #667085;
-  --color-surface: #f7f7f5;
-  --color-surface-alt: #eeeeeb;
-  --color-border: #e6e4df;
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --color-navy: #0b1220;
+  --color-navy-light: #151c2c;
+  --color-navy-muted: #1c2436;
+  --color-copper: #b87333;
+  --color-copper-light: #c9915a;
+  --color-copper-dark: #8f5a28;
+  --color-earth: #6b5344;
+  --color-sand: #e8dfd2;
+  --color-stone: #f4f1ec;
+  --color-royal: #8a6a4b;
+  --color-royal-dark: #6f5340;
+  --color-royal-light: #b08a66;
+  --color-gold: #c17a4a;
+  --color-gold-light: #d4a07a;
+  --color-gold-light: #d4a07a;
+  --color-gold-dark: #9a5e32;
+  --color-ink: #12151c;
+  --color-ink-muted: #5c6473;
+  --color-surface: #f4f1ec;
+  --color-surface-alt: #ebe6de;
+  --color-border: #ddd6cb;
+  --font-display: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-body: 'Source Sans 3', ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -38,7 +45,7 @@
   }
 
   ::selection {
-    @apply bg-navy/10 text-navy;
+    @apply bg-copper/20 text-navy;
   }
 }
 
@@ -48,45 +55,53 @@
   }
 
   .gradient-navy {
-    background: linear-gradient(165deg, #0a0a0b 0%, #121214 50%, #1a1714 100%);
+    background: linear-gradient(165deg, #0b1220 0%, #121a2b 48%, #1a1714 100%);
   }
 
+  .hero-photo,
   .hero-photo {
-    background-color: #0a0a0b;
+    background-color: #0b1220;
     background-image:
-      linear-gradient(105deg, rgba(10, 10, 11, 0.78) 0%, rgba(10, 10, 11, 0.35) 48%, rgba(10, 10, 11, 0.55) 100%),
-      linear-gradient(180deg, rgba(10, 10, 11, 0.25) 0%, rgba(10, 10, 11, 0.15) 40%, rgba(10, 10, 11, 0.88) 100%),
-      linear-gradient(40deg, rgba(196, 165, 116, 0.18), transparent 42%),
-      url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=2400&q=80');
+      linear-gradient(105deg, rgba(11, 18, 32, 0.82) 0%, rgba(11, 18, 32, 0.42) 48%, rgba(11, 18, 32, 0.62) 100%),
+      linear-gradient(180deg, rgba(11, 18, 32, 0.2) 0%, rgba(11, 18, 32, 0.12) 40%, rgba(11, 18, 32, 0.9) 100%),
+      linear-gradient(40deg, rgba(184, 115, 51, 0.16), transparent 42%),
+      url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2400&q=80');
     background-size: cover;
-    background-position: center 35%;
+    background-position: center 40%;
   }
 
   .section-photo-a {
     background-image:
-      linear-gradient(180deg, rgba(10, 10, 11, 0.25), rgba(10, 10, 11, 0.78)),
-      url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80');
+      linear-gradient(180deg, rgba(11, 18, 32, 0.28), rgba(11, 18, 32, 0.8)),
+      url('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?auto=format&fit=crop&w=1600&q=80');
     background-size: cover;
     background-position: center;
   }
 
   .section-photo-b {
     background-image:
-      linear-gradient(180deg, rgba(10, 10, 11, 0.2), rgba(10, 10, 11, 0.8)),
-      url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=80');
+      linear-gradient(180deg, rgba(11, 18, 32, 0.22), rgba(11, 18, 32, 0.82)),
+      url('https://images.unsplash.com/photo-1581093458791-9d42e1c5d3c0?auto=format&fit=crop&w=1600&q=80');
     background-size: cover;
     background-position: center;
   }
 
   .section-photo-c {
     background-image:
-      linear-gradient(180deg, rgba(10, 10, 11, 0.25), rgba(10, 10, 11, 0.82)),
-      url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1600&q=80');
+      linear-gradient(180deg, rgba(11, 18, 32, 0.28), rgba(11, 18, 32, 0.84)),
+      url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80');
     background-size: cover;
     background-position: center;
   }
 
   .eyebrow {
     @apply font-body text-[0.72rem] font-semibold tracking-[0.22em] uppercase;
+  }
+
+  .grid-fine {
+    background-image:
+      linear-gradient(rgba(184, 115, 51, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184, 115, 51, 0.07) 1px, transparent 1px);
+    background-size: 32px 32px;
   }
 }

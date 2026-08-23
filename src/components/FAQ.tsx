@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import { faqs } from '@/data/content'
+import { FAQS } from '@/data/resourceCapital'
 import { SectionHeading } from '@/components/SectionHeading'
 
-export function FAQ({ items = faqs }: { items?: typeof faqs }) {
+export function FAQ({ items = FAQS }: { items?: typeof FAQS }) {
   const [openId, setOpenId] = useState<number | null>(0)
 
   return (
@@ -13,7 +13,7 @@ export function FAQ({ items = faqs }: { items?: typeof faqs }) {
         <SectionHeading
           eyebrow="Enterprise FAQ"
           title="Frequently asked questions"
-          description="Clear answers for executives evaluating AI, blockchain, and real-world asset initiatives."
+          description="Clear answers for mining executives evaluating Resource Capital, product architecture and digital asset registry."
         />
         <div className="space-y-3">
           {items.map((item, index) => {

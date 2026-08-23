@@ -14,34 +14,39 @@ interface ChatMessage {
 
 const KNOWLEDGE: Array<{ keywords: string[]; answer: string }> = [
   {
-    keywords: ['rwa', 'token', 'tokenization', 'real world', 'asset'],
+    keywords: ['resource capital', 'rcp', 'capital product', 'what is'],
     answer:
-      'Real World Asset (RWA) tokenization creates a digital representation of physical assets on blockchain—supporting ownership models, investor access, and lifecycle management. Explore our guide or book a discovery call to assess fit.',
+      'Resource Capital is economic value that can potentially be unlocked from natural resources and associated rights. RCPs shown here are illustrative architectures, not securities offered on this website.',
   },
   {
-    keywords: ['ai', 'artificial', 'automation', 'agent', 'analytics'],
+    keywords: ['token', 'tokenization', 'blockchain', 'rwa', 'crypto'],
     answer:
-      'Our AI solutions cover strategy, automation, agents, business intelligence, predictive analytics, and document intelligence. We help enterprises move from pilots to scaled operating impact.',
+      'Digital records and, where appropriate, blockchain can support how a structure is recorded after the economics are defined. Real Block is not a tokenization agency; technology supports the capital product.',
   },
   {
-    keywords: ['blockchain', 'web3', 'smart contract'],
+    keywords: ['submit', 'asset', 'royalty', 'mine', 'mining', 'mineral'],
     answer:
-      'We provide blockchain advisory spanning strategy, architecture, security considerations, and implementation guidance aligned to enterprise controls.',
+      'Primary customers are resource owners. Use Submit Your Asset to request a Resource Capital assessment. That is not an application for funding.',
+  },
+  {
+    keywords: ['invest', 'buy', 'yield', 'return', 'marketplace'],
+    answer:
+      'This website is not an investment marketplace. We do not offer securities for purchase here. We prepare structures for potential review by appropriate financing partners.',
   },
   {
     keywords: ['consult', 'book', 'meeting', 'call', 'schedule', 'calendly'],
     answer:
-      'You can book a 30-minute Discovery Call, 60-minute Strategy Session, or Enterprise Transformation Workshop on our Contact page. Would you like me to capture your details for follow-up?',
+      'You can discuss options on the Contact page or submit an asset. Would you like to leave your details for follow-up?',
   },
   {
     keywords: ['price', 'cost', 'fee', 'pricing'],
     answer:
-      'Engagements are proposal-based and scoped to objectives—currency-neutral and tailored for global clients. Share your priorities and we will recommend a suitable approach.',
+      'Engagements are proposal-based and scoped to the asset and objectives.',
   },
   {
-    keywords: ['service', 'offer', 'help', 'what do you'],
+    keywords: ['ai', 'registry', 'passport', 'score', 'service', 'help'],
     answer:
-      'Real Block Technologies helps enterprises with RWA tokenization, AI business solutions, blockchain advisory, treasury/fintech, enterprise consulting, and custom software development.',
+      'AI supports document intelligence. Resource Passport and Resource Capital Score are proprietary frameworks. The Digital Asset Registry is the lifecycle layer beneath RCPs.',
   },
 ]
 
@@ -49,7 +54,7 @@ const OPENERS: ChatMessage[] = [
   {
     id: 'welcome',
     role: 'assistant',
-    text: 'Hello — I am the Real Block Technologies assistant. Ask about AI solutions, RWA tokenization, blockchain consulting, or book a consultation. How can I help?',
+    text: 'Hello — I am the Real Block Technologies assistant. Ask about Resource Capital, submitting a mining asset, or how RCPs are structured. How can I help?',
   },
 ]
 
@@ -57,7 +62,7 @@ function matchAnswer(input: string): string {
   const q = input.toLowerCase()
   const hit = KNOWLEDGE.find((item) => item.keywords.some((k) => q.includes(k)))
   if (hit) return hit.answer
-  return 'Thanks for your question. Our team specializes in AI, blockchain, and real-world asset consulting. You can browse Services, download resources, or share your email and we will follow up.'
+  return 'Thanks for your question. Real Block helps mining and mineral companies identify, structure and manage potential Resource Capital Products. You can explore Products, submit an asset, or leave your email for follow-up.'
 }
 
 type ChatProvider = 'builtin' | 'intercom' | 'crisp' | 'hubspot'
@@ -94,9 +99,9 @@ export function AIChatWidget() {
 
   const recommended = useMemo(
     () => [
-      { label: 'AI Solutions', href: '/services/ai-solutions' },
-      { label: 'RWA Guide', href: '/resources/rwa-tokenization-guide' },
-      { label: 'Book Consultation', href: '/contact#consultation' },
+      { label: 'Resource Capital', href: '/resource-capital' },
+      { label: 'Submit Asset', href: '/submit-asset' },
+      { label: 'Contact', href: '/contact' },
     ],
     [],
   )

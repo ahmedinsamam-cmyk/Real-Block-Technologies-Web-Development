@@ -25,7 +25,7 @@ export function Logo({ light = false, compact = false }: LogoProps) {
             Real Block
           </span>
           <span className={`mt-1 text-[0.56rem] font-medium tracking-[0.26em] uppercase ${muted}`}>
-            Technologies
+            Resource Capital
           </span>
         </span>
       )}

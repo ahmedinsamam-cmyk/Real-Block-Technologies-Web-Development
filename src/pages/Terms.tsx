@@ -10,7 +10,7 @@ const sections = [
   },
   {
     title: '2. Informational Purpose',
-    body: 'Content on this website is provided for general informational purposes about our services and capabilities. It does not constitute legal, financial, investment, tax, or other professional advice. Engagements are governed by separate written agreements.',
+    body: 'Content on this website is provided for general informational purposes about resource intelligence, capital-product structuring and related technology services. Product examples are illustrative and do not constitute an offer, solicitation, recommendation or investment advice. Engagements are governed by separate written agreements. Any regulated activity will be conducted by appropriately authorized entities where required.',
   },
   {
     title: '3. Intellectual Property',

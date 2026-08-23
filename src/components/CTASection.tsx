@@ -12,20 +12,21 @@ interface CTASectionProps {
 }
 
 export function CTASection({
-  title = 'Ready to unlock the next chapter of digital transformation?',
-  description = 'Partner with Real Block Technologies to design and deliver AI, blockchain, and real-world asset solutions built for enterprise outcomes.',
-  primaryLabel = 'Schedule Consultation',
-  primaryTo = '/contact',
-  secondaryLabel = 'Explore Services',
-  secondaryTo = '/services',
+  title = 'Submit Your Asset',
+  description = "Tell us what you own, what you produce or what you're developing. We'll help identify potential Resource Capital structures that could be explored around the asset.",
+  primaryLabel = 'Submit Your Asset',
+  primaryTo = '/submit-asset',
+  secondaryLabel = 'Discuss Your Capital Options',
+  secondaryTo = '/contact',
 }: CTASectionProps) {
   return (
     <section className="relative overflow-hidden py-24 md:py-28">
-      <div className="absolute inset-0 section-photo-c" />
-      <div className="absolute inset-0 bg-navy/80" />
+      <div className="absolute inset-0 section-photo-a" />
+      <div className="absolute inset-0 bg-navy/82" />
       <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+        <p className="eyebrow text-copper-light">Resource owners</p>
         <motion.h2
-          className="font-display text-4xl font-medium text-white md:text-5xl"
+          className="mt-4 font-display text-4xl font-medium text-white md:text-5xl"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

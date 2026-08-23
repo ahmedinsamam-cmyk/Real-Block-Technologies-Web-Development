@@ -30,22 +30,21 @@ const initialForm: ContactFormData = {
 }
 
 const industries = [
-  'Real Estate',
-  'Financial Services',
-  'Manufacturing',
-  'Healthcare',
-  'Logistics',
-  'Professional Services',
+  'Mining & metals',
+  'Mineral development',
+  'Royalty company',
+  'Resource infrastructure',
+  'Critical minerals',
+  'Energy & mining services',
   'Other',
 ]
 
 const serviceInterests = [
-  { value: 'ai_transformation', label: 'AI Transformation' },
-  { value: 'rwa_tokenization', label: 'RWA Tokenization' },
-  { value: 'blockchain_strategy', label: 'Blockchain Strategy' },
-  { value: 'enterprise_automation', label: 'Enterprise Automation' },
-  { value: 'treasury_fintech', label: 'Treasury & FinTech' },
-  { value: 'software_development', label: 'Software Development' },
+  { value: 'resource_intelligence', label: 'Resource Asset Intelligence' },
+  { value: 'capital_opportunity', label: 'Capital Opportunity Assessment' },
+  { value: 'rcp_structuring', label: 'Resource Capital Product Structuring' },
+  { value: 'financial_modelling', label: 'Financial & Scenario Modelling' },
+  { value: 'digital_registry', label: 'Digital Asset Registry' },
   { value: 'general', label: 'General Inquiry' },
 ]
 

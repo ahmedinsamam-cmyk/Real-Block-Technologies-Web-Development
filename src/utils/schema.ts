@@ -8,7 +8,7 @@ export function organizationSchema() {
     url: COMPANY.url,
     logo: `${COMPANY.url}/favicon.svg`,
     description:
-      'AI, Blockchain, and Real World Asset (RWA) technology consulting company helping enterprises transform physical assets, financial operations, and business processes.',
+      'Real Block Technologies helps mining and mineral companies identify, value and structure economic rights arising from their resources into potential capital products, supported by digital asset registry and management infrastructure.',
     slogan: COMPANY.tagline,
     sameAs: [
       'https://www.linkedin.com/company/real-block-technologies/',
@@ -19,15 +19,18 @@ export function organizationSchema() {
       '@type': 'ContactPoint',
       contactType: 'sales',
       email: COMPANY.email,
-      availableLanguage: ['English', 'Spanish', 'French', 'Arabic', 'Chinese'],
+      availableLanguage: ['English'],
     },
     areaServed: 'Worldwide',
     knowsAbout: [
-      'AI Consulting Company',
-      'Blockchain Consulting',
-      'Real World Asset Tokenization',
-      'Enterprise AI Solutions',
-      'Digital Transformation Consulting',
+      'Resource Capital',
+      'Mining finance',
+      'Mining royalty financing',
+      'Mineral project financing',
+      'Critical mineral financing',
+      'Future production financing',
+      'Mineral inventory financing',
+      'Digital asset registry for mining',
     ],
   }
 }
@@ -40,18 +43,18 @@ export function professionalServiceSchema() {
     url: COMPANY.url,
     image: `${COMPANY.url}/og-image.png`,
     description:
-      'Enterprise consulting for AI transformation, blockchain strategy, and real-world asset tokenization.',
+      'Resource intelligence, capital-product structuring and digital asset registry services for mining and mineral companies.',
     priceRange: '$$$',
     areaServed: {
       '@type': 'Place',
       name: 'Worldwide',
     },
     serviceType: [
-      'AI Consulting',
-      'Blockchain Consulting',
-      'Real World Asset Tokenization',
-      'Digital Transformation Consulting',
-      'Enterprise Technology Consulting',
+      'Resource Capital structuring',
+      'Mining asset intelligence',
+      'Royalty and production structuring',
+      'Digital asset registry',
+      'Financial modelling for mining',
     ],
   }
 }

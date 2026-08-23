@@ -131,3 +131,4 @@ export function enforceHttpsInProduction(): void {
   if (window.location.hostname === 'localhost') return
   window.location.replace(`https://${window.location.host}${window.location.pathname}${window.location.search}`)
 }
+

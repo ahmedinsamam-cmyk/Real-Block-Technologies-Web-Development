@@ -12,7 +12,7 @@ export interface NavDropdownItem {
 interface NavDropdownProps {
   label: string
   href: string
-  items: NavDropdownItem[]
+  items: readonly NavDropdownItem[]
   dark?: boolean
 }
 
