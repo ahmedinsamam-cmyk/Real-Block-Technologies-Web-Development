@@ -1,0 +1,7 @@
+# Cloudflare Pages — optional Wrangler config
+# Prefer connecting Git in the Cloudflare dashboard.
+# Deploy manually with: npx wrangler pages deploy dist --project-name=real-block-technologies
+
+name = "real-block-technologies"
+compatibility_date = "2026-07-31"
+pages_build_output_dir = "dist"
