@@ -12,21 +12,20 @@ interface CTASectionProps {
 }
 
 export function CTASection({
-  title = 'Submit Your Asset',
-  description = "Tell us what you own, what you produce or what you're developing. We'll help identify potential Resource Capital structures that could be explored around the asset.",
-  primaryLabel = 'Submit Your Asset',
-  primaryTo = '/submit-asset',
-  secondaryLabel = 'Discuss Your Capital Options',
-  secondaryTo = '/contact',
+  title = 'Ready to structure a Tokenised Royalty?',
+  description = 'Talk with Real Block about transforming a mineral resource, royalty or other real-world asset into a compliant digital investment product.',
+  primaryLabel = 'Talk to us',
+  primaryTo = '/contact',
+  secondaryLabel = 'Tokenisation as a Service',
+  secondaryTo = '/service',
 }: CTASectionProps) {
   return (
-    <section className="relative overflow-hidden py-24 md:py-28">
-      <div className="absolute inset-0 section-photo-a" />
-      <div className="absolute inset-0 bg-navy/82" />
+    <section className="relative overflow-hidden bg-navy py-20 md:py-24">
+      <div className="absolute inset-0 grid-fine opacity-40" aria-hidden />
       <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-        <p className="eyebrow text-copper-light">Resource owners</p>
+        <p className="eyebrow text-cyan">Next step</p>
         <motion.h2
-          className="mt-4 font-display text-4xl font-medium text-white md:text-5xl"
+          className="mt-4 text-3xl font-semibold text-white md:text-4xl"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -38,7 +37,7 @@ export function CTASection({
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
+          transition={{ delay: 0.08 }}
         >
           {description}
         </motion.p>
@@ -47,9 +46,9 @@ export function CTASection({
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.16 }}
         >
-          <Button to={primaryTo} variant="gold" size="lg">
+          <Button to={primaryTo} variant="primary" size="lg">
             {primaryLabel}
             <ArrowRight className="h-4 w-4" />
           </Button>

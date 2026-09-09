@@ -32,21 +32,21 @@ type ButtonAsExternal = BaseProps &
 type ButtonProps = ButtonAsButton | ButtonAsLink | ButtonAsExternal
 
 const variantClasses: Record<Variant, string> = {
-  primary: 'bg-navy text-white hover:bg-navy-light border border-transparent',
+  primary: 'bg-cyan text-navy hover:bg-cyan-dark border border-transparent',
   secondary: 'bg-white text-navy hover:bg-white/90 border border-transparent',
-  outline: 'bg-transparent text-white border border-white/40 hover:bg-white/10 hover:border-white',
-  ghost: 'bg-transparent text-navy border border-navy/15 hover:border-navy/40 hover:bg-surface',
-  gold: 'bg-white text-navy hover:bg-[#f3f1ec] border border-transparent',
+  outline: 'bg-transparent text-white border border-white/25 hover:bg-white/10 hover:border-white/60',
+  ghost: 'bg-transparent text-navy border border-border hover:border-navy/30 hover:bg-surface',
+  gold: 'bg-cyan text-navy hover:bg-cyan-dark border border-transparent',
 }
 
 const sizeClasses: Record<Size, string> = {
-  sm: 'px-5 py-2.5 text-sm',
-  md: 'px-7 py-3 text-sm',
-  lg: 'px-8 py-3.5 text-[0.95rem]',
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-5 py-2.5 text-sm',
+  lg: 'px-6 py-3 text-[0.95rem]',
 }
 
 const baseClasses =
-  'inline-flex items-center justify-center gap-2 rounded-[2px] font-body font-semibold tracking-[0.01em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy/25 focus-visible:ring-offset-2 disabled:opacity-60 disabled:pointer-events-none'
+  'inline-flex items-center justify-center gap-2 rounded-md font-body font-semibold tracking-tight transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/40 focus-visible:ring-offset-2 disabled:opacity-60 disabled:pointer-events-none'
 
 export function Button(props: ButtonProps) {
   const { variant = 'primary', size = 'md', children, className = '' } = props
