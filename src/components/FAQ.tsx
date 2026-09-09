@@ -1,37 +1,38 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import { FAQS } from '@/data/resourceCapital'
+import { HOME_FAQS } from '@/data/site'
 import { SectionHeading } from '@/components/SectionHeading'
 
-export function FAQ({ items = FAQS }: { items?: typeof FAQS }) {
+export function FAQ({
+  items = HOME_FAQS,
+}: {
+  items?: ReadonlyArray<{ question: string; answer: string }>
+}) {
   const [openId, setOpenId] = useState<number | null>(0)
 
   return (
     <section className="bg-surface py-20 md:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Enterprise FAQ"
-          title="Frequently asked questions"
-          description="Clear answers for mining executives evaluating Resource Capital, product architecture and digital asset registry."
+          eyebrow="FAQ"
+          title="Clear answers for mining issuers"
+          description="Tokenised Royalty is the product. Tokenisation as a Service is how we deliver it."
         />
         <div className="space-y-3">
           {items.map((item, index) => {
             const isOpen = openId === index
             return (
-              <div
-                key={item.question}
-                className="overflow-hidden rounded-lg border border-border bg-white"
-              >
+              <div key={item.question} className="overflow-hidden rounded-lg border border-border bg-white">
                 <button
                   type="button"
                   className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
                   onClick={() => setOpenId(isOpen ? null : index)}
                   aria-expanded={isOpen}
                 >
-                  <span className="font-display text-base font-semibold text-navy">{item.question}</span>
+                  <span className="text-base font-semibold text-navy">{item.question}</span>
                   <ChevronDown
-                    className={`h-5 w-5 shrink-0 text-royal transition-transform duration-300 ${
+                    className={`h-5 w-5 shrink-0 text-cyan-dark transition-transform duration-300 ${
                       isOpen ? 'rotate-180' : ''
                     }`}
                   />

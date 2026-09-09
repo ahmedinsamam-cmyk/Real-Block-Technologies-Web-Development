@@ -40,12 +40,9 @@ const industries = [
 ]
 
 const serviceInterests = [
-  { value: 'resource_intelligence', label: 'Resource Asset Intelligence' },
-  { value: 'capital_opportunity', label: 'Capital Opportunity Assessment' },
-  { value: 'rcp_structuring', label: 'Resource Capital Product Structuring' },
-  { value: 'financial_modelling', label: 'Financial & Scenario Modelling' },
-  { value: 'digital_registry', label: 'Digital Asset Registry' },
-  { value: 'general', label: 'General Inquiry' },
+  { value: 'tokenised_royalty', label: 'Tokenised Royalty' },
+  { value: 'tokenisation_as_a_service', label: 'Tokenisation as a Service' },
+  { value: 'general', label: 'General inquiry' },
 ]
 
 export function ContactPage() {
@@ -101,21 +98,22 @@ export function ContactPage() {
     <PageTransition>
       <SEO
         title="Contact"
-        description="Schedule a consultation with Real Block Technologies. Global enterprise contact form for AI, blockchain, and RWA initiatives."
+        description="Talk with Real Block Technologies about Tokenised Royalty and Tokenisation as a Service for mining companies."
         path="/contact"
       />
       <PageHero
         eyebrow="Contact"
-        title="Let's discuss your transformation priorities"
-        description="Submit an international inquiry or book a Calendly consultation. Timezone-aware scheduling and currency-neutral proposals."
+        title="Talk to us about a Tokenised Royalty"
+        description="Tell us about the mineral resource, royalty or other real-world asset. Book a call or send an inquiry — this is not an application to buy or sell a token."
       />
 
       <section className="bg-surface py-20 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.3fr] lg:px-8">
           <div>
-            <h2 className="font-display text-2xl font-bold text-navy md:text-3xl">Global enterprise inquiry</h2>
+            <h2 className="text-2xl font-semibold text-navy md:text-3xl">Issuer inquiry</h2>
             <p className="mt-4 text-sm leading-relaxed text-ink-muted md:text-base">
-              {COMMERCIAL_POSITIONING.pricingNote}
+              {COMMERCIAL_POSITIONING.pricingNote} Engagements cover Tokenised Royalty structuring and
+              Tokenisation as a Service.
             </p>
             <ul className="mt-8 space-y-4">
               <li className="flex items-start gap-3 text-sm text-ink-muted">
@@ -149,10 +147,9 @@ export function ContactPage() {
             {submitted ? (
               <div className="flex flex-col items-center py-10 text-center">
                 <CheckCircle2 className="h-12 w-12 text-royal" />
-                <h3 className="mt-4 font-display text-xl font-bold text-navy">Thank you for reaching out</h3>
+                <h3 className="mt-4 text-xl font-semibold text-navy">Thank you for reaching out</h3>
                 <p className="mt-2 max-w-md text-sm text-ink-muted">
-                  Your inquiry was captured for HubSpot-ready CRM follow-up. Book time below if you prefer an
-                  immediate calendar slot.
+                  Your inquiry was captured. Book time below if you prefer an immediate calendar slot.
                 </p>
                 <Button className="mt-6" variant="ghost" onClick={() => setSubmitted(false)}>
                   Send another message
@@ -204,7 +201,7 @@ export function ContactPage() {
                     className={`w-full rounded-lg border px-3.5 py-2.5 text-sm outline-none transition focus:ring-2 focus:ring-royal/30 ${
                       errors.message ? 'border-red-400' : 'border-border focus:border-royal'
                     }`}
-                    placeholder="Tell us about objectives, timeline, and stakeholders."
+                    placeholder="Describe the royalty, mineral asset or other real-world right, and what you want to explore."
                   />
                   {errors.message && <p className="mt-1.5 text-xs text-red-600">{errors.message}</p>}
                 </div>
@@ -222,7 +219,7 @@ export function ContactPage() {
 
       <ConsultationBooking
         embed
-        title="Book a Free Consultation"
+        title="Book a conversation"
         description="Choose a meeting type and schedule instantly. Confirmation and calendar invites are handled by Calendly."
       />
     </PageTransition>

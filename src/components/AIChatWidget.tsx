@@ -14,39 +14,38 @@ interface ChatMessage {
 
 const KNOWLEDGE: Array<{ keywords: string[]; answer: string }> = [
   {
-    keywords: ['resource capital', 'rcp', 'capital product', 'what is'],
+    keywords: ['tokenised royalty', 'tokenized royalty', 'royalty', 'product', 'what is'],
     answer:
-      'Resource Capital is economic value that can potentially be unlocked from natural resources and associated rights. RCPs shown here are illustrative architectures, not securities offered on this website.',
+      'Tokenised Royalty is Real Block’s product: a structured digital investment product architecture around mining royalties and similar cash-flow rights. It is illustrative until legally issued and is not sold on this website.',
   },
   {
-    keywords: ['token', 'tokenization', 'blockchain', 'rwa', 'crypto'],
+    keywords: ['tokenisation', 'tokenization', 'taas', 'service'],
     answer:
-      'Digital records and, where appropriate, blockchain can support how a structure is recorded after the economics are defined. Real Block is not a tokenization agency; technology supports the capital product.',
+      'Tokenisation as a Service is how we help mining companies prepare, document and support issuance of a compliant digital investment product. Regulated activities are handled by authorized partners.',
   },
   {
-    keywords: ['submit', 'asset', 'royalty', 'mine', 'mining', 'mineral'],
+    keywords: ['token', 'blockchain', 'rwa', 'crypto', 'coin'],
     answer:
-      'Primary customers are resource owners. Use Submit Your Asset to request a Resource Capital assessment. That is not an application for funding.',
+      'Technology can support how a product is recorded after the economics and legal structure are defined. Real Block is not a cryptocurrency exchange and does not list tokens for purchase here.',
+  },
+  {
+    keywords: ['mine', 'mining', 'mineral', 'asset', 'resource'],
+    answer:
+      'Primary customers are mining companies and royalty holders. Use the Contact page to discuss a Tokenised Royalty. That is not an application to buy or sell a token.',
   },
   {
     keywords: ['invest', 'buy', 'yield', 'return', 'marketplace'],
     answer:
-      'This website is not an investment marketplace. We do not offer securities for purchase here. We prepare structures for potential review by appropriate financing partners.',
+      'This website is not an investment marketplace. We do not offer securities or tokens for purchase here.',
   },
   {
     keywords: ['consult', 'book', 'meeting', 'call', 'schedule', 'calendly'],
     answer:
-      'You can discuss options on the Contact page or submit an asset. Would you like to leave your details for follow-up?',
+      'You can book a conversation on the Contact page. Would you like to leave your details for follow-up?',
   },
   {
     keywords: ['price', 'cost', 'fee', 'pricing'],
-    answer:
-      'Engagements are proposal-based and scoped to the asset and objectives.',
-  },
-  {
-    keywords: ['ai', 'registry', 'passport', 'score', 'service', 'help'],
-    answer:
-      'AI supports document intelligence. Resource Passport and Resource Capital Score are proprietary frameworks. The Digital Asset Registry is the lifecycle layer beneath RCPs.',
+    answer: 'Engagements are proposal-based and scoped to the asset and objectives.',
   },
 ]
 
@@ -54,7 +53,7 @@ const OPENERS: ChatMessage[] = [
   {
     id: 'welcome',
     role: 'assistant',
-    text: 'Hello — I am the Real Block Technologies assistant. Ask about Resource Capital, submitting a mining asset, or how RCPs are structured. How can I help?',
+    text: 'Hello — I am the Real Block Technologies assistant. Ask about Tokenised Royalty, Tokenisation as a Service, or how we work with mining companies. How can I help?',
   },
 ]
 
@@ -62,7 +61,7 @@ function matchAnswer(input: string): string {
   const q = input.toLowerCase()
   const hit = KNOWLEDGE.find((item) => item.keywords.some((k) => q.includes(k)))
   if (hit) return hit.answer
-  return 'Thanks for your question. Real Block helps mining and mineral companies identify, structure and manage potential Resource Capital Products. You can explore Products, submit an asset, or leave your email for follow-up.'
+  return 'Thanks for your question. Real Block helps mining companies transform mineral resources, royalties and other real-world assets into compliant digital investment products. You can explore Tokenised Royalty, Tokenisation as a Service, or leave your email for follow-up.'
 }
 
 type ChatProvider = 'builtin' | 'intercom' | 'crisp' | 'hubspot'
@@ -99,8 +98,8 @@ export function AIChatWidget() {
 
   const recommended = useMemo(
     () => [
-      { label: 'Resource Capital', href: '/resource-capital' },
-      { label: 'Submit Asset', href: '/submit-asset' },
+      { label: 'Tokenised Royalty', href: '/product' },
+      { label: 'Tokenisation as a Service', href: '/service' },
       { label: 'Contact', href: '/contact' },
     ],
     [],
@@ -250,7 +249,7 @@ export function AIChatWidget() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={onKey}
-                  placeholder="Ask about AI, RWA, consulting..."
+                  placeholder="Ask about Tokenised Royalty..."
                   className="flex-1 rounded-lg border border-border px-3 py-2 text-xs outline-none focus:border-royal"
                 />
                 <button
@@ -272,7 +271,7 @@ export function AIChatWidget() {
 
       <button
         type="button"
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-navy text-gold shadow-lg shadow-navy/30 transition hover:bg-royal hover:text-white"
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-cyan text-navy shadow-lg shadow-navy/30 transition hover:bg-cyan-dark"
         aria-label={open ? 'Close chat' : 'Open chat assistant'}
         onClick={() => {
           setOpen((v) => !v)

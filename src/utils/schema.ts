@@ -7,8 +7,7 @@ export function organizationSchema() {
     name: COMPANY.name,
     url: COMPANY.url,
     logo: `${COMPANY.url}/favicon.svg`,
-    description:
-      'Real Block Technologies helps mining and mineral companies identify, value and structure economic rights arising from their resources into potential capital products, supported by digital asset registry and management infrastructure.',
+    description: COMPANY.proposition,
     slogan: COMPANY.tagline,
     sameAs: [
       'https://www.linkedin.com/company/real-block-technologies/',
@@ -23,14 +22,10 @@ export function organizationSchema() {
     },
     areaServed: 'Worldwide',
     knowsAbout: [
-      'Resource Capital',
-      'Mining finance',
-      'Mining royalty financing',
-      'Mineral project financing',
-      'Critical mineral financing',
-      'Future production financing',
-      'Mineral inventory financing',
-      'Digital asset registry for mining',
+      'Tokenised royalty',
+      'Tokenisation as a Service',
+      'Mining royalty tokenization',
+      'Compliant digital investment products',
     ],
   }
 }
@@ -42,20 +37,13 @@ export function professionalServiceSchema() {
     name: COMPANY.name,
     url: COMPANY.url,
     image: `${COMPANY.url}/og-image.png`,
-    description:
-      'Resource intelligence, capital-product structuring and digital asset registry services for mining and mineral companies.',
+    description: COMPANY.proposition,
     priceRange: '$$$',
     areaServed: {
       '@type': 'Place',
       name: 'Worldwide',
     },
-    serviceType: [
-      'Resource Capital structuring',
-      'Mining asset intelligence',
-      'Royalty and production structuring',
-      'Digital asset registry',
-      'Financial modelling for mining',
-    ],
+    serviceType: ['Tokenisation as a Service', 'Tokenised Royalty structuring'],
   }
 }
 

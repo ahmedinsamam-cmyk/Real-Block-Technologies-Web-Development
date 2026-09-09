@@ -2,16 +2,8 @@ import { Navigate, useRoutes } from 'react-router-dom'
 import { MainLayout } from '@/layouts/MainLayout'
 import { HomePage } from '@/pages/Home'
 import { AboutPage } from '@/pages/About'
-import { ServicesPage } from '@/pages/Services'
-import { ProductsPage } from '@/pages/Products'
-import { ProductDetailPage } from '@/pages/ProductDetail'
-import { ResourceCapitalPage } from '@/pages/ResourceCapital'
-import { DigitalAssetRegistryPage } from '@/pages/DigitalAssetRegistry'
-import { DigitalCapitalPage } from '@/pages/DigitalCapital'
-import { MiningCompaniesPage } from '@/pages/MiningCompanies'
-import { SubmitAssetPage } from '@/pages/SubmitAsset'
-import { InsightsPage } from '@/pages/Insights'
-import { InsightArticlePage } from '@/pages/InsightArticle'
+import { ProductPage } from '@/pages/Product'
+import { ServicePage } from '@/pages/Service'
 import { ContactPage } from '@/pages/Contact'
 import { PrivacyPage } from '@/pages/Privacy'
 import { TermsPage } from '@/pages/Terms'
@@ -22,29 +14,33 @@ export default function App() {
       element: <MainLayout />,
       children: [
         { index: true, element: <HomePage /> },
-        { path: 'resource-capital', element: <ResourceCapitalPage /> },
-        { path: 'products', element: <ProductsPage /> },
-        { path: 'products/:slug', element: <ProductDetailPage /> },
-        { path: 'services', element: <ServicesPage /> },
-        { path: 'digital-asset-registry', element: <DigitalAssetRegistryPage /> },
-        { path: 'digital-capital', element: <DigitalCapitalPage /> },
-        { path: 'mining-companies', element: <MiningCompaniesPage /> },
-        { path: 'submit-asset', element: <SubmitAssetPage /> },
-        { path: 'insights', element: <InsightsPage /> },
-        { path: 'insights/:slug', element: <InsightArticlePage /> },
+        { path: 'product', element: <ProductPage /> },
+        { path: 'tokenised-royalty', element: <Navigate to="/product" replace /> },
+        { path: 'tokenized-royalty', element: <Navigate to="/product" replace /> },
+        { path: 'service', element: <ServicePage /> },
+        { path: 'tokenisation-as-a-service', element: <Navigate to="/service" replace /> },
+        { path: 'tokenization-as-a-service', element: <Navigate to="/service" replace /> },
         { path: 'about', element: <AboutPage /> },
         { path: 'contact', element: <ContactPage /> },
         { path: 'privacy', element: <PrivacyPage /> },
         { path: 'terms', element: <TermsPage /> },
-        { path: 'services/real-estate-tokenization', element: <Navigate to="/digital-capital" replace /> },
-        { path: 'services/ai-solutions', element: <Navigate to="/digital-capital" replace /> },
-        { path: 'services/:slug', element: <Navigate to="/services" replace /> },
-        { path: 'industries', element: <Navigate to="/mining-companies" replace /> },
-        { path: 'industries/:slug', element: <Navigate to="/mining-companies" replace /> },
-        { path: 'case-studies', element: <Navigate to="/products" replace /> },
+        { path: 'products', element: <Navigate to="/product" replace /> },
+        { path: 'products/:slug', element: <Navigate to="/product" replace /> },
+        { path: 'services', element: <Navigate to="/service" replace /> },
+        { path: 'services/:slug', element: <Navigate to="/service" replace /> },
+        { path: 'resource-capital', element: <Navigate to="/" replace /> },
+        { path: 'digital-asset-registry', element: <Navigate to="/service" replace /> },
+        { path: 'digital-capital', element: <Navigate to="/service" replace /> },
+        { path: 'mining-companies', element: <Navigate to="/" replace /> },
+        { path: 'submit-asset', element: <Navigate to="/contact" replace /> },
+        { path: 'insights', element: <Navigate to="/about" replace /> },
+        { path: 'insights/:slug', element: <Navigate to="/about" replace /> },
+        { path: 'industries', element: <Navigate to="/" replace /> },
+        { path: 'industries/:slug', element: <Navigate to="/" replace /> },
+        { path: 'case-studies', element: <Navigate to="/product" replace /> },
         { path: 'careers', element: <Navigate to="/about" replace /> },
-        { path: 'resources', element: <Navigate to="/insights" replace /> },
-        { path: 'resources/rwa-tokenization-guide', element: <Navigate to="/insights" replace /> },
+        { path: 'resources', element: <Navigate to="/about" replace /> },
+        { path: 'resources/:slug', element: <Navigate to="/about" replace /> },
         { path: 'help', element: <Navigate to="/contact" replace /> },
         { path: '*', element: <Navigate to="/" replace /> },
       ],

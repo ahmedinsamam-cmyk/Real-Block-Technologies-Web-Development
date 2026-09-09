@@ -58,9 +58,9 @@ function loadCalendlyAssets(): Promise<void> {
 }
 
 export function ConsultationBooking({
-  title = 'Discuss a Resource Capital structure',
-  description = 'Book a conversation with the Real Block team on asset intelligence, economic rights and potential product architectures. This is not an application for funding.',
-  ctaLabel = 'Discuss Your Capital Options',
+  title = 'Discuss Tokenised Royalty',
+  description = 'Book a conversation with Real Block on Tokenised Royalty and Tokenisation as a Service. This is not an application to buy or sell a token.',
+  ctaLabel = 'Talk to us',
   embed = false,
   variant = 'section',
 }: ConsultationBookingProps) {

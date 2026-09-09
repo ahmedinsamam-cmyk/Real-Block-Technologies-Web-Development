@@ -24,10 +24,10 @@ export function SectionHeading({
       transition={{ duration: 0.5 }}
     >
       {eyebrow && (
-        <p className={`eyebrow mb-4 ${light ? 'text-gold-light' : 'text-royal'}`}>{eyebrow}</p>
+        <p className={`eyebrow mb-4 ${light ? 'text-cyan' : 'text-cyan-dark'}`}>{eyebrow}</p>
       )}
       <h2
-        className={`font-display text-4xl font-medium leading-[1.1] md:text-5xl ${
+        className={`text-3xl font-semibold leading-[1.15] md:text-4xl ${
           light ? 'text-white' : 'text-navy'
         }`}
       >
